@@ -103,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				AA972A7229CF9F5E000E270E /* Color-Custom.swift */,
-				AA972A7529CFA219000E270E /* Array-GradientStop.swift */,
 				AA972A7729CFA3E2000E270E /* Color-Interpolation.swift */,
+				AA972A7529CFA219000E270E /* Array-GradientStop.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
