@@ -55,8 +55,27 @@ struct ContentView: View {
         .init(color: .darkCloudEnd, location: 1)
     ]
     
+    let starStops: [Gradient.Stop] = [
+        .init(color: .white, location: 0),
+        .init(color: .white, location: 0.25),
+        .init(color: .clear, location: 0.333),
+        .init(color: .clear, location: 0.38),
+        .init(color: .clear, location: 0.7),
+        .init(color: .clear, location: 0.8),
+        .init(color: .white, location: 0.85),
+        .init(color: .white, location: 1)
+    ]
+    
+    var starOpacity: Double {
+        let color = starStops.interpolated(amount: time)
+        return color.getComponents().alpha
+    }
+    
     var body: some View {
         ZStack {
+            StarsView()
+                .opacity(starOpacity)
+            
             CloudsView(
                 thickness: cloudThickness,
                 topTint: cloudTopStops.interpolated(amount: time),
