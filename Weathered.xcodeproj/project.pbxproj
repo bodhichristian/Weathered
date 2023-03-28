@@ -20,6 +20,9 @@
 		AA972A7B29D1D00E000E270E /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7A29D1D00E000E270E /* Star.swift */; };
 		AA972A7D29D1D016000E270E /* StarField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7C29D1D016000E270E /* StarField.swift */; };
 		AA972A7F29D1D022000E270E /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7E29D1D022000E270E /* StarsView.swift */; };
+		AA972A8129D23491000E270E /* Storm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8029D23491000E270E /* Storm.swift */; };
+		AA972A8329D234C7000E270E /* StormDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8229D234C7000E270E /* StormDrop.swift */; };
+		AA972A8529D23863000E270E /* StormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8429D23863000E270E /* StormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,9 @@
 		AA972A7A29D1D00E000E270E /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Star.swift; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Documents - christian’s MacBook Pro/GitHub/Weathered/Weathered/Models/Star.swift"; sourceTree = "<group>"; };
 		AA972A7C29D1D016000E270E /* StarField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarField.swift; sourceTree = "<group>"; };
 		AA972A7E29D1D022000E270E /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
+		AA972A8029D23491000E270E /* Storm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storm.swift; sourceTree = "<group>"; };
+		AA972A8229D234C7000E270E /* StormDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormDrop.swift; sourceTree = "<group>"; };
+		AA972A8429D23863000E270E /* StormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				AA972A6829CF3E7E000E270E /* Cloud.swift */,
+				AA972A8029D23491000E270E /* Storm.swift */,
+				AA972A8229D234C7000E270E /* StormDrop.swift */,
 				AA972A6A29CF407C000E270E /* CloudGroup.swift */,
 				AA972A7A29D1D00E000E270E /* Star.swift */,
 				AA972A7C29D1D016000E270E /* StarField.swift */,
@@ -102,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				AA972A5C29CF3DED000E270E /* ContentView.swift */,
+				AA972A8429D23863000E270E /* StormView.swift */,
 				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
 				AA972A7E29D1D022000E270E /* StarsView.swift */,
 			);
@@ -188,10 +197,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA972A8329D234C7000E270E /* StormDrop.swift in Sources */,
 				AA972A7B29D1D00E000E270E /* Star.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* ContentView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
+				AA972A8129D23491000E270E /* Storm.swift in Sources */,
 				AA972A7829CFA3E2000E270E /* Color-Interpolation.swift in Sources */,
+				AA972A8529D23863000E270E /* StormView.swift in Sources */,
 				AA972A7329CF9F5E000E270E /* Color-Custom.swift in Sources */,
 				AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */,
 				AA972A7D29D1D016000E270E /* StarField.swift in Sources */,

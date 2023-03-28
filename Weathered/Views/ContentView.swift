@@ -11,6 +11,10 @@ struct ContentView: View {
     @State private var cloudThickness = Cloud.Thickness.regular
     @State private var time = 0.0
     
+    @State private var stormType = Storm.Contents.none
+    @State private var rainIntensity = 500.0
+    @State private var rainAngle = 0.0
+    
     let backgroundTopStops: [Gradient.Stop] = [
         .init(color: .midnightStart, location: 0),
         .init(color: .midnightStart, location: 0.25),
@@ -81,6 +85,8 @@ struct ContentView: View {
                 topTint: cloudTopStops.interpolated(amount: time),
                 bottomTint: cloudBottomStops.interpolated(amount: time)
             )
+            
+            StormView(type: stormType, direction: .degrees(rainAngle), strength: Int(rainIntensity))
         }
         .preferredColorScheme(.dark)
         .background(
@@ -106,6 +112,25 @@ struct ContentView: View {
                     Slider(value: $time)
                 }
                 .padding()
+                
+                Picker("Precipitation", selection: $stormType) {
+                    ForEach(Storm.Contents.allCases, id: \.self) { stormType in
+                        Text(String(describing: stormType).capitalized)
+                    }
+                }
+                .pickerStyle(.segmented)
+                
+                HStack {
+                    Text("Intensity")
+                    Slider(value: $rainIntensity, in: 0...1000)
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    Text("Angle:")
+                    Slider(value: $rainAngle, in: 0...90)
+                }
+                .padding(.horizontal)
             }
             .padding(5)
             .frame(maxWidth: .infinity)
