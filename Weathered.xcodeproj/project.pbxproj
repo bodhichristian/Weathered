@@ -23,6 +23,8 @@
 		AA972A8129D23491000E270E /* Storm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8029D23491000E270E /* Storm.swift */; };
 		AA972A8329D234C7000E270E /* StormDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8229D234C7000E270E /* StormDrop.swift */; };
 		AA972A8529D23863000E270E /* StormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8429D23863000E270E /* StormView.swift */; };
+		AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */; };
+		AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44B29D5EFA1008742CB /* Residue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		AA972A8029D23491000E270E /* Storm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storm.swift; sourceTree = "<group>"; };
 		AA972A8229D234C7000E270E /* StormDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormDrop.swift; sourceTree = "<group>"; };
 		AA972A8429D23863000E270E /* StormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormView.swift; sourceTree = "<group>"; };
+		AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueDrop.swift; sourceTree = "<group>"; };
+		AAD8C44B29D5EFA1008742CB /* Residue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Residue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				AA972A6A29CF407C000E270E /* CloudGroup.swift */,
 				AA972A7A29D1D00E000E270E /* Star.swift */,
 				AA972A7C29D1D016000E270E /* StarField.swift */,
+				AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */,
+				AAD8C44B29D5EFA1008742CB /* Residue.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,12 +205,14 @@
 			files = (
 				AA972A8329D234C7000E270E /* StormDrop.swift in Sources */,
 				AA972A7B29D1D00E000E270E /* Star.swift in Sources */,
+				AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* ContentView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
 				AA972A8129D23491000E270E /* Storm.swift in Sources */,
 				AA972A7829CFA3E2000E270E /* Color-Interpolation.swift in Sources */,
 				AA972A8529D23863000E270E /* StormView.swift in Sources */,
 				AA972A7329CF9F5E000E270E /* Color-Custom.swift in Sources */,
+				AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */,
 				AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */,
 				AA972A7D29D1D016000E270E /* StarField.swift in Sources */,
 				AA972A7629CFA219000E270E /* Array-GradientStop.swift in Sources */,
