@@ -9,14 +9,15 @@ import SwiftUI
 
 class ResidueDrop: Hashable {
     var id = UUID()
-    var destructionTime: Double
+    var destructionTime: Double // The time (in seconds) when this ResidueDrop should be removed from the screen.
     var x: Double
     var y = 0.5
     var scale: Double
     var speed: Double
     var opacity: Double
-    var xMovement: Double
-    var yMovement: Double
+    var xMovement: Double // The amount to move this `ResidueDrop` horizontally each frame.
+    var yMovement: Double // The amount to move this `ResidueDrop` vertically each frame.
+
     
     init(type: Storm.Contents, xPosition: Double, destructionTime: Double) {
         self.x = xPosition

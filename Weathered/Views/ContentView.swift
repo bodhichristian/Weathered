@@ -86,7 +86,11 @@ struct ContentView: View {
                 bottomTint: cloudBottomStops.interpolated(amount: time)
             )
             
-            StormView(type: stormType, direction: .degrees(rainAngle), strength: Int(rainIntensity))
+            if stormType != .none{
+                StormView(type: stormType, direction: .degrees(rainAngle), strength: Int(rainIntensity))
+            }
+            
+            WeatherDetailsView(tintColor: backgroundTopStops.interpolated(amount: time), residueType: stormType, resiudeStrength: rainIntensity)
         }
         .preferredColorScheme(.dark)
         .background(

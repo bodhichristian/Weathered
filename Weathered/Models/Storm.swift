@@ -19,11 +19,9 @@ class Storm {
     init(type: Contents, direction: Angle, strength: Int) {
         // Load correct image based on storm type
         switch type {
-        case .none:
-            image = nil
         case .snow:
             image = Image("snow")
-        case .rain:
+        default:
             image = Image("rain")
         }
         // Create Storm Drop instances based on storm strength
