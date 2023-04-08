@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */; };
+		AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */; };
+		AA607DF229E1F37E00DBE8C3 /* LightningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DF129E1F37E00DBE8C3 /* LightningView.swift */; };
 		AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A5A29CF3DED000E270E /* WeatheredApp.swift */; };
 		AA972A5D29CF3DED000E270E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A5C29CF3DED000E270E /* ContentView.swift */; };
 		AA972A5F29CF3DEE000E270E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA972A5E29CF3DEE000E270E /* Assets.xcassets */; };
@@ -30,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningBolt.swift; sourceTree = "<group>"; };
+		AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lightning.swift; sourceTree = "<group>"; };
+		AA607DF129E1F37E00DBE8C3 /* LightningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningView.swift; sourceTree = "<group>"; };
 		AA972A5729CF3DED000E270E /* Weathered.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weathered.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA972A5A29CF3DED000E270E /* WeatheredApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatheredApp.swift; sourceTree = "<group>"; };
 		AA972A5C29CF3DED000E270E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +118,8 @@
 				AA972A7C29D1D016000E270E /* StarField.swift */,
 				AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */,
 				AAD8C44B29D5EFA1008742CB /* Residue.swift */,
+				AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */,
+				AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -125,6 +133,7 @@
 				AA972A7E29D1D022000E270E /* StarsView.swift */,
 				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
 				AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */,
+				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,9 +232,12 @@
 				AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */,
 				AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */,
 				AA972A7D29D1D016000E270E /* StarField.swift in Sources */,
+				AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */,
 				AA972A7629CFA219000E270E /* Array-GradientStop.swift in Sources */,
 				AA972A7F29D1D022000E270E /* StarsView.swift in Sources */,
 				AA972A6B29CF407C000E270E /* CloudGroup.swift in Sources */,
+				AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */,
+				AA607DF229E1F37E00DBE8C3 /* LightningView.swift in Sources */,
 				AA972A6F29CF42D0000E270E /* CloudsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
