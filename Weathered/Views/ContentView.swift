@@ -85,6 +85,8 @@ struct ContentView: View {
             StarsView()
                 .opacity(starOpacity)
 
+            SunView(progress: time)
+            
             CloudsView(
                 thickness: cloudThickness,
                 topTint: cloudTopStops.interpolated(amount: time),

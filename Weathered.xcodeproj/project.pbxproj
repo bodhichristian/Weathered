@@ -26,6 +26,7 @@
 		AA972A8129D23491000E270E /* Storm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8029D23491000E270E /* Storm.swift */; };
 		AA972A8329D234C7000E270E /* StormDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8229D234C7000E270E /* StormDrop.swift */; };
 		AA972A8529D23863000E270E /* StormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8429D23863000E270E /* StormView.swift */; };
+		AAA8266529E480CA00C74D6C /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8266429E480CA00C74D6C /* SunView.swift */; };
 		AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */; };
 		AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44B29D5EFA1008742CB /* Residue.swift */; };
 		AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44F29D5FD12008742CB /* ResidueView.swift */; };
@@ -53,6 +54,7 @@
 		AA972A8029D23491000E270E /* Storm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storm.swift; sourceTree = "<group>"; };
 		AA972A8229D234C7000E270E /* StormDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormDrop.swift; sourceTree = "<group>"; };
 		AA972A8429D23863000E270E /* StormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormView.swift; sourceTree = "<group>"; };
+		AAA8266429E480CA00C74D6C /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueDrop.swift; sourceTree = "<group>"; };
 		AAD8C44B29D5EFA1008742CB /* Residue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Residue.swift; sourceTree = "<group>"; };
 		AAD8C44F29D5FD12008742CB /* ResidueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueView.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
 				AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */,
 				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
+				AAA8266429E480CA00C74D6C /* SunView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				AA972A7829CFA3E2000E270E /* Color-Interpolation.swift in Sources */,
 				AA972A8529D23863000E270E /* StormView.swift in Sources */,
 				AAD8C45229D5FF4B008742CB /* WeatherDetailsView.swift in Sources */,
+				AAA8266529E480CA00C74D6C /* SunView.swift in Sources */,
 				AA972A7329CF9F5E000E270E /* Color-Custom.swift in Sources */,
 				AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */,
 				AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */,
