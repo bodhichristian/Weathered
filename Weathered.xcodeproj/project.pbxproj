@@ -116,18 +116,18 @@
 		AA972A6C29CF42B7000E270E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA972A6829CF3E7E000E270E /* Cloud.swift */,
-				AA972A8029D23491000E270E /* Storm.swift */,
-				AA972A8229D234C7000E270E /* StormDrop.swift */,
-				AA972A6A29CF407C000E270E /* CloudGroup.swift */,
+				AAE243A629E502D30061910D /* Star.swift */,
 				AA972A7C29D1D016000E270E /* StarField.swift */,
-				AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */,
-				AAD8C44B29D5EFA1008742CB /* Residue.swift */,
-				AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */,
+				AA972A6829CF3E7E000E270E /* Cloud.swift */,
+				AA972A6A29CF407C000E270E /* CloudGroup.swift */,
 				AAE243A829E502E00061910D /* Meteor.swift */,
 				AAE243AA29E502E90061910D /* MeteorShower.swift */,
+				AA972A8029D23491000E270E /* Storm.swift */,
+				AA972A8229D234C7000E270E /* StormDrop.swift */,
+				AAD8C44B29D5EFA1008742CB /* Residue.swift */,
+				AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */,
 				AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */,
-				AAE243A629E502D30061910D /* Star.swift */,
+				AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,13 +136,13 @@
 			isa = PBXGroup;
 			children = (
 				AA972A5C29CF3DED000E270E /* ContentView.swift */,
-				AA972A8429D23863000E270E /* StormView.swift */,
-				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
-				AA972A7E29D1D022000E270E /* StarsView.swift */,
-				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
-				AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */,
-				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
 				AAA8266429E480CA00C74D6C /* SunView.swift */,
+				AA972A7E29D1D022000E270E /* StarsView.swift */,
+				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
+				AA972A8429D23863000E270E /* StormView.swift */,
+				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
+				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
+				AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

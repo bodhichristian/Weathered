@@ -21,6 +21,7 @@ class Meteor: Hashable {
         self.isMovingRight = isMovingRight
     }
     
+    // Hashable conformance
     static func ==(lhs: Meteor, rhs: Meteor) -> Bool {
         lhs.id == rhs.id
     }
