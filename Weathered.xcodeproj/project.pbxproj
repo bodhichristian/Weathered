@@ -20,7 +20,6 @@
 		AA972A7329CF9F5E000E270E /* Color-Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7229CF9F5E000E270E /* Color-Custom.swift */; };
 		AA972A7629CFA219000E270E /* Array-GradientStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7529CFA219000E270E /* Array-GradientStop.swift */; };
 		AA972A7829CFA3E2000E270E /* Color-Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7729CFA3E2000E270E /* Color-Interpolation.swift */; };
-		AA972A7B29D1D00E000E270E /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7A29D1D00E000E270E /* Star.swift */; };
 		AA972A7D29D1D016000E270E /* StarField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7C29D1D016000E270E /* StarField.swift */; };
 		AA972A7F29D1D022000E270E /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A7E29D1D022000E270E /* StarsView.swift */; };
 		AA972A8129D23491000E270E /* Storm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8029D23491000E270E /* Storm.swift */; };
@@ -31,6 +30,9 @@
 		AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44B29D5EFA1008742CB /* Residue.swift */; };
 		AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44F29D5FD12008742CB /* ResidueView.swift */; };
 		AAD8C45229D5FF4B008742CB /* WeatherDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */; };
+		AAE243A729E502D30061910D /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE243A629E502D30061910D /* Star.swift */; };
+		AAE243A929E502E00061910D /* Meteor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE243A829E502E00061910D /* Meteor.swift */; };
+		AAE243AB29E502E90061910D /* MeteorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE243AA29E502E90061910D /* MeteorShower.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +50,6 @@
 		AA972A7229CF9F5E000E270E /* Color-Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Custom.swift"; sourceTree = "<group>"; };
 		AA972A7529CFA219000E270E /* Array-GradientStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-GradientStop.swift"; sourceTree = "<group>"; };
 		AA972A7729CFA3E2000E270E /* Color-Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Interpolation.swift"; sourceTree = "<group>"; };
-		AA972A7A29D1D00E000E270E /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Star.swift; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Documents - christian’s MacBook Pro/GitHub/Weathered/Weathered/Models/Star.swift"; sourceTree = "<group>"; };
 		AA972A7C29D1D016000E270E /* StarField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarField.swift; sourceTree = "<group>"; };
 		AA972A7E29D1D022000E270E /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		AA972A8029D23491000E270E /* Storm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storm.swift; sourceTree = "<group>"; };
@@ -59,6 +60,9 @@
 		AAD8C44B29D5EFA1008742CB /* Residue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Residue.swift; sourceTree = "<group>"; };
 		AAD8C44F29D5FD12008742CB /* ResidueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueView.swift; sourceTree = "<group>"; };
 		AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsView.swift; sourceTree = "<group>"; };
+		AAE243A629E502D30061910D /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		AAE243A829E502E00061910D /* Meteor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meteor.swift; sourceTree = "<group>"; };
+		AAE243AA29E502E90061910D /* MeteorShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteorShower.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,12 +120,14 @@
 				AA972A8029D23491000E270E /* Storm.swift */,
 				AA972A8229D234C7000E270E /* StormDrop.swift */,
 				AA972A6A29CF407C000E270E /* CloudGroup.swift */,
-				AA972A7A29D1D00E000E270E /* Star.swift */,
 				AA972A7C29D1D016000E270E /* StarField.swift */,
 				AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */,
 				AAD8C44B29D5EFA1008742CB /* Residue.swift */,
 				AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */,
+				AAE243A829E502E00061910D /* Meteor.swift */,
+				AAE243AA29E502E90061910D /* MeteorShower.swift */,
 				AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */,
+				AAE243A629E502D30061910D /* Star.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,7 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA972A8329D234C7000E270E /* StormDrop.swift in Sources */,
-				AA972A7B29D1D00E000E270E /* Star.swift in Sources */,
+				AAE243AB29E502E90061910D /* MeteorShower.swift in Sources */,
 				AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* ContentView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
@@ -233,8 +239,10 @@
 				AAA8266529E480CA00C74D6C /* SunView.swift in Sources */,
 				AA972A7329CF9F5E000E270E /* Color-Custom.swift in Sources */,
 				AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */,
+				AAE243A929E502E00061910D /* Meteor.swift in Sources */,
 				AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */,
 				AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */,
+				AAE243A729E502D30061910D /* Star.swift in Sources */,
 				AA972A7D29D1D016000E270E /* StarField.swift in Sources */,
 				AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */,
 				AA972A7629CFA219000E270E /* Array-GradientStop.swift in Sources */,
