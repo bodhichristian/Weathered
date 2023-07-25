@@ -11,7 +11,7 @@ import SwiftUI
 struct WeatheredApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WeatherView()
         }
     }
 }

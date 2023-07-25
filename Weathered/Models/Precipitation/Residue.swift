@@ -22,14 +22,11 @@ class Residue {
     init(type: Storm.Contents, strength: Double) {
         self.type = type
         
-        // Set creationAmount and lifetime based on storm contents
-        switch type {
-        case .snow:
-            // For snow, create one residue element
+        switch type { // Set creationAmount and lifetime based on storm contents
+        case .snow: // Create one residue element
             creationAmount = 1
             lifetime = 1.0...2.0
-        default:
-            // For rain, create three resiude elements
+        default: // Create three resiude elements
             creationAmount = 3
             lifetime = 0.9...1.1
         }
