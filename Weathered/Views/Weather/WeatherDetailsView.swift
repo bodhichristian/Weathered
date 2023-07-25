@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WeatherDetailsView: View {
+    let weatherData: WeatherData?
+
     // Background color
     let tintColor: Color
     
@@ -28,22 +30,54 @@ struct WeatherDetailsView: View {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(tintColor.opacity(0.25))
-                    .frame(height: 400)
+                    .frame(height: 420)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 25))
                     .padding(.horizontal, 20)
                 
-                ScrollView {
-                    VStack(spacing: 4) {
-                        WeatherDetailItem(metric: "Feels like", unit: "°F", value: 81, iconName: "person.fill")
-                        WeatherDetailItem(metric: "Humidity", unit: "%",  value: 77, iconName: "humidity.fill")
-                        WeatherDetailItem(metric: "Wind", unit: "mph", value: 11, iconName: "wind")
-                        WeatherDetailItem(metric: "Visibility", unit: "mi", value: 4, iconName: "eye.fill")
-                        WeatherDetailItem(metric: "UV Index", unit: "", value: 4, iconName: "sun.max.fill")
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Right now")
+                            .font(.headline)
+                            .fontWeight(.medium)
+                            .padding([.leading, .top], 20)
+                            .padding(.bottom, 10)
+                        
+                        rightNowDetails
+                        
+                        Text("Today")
+                            .font(.headline)
+                            .fontWeight(.medium)
+                            .padding(.leading, 20)
+                            .padding(.top)
+                            .padding(.bottom, 10)
+                        
+                            HStack(spacing: 10) {
+                                WeatherDetailGridItem(
+                                    value: weatherData?.forecast.forecastday[0].astro.sunrise ?? "",
+                                    iconName: "sunrise"
+                                )
+                                
+                                WeatherDetailGridItem(
+                                    value: weatherData?.forecast.forecastday[0].astro.sunset ?? "",
+                                    iconName: "sunset"
+                                )
+                                
+                                WeatherDetailGridItem(
+                                    value: weatherData?.forecast.forecastday[0].astro.moonrise ?? "",
+                                    iconName: "moon.stars"
+                                )
+                                
+                                WeatherDetailGridItem(
+                                    value: weatherData?.forecast.forecastday[0].astro.moonset ?? "",
+                                    iconName: "moon.zzz"
+                                )
+                            }
+                        
+                        .padding(.leading, 20)
                     }
-                    .padding([.leading, .top], 20)
+                    .padding(.leading, 20)
                     .padding(.trailing, 10)
                     
-                }
+                
             }
             .padding(.top, 200)
         }
@@ -52,6 +86,54 @@ struct WeatherDetailsView: View {
 
 struct WeatherDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetailsView(tintColor: .blue, residueType: .rain, resiudeStrength: 200)
+        WeatherDetailsView(weatherData: nil, tintColor: .blue, residueType: .rain, resiudeStrength: 200)
+    }
+}
+
+extension WeatherDetailsView {
+    private var rightNowDetails: some View {
+        Group {
+            WeatherDetailRowView(
+                metric: "Feels like",
+                unit: "°F",
+                value: weatherData?.current.tempF ?? 0,
+                iconName: "person.fill"
+            )
+            
+            WeatherDetailRowView(
+                metric: "Humidity",
+                unit: "%",
+                value: Double(weatherData?.current.humidity ?? 0),
+                iconName: "humidity.fill"
+            )
+            
+            WeatherDetailRowView(
+                metric: "Dew point",
+                unit: "°F",
+                value: weatherData?.forecast.forecastday[0].hour[0].dewpointF ?? 0,
+                iconName: "drop.degreesign"
+            )
+            
+            WeatherDetailRowView(
+                metric: "Wind",
+                unit: "mph",
+                value: weatherData?.current.windMph ?? 0,
+                iconName: "wind"
+            )
+            
+            WeatherDetailRowView(
+                metric: "Visibility",
+                unit: "mi",
+                value: weatherData?.current.visMiles ?? 0,
+                iconName: "eye.fill"
+            )
+            
+            WeatherDetailRowView(
+                metric: "UV Index",
+                unit: "",
+                value: weatherData?.current.uv ?? 0,
+                iconName: "sun.max.fill"
+            )
+        }
     }
 }

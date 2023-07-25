@@ -20,7 +20,7 @@ struct WeatherView: View {
     @State private var cloudThickness = Cloud.Thickness.regular
     @State private var time = 0.5
     
-    @State private var stormType = Storm.Contents.rain
+    @State private var stormType = Storm.Contents.none
     @State private var rainIntensity = 500.0
     @State private var rainAngle = 0.0
     
@@ -90,7 +90,8 @@ struct WeatherView: View {
     }
     
     var body: some View {
-        ZStack {
+        NavigationStack {
+            ZStack {
             StarsView()
                 .opacity(starOpacity)
             
@@ -106,55 +107,64 @@ struct WeatherView: View {
                 StormView(type: stormType, direction: .degrees(rainAngle), strength: Int(rainIntensity))
             }
             
-            WeatherDetailsView(tintColor: backgroundTopStops.interpolated(amount: time), residueType: stormType, resiudeStrength: rainIntensity)
+            WeatherDetailsView(weatherData: viewModel.weatherData, tintColor: backgroundTopStops.interpolated(amount: time), residueType: stormType, resiudeStrength: rainIntensity)
             
             // Current Weather conditions
             // Extract to sepearate view
-                
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(viewModel.weatherData?.location.name ?? "")
+                        .lineLimit(1)
+                        .font(.largeTitle)
+                        .fontWeight(.medium)
+                    
+                    Text(viewModel.weatherData?.current.condition.text ?? "")
+                    
                     HStack {
-                        VStack(alignment: .leading) {
-                            Text(viewModel.weatherData?.location.name ?? "")
-                                .lineLimit(1)
-                                .font(.largeTitle)
-                                .fontWeight(.medium)
-
-                            Text(viewModel.weatherData?.current.condition.text ?? "")
-                            
-                            HStack {
-                                Text("L \(todaysLowTemp)°")
-                                
-                                Text("H \(todaysHighTemp)°")
-
-                            }
-
-                        }
-                        .shadow(color: .black, radius: 7)
-
-                        .padding(20)
+                        Text("L \(Int(viewModel.weatherData?.forecast.forecastday[0].day.mintempF ?? 0))°")
                         
+                        Text("H \(Int(viewModel.weatherData?.forecast.forecastday[0].day.maxtempF ?? 0))°")
                         
-                        Spacer()
-                        
-                        Text(currentTemp)
-                            .font(.system(size: 96))
-                            .fontWeight(.ultraLight)
-                            .shadow(color: .black, radius: 7)
                     }
-                    .offset(y: -170)
-
-
+                    
+                }
+                .shadow(color: .black, radius: 7)
                 
-
-                .padding()
+                .padding(20)
+                
+                
+                Spacer()
+                
+                Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                    .font(.system(size: 96))
+                    .fontWeight(.ultraLight)
+                    .shadow(color: .black, radius: 7)
+            }
+            .offset(y: -140)
+            
+            
+            
+            
+            .padding()
             
             
             
             LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
             
         }
-        .onAppear {
-            viewModel.query = "Brighton"
-            viewModel.fetchWeatherData()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing){
+                Button {
+                    viewModel.query = "London"
+                    viewModel.fetchWeatherData()
+                } label: {
+                    Text("Search")
+                    
+                }
+            }
+            
+            
         }
         
         
@@ -165,6 +175,31 @@ struct WeatherView: View {
                 backgroundBottomStops.interpolated(amount: time)
             ], startPoint: .top, endPoint: .bottom)
         )
+        }
+        
+    }
+    
+    // Convert time double into a neatly formatted string
+    var formattedTime: String {
+        let start = Calendar.current.startOfDay(for: Date.now)
+        let advanced = start.addingTimeInterval(time * 24 * 60 * 60)
+        return advanced.formatted(date: .omitted, time: .shortened)
+    }
+}
+
+struct WeatherView_Previews: PreviewProvider {
+    static var previews: some View {
+        WeatherView()
+    }
+}
+
+
+
+
+
+// FOR DEBUG
+// Modififer to add controls console
+
 //        .safeAreaInset(edge: .bottom) {
 //            VStack {
 //                Button {
@@ -260,18 +295,3 @@ struct WeatherView: View {
 //            .frame(maxWidth: .infinity)
 //            .background(.regularMaterial)
 //        }
-    }
-    
-    // Convert time double into a neatly formatted string
-    var formattedTime: String {
-        let start = Calendar.current.startOfDay(for: Date.now)
-        let advanced = start.addingTimeInterval(time * 24 * 60 * 60)
-        return advanced.formatted(date: .omitted, time: .shortened)
-    }
-}
-
-struct WeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherView()
-    }
-}

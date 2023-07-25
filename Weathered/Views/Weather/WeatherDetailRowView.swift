@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct WeatherDetailItem: View {
+struct WeatherDetailRowView: View {
     let metric: String
     let unit: String
-    let value: Int
+    let value: Double
     let iconName: String
     
     var body: some View {
@@ -33,9 +33,10 @@ struct WeatherDetailItem: View {
                 Spacer()
                 
                 HStack (alignment: .bottom, spacing: 8){
-                    Text(String(value))
+                    Text(String(Int(value)))
                         .font(.headline)
                         .fontWeight(.medium)
+                    
                     
                     Rectangle()
                         .foregroundStyle(.clear)
@@ -72,6 +73,6 @@ struct WeatherDetailItem: View {
 
 struct WeatherDetailItem_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetailItem(metric: "Humidity", unit: "mph", value: 77, iconName: "humidity")
+        WeatherDetailRowView(metric: "Humidity", unit: "mph", value: 77, iconName: "humidity")
     }
 }
