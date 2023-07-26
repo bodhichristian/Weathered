@@ -22,7 +22,7 @@ struct WeatherDetailRowView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 15, height: 15)
-                    .padding(.trailing, 10)
+                    .padding(.trailing, 15)
                     .fontWeight(.light)
                     .opacity(0.8)
                 
@@ -58,14 +58,15 @@ struct WeatherDetailRowView: View {
             }
             .fontWeight(.light)
             .foregroundStyle(.white)
-            .padding(.horizontal, 20)
+            .padding(.leading, 20)
+            .padding(.trailing, 10)
             .padding(.vertical, 6)
             
             Rectangle()
                 .frame(height: 1)
                 .foregroundStyle(.white.opacity(0.1))
-                .padding(.leading, 46)
-                .padding(.trailing, 70)
+                .padding(.leading, 51)
+                .padding(.trailing, 60)
         }
         .padding(.leading, 4)
     }
