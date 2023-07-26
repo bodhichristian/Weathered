@@ -22,15 +22,21 @@ struct SearchView: View {
             
             
             VStack {
-            
-                if let location = searchVM.weatherData?.location.name {
-                    Text(location)
-                        .font(.title)
+                
+                if let location = searchVM.weatherData?.location {
+                    Text(location.name)
+                        .font(.largeTitle)
                         .fontWeight(.medium)
                         .foregroundStyle(.white)
                         .lineLimit(1)
+                    
+                    Text(location.region)
+                        .font(.title2)
+                        .foregroundColor(.lightCloudEnd)
+                        .lineLimit(1)
                 }
-                
+            }
+            .offset(y: -80)
                 // Search Field
                 ZStack {
                     Capsule()
@@ -46,7 +52,7 @@ struct SearchView: View {
                     .padding()
                     .frame(width: 350, height: 40)
                 }
-            }
+            
             
             // Search Button
             
@@ -54,7 +60,9 @@ struct SearchView: View {
         .onChange(of: searchText) { query in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 searchVM.query = query
-                searchVM.fetchWeatherData()
+                withAnimation{
+                    searchVM.fetchWeatherData()
+                }
             }
         }
     }
