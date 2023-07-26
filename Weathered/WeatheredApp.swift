@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct WeatheredApp: App {
+    @StateObject var viewModel = WeatherViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            SearchView()
+            ContentView()
+                .environmentObject(viewModel)
         }
     }
 }

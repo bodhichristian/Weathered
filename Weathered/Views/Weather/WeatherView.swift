@@ -9,7 +9,9 @@ import SwiftUI
 
 
 struct WeatherView: View {
-    @ObservedObject var viewModel = WeatherViewModel()
+    let weatherData: WeatherData
+    
+    @Binding var viewingDetails: Bool
     
     @State private var cloudThickness = Cloud.Thickness.thick
     @State private var time = 0.1
@@ -24,11 +26,11 @@ struct WeatherView: View {
     @State private var showingControls = false
     
     var low: Int {
-        Int(viewModel.weatherData?.forecast.forecastday[0].day.mintempF ?? 0)
+        Int(weatherData.forecast.forecastday[0].day.mintempF)
     }
     
     var high: Int {
-        Int(viewModel.weatherData?.forecast.forecastday[0].day.maxtempF ?? 0)
+        Int(weatherData.forecast.forecastday[0].day.maxtempF)
     }
 
     var body: some View {
@@ -37,7 +39,7 @@ struct WeatherView: View {
                 SkyView()
                 
                 WeatherDetailsView(
-                    weatherData: viewModel.weatherData,
+                    weatherData: weatherData,
                     tintColor: backgroundTopStops.interpolated(amount: time),
                     residueType: stormType,
                     resiudeStrength: rainIntensity
@@ -48,12 +50,12 @@ struct WeatherView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(viewModel.weatherData?.location.name ?? "")
+                        Text(weatherData.location.name)
                             .lineLimit(1)
                             .font(.largeTitle)
                             .fontWeight(.medium)
                         
-                        Text(viewModel.weatherData?.current.condition.text ?? "")
+                        Text(weatherData.current.condition.text)
                         
                         HStack {
                             Text("L \(low)°")
@@ -69,7 +71,7 @@ struct WeatherView: View {
                     
                     Spacer()
                     
-                    Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                    Text("\(Int(weatherData.current.tempF))°")
                         .font(.system(size: 96))
                         .fontWeight(.ultraLight)
                         .shadow(color: .black, radius: 7)
@@ -83,17 +85,17 @@ struct WeatherView: View {
                 
                 
                 VStack {
-                    Text(viewModel.weatherData?.location.localtime.getTime() ?? "")
+                    Text(weatherData.location.localtime.getTime())
                         .font(.system(size: 70))
                         //.fontDesign(.serif)
                         .fontWeight(.medium)
                         .padding(.top, 15)
                     
-                    Text(viewModel.weatherData?.location.region ?? "")
+                    Text(weatherData.location.region)
                         .foregroundStyle(.secondary)
                         .padding(.bottom, 1)
                     
-                    Text(viewModel.weatherData?.location.localtime.getDate() ?? "")
+                    Text(weatherData.location.localtime.getDate())
                         .font(.title)
                     Spacer()
                 }
@@ -106,10 +108,11 @@ struct WeatherView: View {
                 
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing){
+                ToolbarItem(placement: .navigationBarLeading){
                     Button {
-                        viewModel.query = "Lake_Grove"
-                        viewModel.fetchWeatherData()
+                            withAnimation {
+                                viewingDetails = false
+                            }
                     } label: {
                         Text("Search")
                     }
@@ -128,11 +131,11 @@ struct WeatherView: View {
     }
 }
 
-struct WeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherView()
-    }
-}
+//struct WeatherView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WeatherView(weatherData: nil, showingDetails: .constant(true))
+//    }
+//}
 
 
 

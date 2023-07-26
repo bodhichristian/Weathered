@@ -8,22 +8,20 @@
 import SwiftUI
 
 struct SearchView: View {
-    @ObservedObject var searchVM = WeatherViewModel()
-    
+    @EnvironmentObject var viewModel: WeatherViewModel
     @State private var searchText = ""
-    
     @State private var locationName: String?
+    @State private var timer: Timer?
+    
+    @Binding var viewingDetails: Bool
     
     var body: some View {
         ZStack {
             LinearGradient(colors: [.midnightStart, .midnightEnd], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            
-            
             VStack {
-                
-                if let location = searchVM.weatherData?.location {
+                if let location = viewModel.weatherData?.location {
                     Text(location.name)
                         .font(.largeTitle)
                         .fontWeight(.medium)
@@ -37,31 +35,39 @@ struct SearchView: View {
                 }
             }
             .offset(y: -80)
-                // Search Field
-                ZStack {
-                    Capsule()
-                        .foregroundStyle(.ultraThinMaterial)
-                        .frame(width: 350, height: 40)
-
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                        TextField("Search for a location", text: $searchText)
-                            
-                    }
-                    .foregroundStyle(.white)
-                    .padding()
-                    .frame(width: 350, height: 40)
+            .onTapGesture {
+                withAnimation{
+                    viewingDetails = true
                 }
+            }
             
             
-            // Search Button
-            
+            // Search Field
+            ZStack {
+                Capsule()
+                    .foregroundStyle(.ultraThinMaterial)
+                    .frame(width: 350, height: 40)
+                
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    TextField("Search for a location", text: $searchText)
+                    
+                }
+                .foregroundStyle(.white)
+                .padding()
+                .frame(width: 350, height: 40)
+            }
         }
         .onChange(of: searchText) { query in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                searchVM.query = query
-                withAnimation{
-                    searchVM.fetchWeatherData()
+            // Invalidate the previous timer when the user types again
+            timer?.invalidate()
+            
+            // Start a new timer with a 2-second delay
+            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                // This block will be executed after 2 seconds of the user stopping typing
+                DispatchQueue.main.async {
+                    viewModel.query = query
+                    viewModel.fetchWeatherData()
                 }
             }
         }
@@ -70,6 +76,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(viewingDetails: .constant(false))
     }
 }
