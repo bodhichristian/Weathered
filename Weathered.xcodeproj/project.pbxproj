@@ -15,6 +15,9 @@
 		AA611A632A6EF1B900B55BBA /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA611A622A6EF1B900B55BBA /* WeatherService.swift */; };
 		AA611A662A6EF4D000B55BBA /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA611A652A6EF4D000B55BBA /* WeatherViewModel.swift */; };
 		AA846C702A7036D800C4D61E /* WeatherDetailGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */; };
+		AA846C732A70AE7600C4D61E /* SkyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA846C722A70AE7600C4D61E /* SkyView.swift */; };
+		AA846C752A70B2E800C4D61E /* GradientStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA846C742A70B2E800C4D61E /* GradientStops.swift */; };
+		AA846C772A70B89E00C4D61E /* String-DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA846C762A70B89E00C4D61E /* String-DateFormat.swift */; };
 		AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A5A29CF3DED000E270E /* WeatheredApp.swift */; };
 		AA972A5D29CF3DED000E270E /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A5C29CF3DED000E270E /* WeatherView.swift */; };
 		AA972A5F29CF3DEE000E270E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA972A5E29CF3DEE000E270E /* Assets.xcassets */; };
@@ -49,6 +52,9 @@
 		AA611A622A6EF1B900B55BBA /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		AA611A652A6EF4D000B55BBA /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailGridItem.swift; sourceTree = "<group>"; };
+		AA846C722A70AE7600C4D61E /* SkyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyView.swift; sourceTree = "<group>"; };
+		AA846C742A70B2E800C4D61E /* GradientStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientStops.swift; sourceTree = "<group>"; };
+		AA846C762A70B89E00C4D61E /* String-DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-DateFormat.swift"; sourceTree = "<group>"; };
 		AA972A5729CF3DED000E270E /* Weathered.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weathered.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA972A5A29CF3DED000E270E /* WeatheredApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatheredApp.swift; sourceTree = "<group>"; };
 		AA972A5C29CF3DED000E270E /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
@@ -155,9 +161,10 @@
 			path = Weather;
 			sourceTree = "<group>";
 		};
-		AA611A682A6EFF3B00B55BBA /* Elements */ = {
+		AA611A682A6EFF3B00B55BBA /* Sky */ = {
 			isa = PBXGroup;
 			children = (
+				AA846C722A70AE7600C4D61E /* SkyView.swift */,
 				AAA8266429E480CA00C74D6C /* SunView.swift */,
 				AA972A7E29D1D022000E270E /* StarsView.swift */,
 				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
@@ -165,7 +172,7 @@
 				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
 				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
 			);
-			path = Elements;
+			path = Sky;
 			sourceTree = "<group>";
 		};
 		AA972A4E29CF3DED000E270E = {
@@ -221,7 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				AA611A672A6EFEEA00B55BBA /* Weather */,
-				AA611A682A6EFF3B00B55BBA /* Elements */,
+				AA611A682A6EFF3B00B55BBA /* Sky */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,6 +239,8 @@
 				AA972A7229CF9F5E000E270E /* Color-Custom.swift */,
 				AA972A7729CFA3E2000E270E /* Color-Interpolation.swift */,
 				AA972A7529CFA219000E270E /* Array-GradientStop.swift */,
+				AA846C742A70B2E800C4D61E /* GradientStops.swift */,
+				AA846C762A70B89E00C4D61E /* String-DateFormat.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -306,10 +315,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA846C732A70AE7600C4D61E /* SkyView.swift in Sources */,
 				AA972A8329D234C7000E270E /* StormDrop.swift in Sources */,
 				AA611A632A6EF1B900B55BBA /* WeatherService.swift in Sources */,
 				AAE243AB29E502E90061910D /* MeteorShower.swift in Sources */,
 				AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */,
+				AA846C752A70B2E800C4D61E /* GradientStops.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* WeatherView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
 				AA972A8129D23491000E270E /* Storm.swift in Sources */,
@@ -333,6 +344,7 @@
 				AA972A7F29D1D022000E270E /* StarsView.swift in Sources */,
 				AA972A6B29CF407C000E270E /* CloudGroup.swift in Sources */,
 				AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */,
+				AA846C772A70B89E00C4D61E /* String-DateFormat.swift in Sources */,
 				AA607DF229E1F37E00DBE8C3 /* LightningView.swift in Sources */,
 				AA972A6F29CF42D0000E270E /* CloudsView.swift in Sources */,
 			);

@@ -11,15 +11,8 @@ import SwiftUI
 struct WeatherView: View {
     @ObservedObject var viewModel = WeatherViewModel()
     
-    @State private var locationName = "London"
-    @State private var currentTemp = "79°"
-    @State private var currentConditions = "Light Showers"
-    @State private var todaysHighTemp = "84"
-    @State private var todaysLowTemp = "66"
-    
-    
-    @State private var cloudThickness = Cloud.Thickness.regular
-    @State private var time = 0.5
+    @State private var cloudThickness = Cloud.Thickness.thick
+    @State private var time = 0.1
     
     @State private var stormType = Storm.Contents.none
     @State private var rainIntensity = 500.0
@@ -30,152 +23,99 @@ struct WeatherView: View {
     
     @State private var showingControls = false
     
-    let backgroundTopStops: [Gradient.Stop] = [
-        .init(color: .midnightStart, location: 0),
-        .init(color: .midnightStart, location: 0.25),
-        .init(color: .sunriseStart, location: 0.33),
-        .init(color: .sunnyDayStart, location: 0.38),
-        .init(color: .sunnyDayStart, location: 0.7),
-        .init(color: .sunriseStart, location: 0.78),
-        .init(color: .midnightStart, location: 0.82),
-        .init(color: .midnightStart, location: 1)
-    ]
-    
-    let backgroundBottomStops: [Gradient.Stop] = [
-        .init(color: .midnightEnd, location: 0),
-        .init(color: .midnightEnd, location: 0.25),
-        .init(color: .sunriseEnd, location: 0.33),
-        .init(color: .sunnyDayEnd, location: 0.38),
-        .init(color: .sunnyDayEnd, location: 0.7),
-        .init(color: .sunsetEnd, location: 0.78),
-        .init(color: .midnightEnd, location: 0.82),
-        .init(color: .midnightEnd, location: 1)
-    ]
-    
-    let cloudTopStops: [Gradient.Stop] = [
-        .init(color: .darkCloudStart, location: 0),
-        .init(color: .darkCloudStart, location: 0.25),
-        .init(color: .sunriseCloudStart, location: 0.33),
-        .init(color: .lightCloudStart, location: 0.38),
-        .init(color: .lightCloudStart, location: 0.7),
-        .init(color: .sunsetCloudStart, location: 0.78),
-        .init(color: .darkCloudStart, location: 0.82),
-        .init(color: .darkCloudStart, location: 1)
-    ]
-    
-    let cloudBottomStops: [Gradient.Stop] = [
-        .init(color: .darkCloudEnd, location: 0),
-        .init(color: .darkCloudEnd, location: 0.25),
-        .init(color: .sunriseCloudEnd, location: 0.33),
-        .init(color: .lightCloudEnd, location: 0.38),
-        .init(color: .lightCloudEnd, location: 0.7),
-        .init(color: .sunsetCloudEnd, location: 0.78),
-        .init(color: .darkCloudEnd, location: 0.82),
-        .init(color: .darkCloudEnd, location: 1)
-    ]
-    
-    let starStops: [Gradient.Stop] = [
-        .init(color: .white, location: 0),
-        .init(color: .white, location: 0.25),
-        .init(color: .clear, location: 0.333),
-        .init(color: .clear, location: 0.38),
-        .init(color: .clear, location: 0.7),
-        .init(color: .clear, location: 0.8),
-        .init(color: .white, location: 0.85),
-        .init(color: .white, location: 1)
-    ]
-    
-    var starOpacity: Double {
-        let color = starStops.interpolated(amount: time)
-        return color.getComponents().alpha
+    var low: Int {
+        Int(viewModel.weatherData?.forecast.forecastday[0].day.mintempF ?? 0)
     }
     
+    var high: Int {
+        Int(viewModel.weatherData?.forecast.forecastday[0].day.maxtempF ?? 0)
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
-            StarsView()
-                .opacity(starOpacity)
-            
-            SunView(progress: time)
-            
-            CloudsView(
-                thickness: cloudThickness,
-                topTint: cloudTopStops.interpolated(amount: time),
-                bottomTint: cloudBottomStops.interpolated(amount: time)
-            )
-            
-            if stormType != .none{
-                StormView(type: stormType, direction: .degrees(rainAngle), strength: Int(rainIntensity))
-            }
-            
-            WeatherDetailsView(weatherData: viewModel.weatherData, tintColor: backgroundTopStops.interpolated(amount: time), residueType: stormType, resiudeStrength: rainIntensity)
-            
-            // Current Weather conditions
-            // Extract to sepearate view
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(viewModel.weatherData?.location.name ?? "")
-                        .lineLimit(1)
-                        .font(.largeTitle)
-                        .fontWeight(.medium)
-                    
-                    Text(viewModel.weatherData?.current.condition.text ?? "")
-                    
-                    HStack {
-                        Text("L \(Int(viewModel.weatherData?.forecast.forecastday[0].day.mintempF ?? 0))°")
+                SkyView()
+                
+                WeatherDetailsView(
+                    weatherData: viewModel.weatherData,
+                    tintColor: backgroundTopStops.interpolated(amount: time),
+                    residueType: stormType,
+                    resiudeStrength: rainIntensity
+                )
+                
+                // Current Weather conditions
+                // Extract to sepearate view
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(viewModel.weatherData?.location.name ?? "")
+                            .lineLimit(1)
+                            .font(.largeTitle)
+                            .fontWeight(.medium)
                         
-                        Text("H \(Int(viewModel.weatherData?.forecast.forecastday[0].day.maxtempF ?? 0))°")
+                        Text(viewModel.weatherData?.current.condition.text ?? "")
+                        
+                        HStack {
+                            Text("L \(low)°")
+                            
+                            Text("H \(high)°")
+                            
+                        }
                         
                     }
-                    
-                }
-                .shadow(color: .black, radius: 7)
-                
-                .padding(20)
-                
-                
-                Spacer()
-                
-                Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
-                    .font(.system(size: 96))
-                    .fontWeight(.ultraLight)
                     .shadow(color: .black, radius: 7)
-            }
-            .offset(y: -140)
-            
-            
-            
-            
-            .padding()
-            
-            
-            
-            LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
-            
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing){
-                Button {
-                    viewModel.query = "London"
-                    viewModel.fetchWeatherData()
-                } label: {
-                    Text("Search")
+                    .padding(20)
+                    
+                    
+                    Spacer()
+                    
+                    Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                        .font(.system(size: 96))
+                        .fontWeight(.ultraLight)
+                        .shadow(color: .black, radius: 7)
                     
                 }
+                .offset(y: -130)
+                .padding()
+                
+                
+                
+                
+                
+                VStack {
+                    Text(viewModel.weatherData?.location.localtime.getTime() ?? "")
+                        .font(.system(size: 70))
+                        //.fontDesign(.serif)
+                        .fontWeight(.medium)
+                        .padding(.top, 15)
+                    
+                    Text(viewModel.weatherData?.location.region ?? "")
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, 1)
+                    
+                    Text(viewModel.weatherData?.location.localtime.getDate() ?? "")
+                        .font(.title)
+                    Spacer()
+                }
+                .shadow(radius: 6)
+                
+                
+                
+                
+                LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
+                
             }
-            
-            
-        }
-        
-        
-        .preferredColorScheme(.dark)
-        .background(
-            LinearGradient(colors: [
-                backgroundTopStops.interpolated(amount: time),
-                backgroundBottomStops.interpolated(amount: time)
-            ], startPoint: .top, endPoint: .bottom)
-        )
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button {
+                        viewModel.query = "London"
+                        viewModel.fetchWeatherData()
+                    } label: {
+                        Text("Search")
+                    }
+                }
+            }
+            .preferredColorScheme(.dark)
         }
         
     }

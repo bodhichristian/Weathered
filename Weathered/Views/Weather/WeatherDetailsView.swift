@@ -30,7 +30,7 @@ struct WeatherDetailsView: View {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(tintColor.opacity(0.25))
-                    .frame(height: 420)
+                    .frame(height: 430)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 25))
                     .padding(.horizontal, 20)
                 
@@ -52,21 +52,25 @@ struct WeatherDetailsView: View {
                         
                             HStack(spacing: 10) {
                                 WeatherDetailGridItem(
+                                    metric: "Sunrise",
                                     value: weatherData?.forecast.forecastday[0].astro.sunrise ?? "",
                                     iconName: "sunrise"
                                 )
                                 
                                 WeatherDetailGridItem(
+                                    metric: "Sunset",
                                     value: weatherData?.forecast.forecastday[0].astro.sunset ?? "",
                                     iconName: "sunset"
                                 )
                                 
                                 WeatherDetailGridItem(
+                                    metric: "Moonrise",
                                     value: weatherData?.forecast.forecastday[0].astro.moonrise ?? "",
                                     iconName: "moon.stars"
                                 )
                                 
                                 WeatherDetailGridItem(
+                                    metric: "Moonset",
                                     value: weatherData?.forecast.forecastday[0].astro.moonset ?? "",
                                     iconName: "moon.zzz"
                                 )
@@ -81,12 +85,14 @@ struct WeatherDetailsView: View {
             }
             .padding(.top, 200)
         }
+        .offset(y: 10)
     }
 }
 
 struct WeatherDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetailsView(weatherData: nil, tintColor: .blue, residueType: .rain, resiudeStrength: 200)
+        WeatherDetailsView(weatherData: nil, tintColor: .blue, residueType: .rain, resiudeStrength: 600)
+            .preferredColorScheme(.dark)
     }
 }
 
