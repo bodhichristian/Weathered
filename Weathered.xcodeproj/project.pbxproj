@@ -34,6 +34,7 @@
 		AA972A8329D234C7000E270E /* StormDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8229D234C7000E270E /* StormDrop.swift */; };
 		AA972A8529D23863000E270E /* StormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8429D23863000E270E /* StormView.swift */; };
 		AAA8266529E480CA00C74D6C /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8266429E480CA00C74D6C /* SunView.swift */; };
+		AABC2C0E2A713F89004EFF49 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC2C0D2A713F89004EFF49 /* SearchView.swift */; };
 		AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */; };
 		AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44B29D5EFA1008742CB /* Residue.swift */; };
 		AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44F29D5FD12008742CB /* ResidueView.swift */; };
@@ -72,6 +73,7 @@
 		AA972A8229D234C7000E270E /* StormDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormDrop.swift; sourceTree = "<group>"; };
 		AA972A8429D23863000E270E /* StormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormView.swift; sourceTree = "<group>"; };
 		AAA8266429E480CA00C74D6C /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
+		AABC2C0D2A713F89004EFF49 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueDrop.swift; sourceTree = "<group>"; };
 		AAD8C44B29D5EFA1008742CB /* Residue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Residue.swift; sourceTree = "<group>"; };
 		AAD8C44F29D5FD12008742CB /* ResidueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		AA972A6D29CF42C1000E270E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AABC2C0C2A713F79004EFF49 /* Search */,
 				AA611A672A6EFEEA00B55BBA /* Weather */,
 				AA611A682A6EFF3B00B55BBA /* Sky */,
 			);
@@ -243,6 +246,14 @@
 				AA846C762A70B89E00C4D61E /* String-DateFormat.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AABC2C0C2A713F79004EFF49 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AABC2C0D2A713F89004EFF49 /* SearchView.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +336,7 @@
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
 				AA972A8129D23491000E270E /* Storm.swift in Sources */,
 				AA611A602A6EDCF400B55BBA /* WeatherData.swift in Sources */,
+				AABC2C0E2A713F89004EFF49 /* SearchView.swift in Sources */,
 				AA972A7829CFA3E2000E270E /* Color-Interpolation.swift in Sources */,
 				AA972A8529D23863000E270E /* StormView.swift in Sources */,
 				AAD8C45229D5FF4B008742CB /* WeatherDetailsView.swift in Sources */,

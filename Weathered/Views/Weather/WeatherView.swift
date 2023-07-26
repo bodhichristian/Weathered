@@ -108,7 +108,7 @@ struct WeatherView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button {
-                        viewModel.query = "London"
+                        viewModel.query = "Lake_Grove"
                         viewModel.fetchWeatherData()
                     } label: {
                         Text("Search")
