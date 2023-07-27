@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA093DDF2A72B1250099A958 /* SampleWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */; };
 		AA389B342A6EB4C100EF6E2F /* WeatherDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */; };
 		AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */; };
 		AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleWeatherData.swift; sourceTree = "<group>"; };
 		AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowView.swift; sourceTree = "<group>"; };
 		AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningBolt.swift; sourceTree = "<group>"; };
 		AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lightning.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				AA611A5F2A6EDCF400B55BBA /* WeatherData.swift */,
+				AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				AA972A7329CF9F5E000E270E /* Color-Custom.swift in Sources */,
 				AAD8C44C29D5EFA1008742CB /* Residue.swift in Sources */,
 				AAE243A929E502E00061910D /* Meteor.swift in Sources */,
+				AA093DDF2A72B1250099A958 /* SampleWeatherData.swift in Sources */,
 				AAD8C45029D5FD12008742CB /* ResidueView.swift in Sources */,
 				AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */,
 				AA611A662A6EF4D000B55BBA /* WeatherViewModel.swift in Sources */,

@@ -15,8 +15,6 @@ class WeatherService: ObservableObject {
             let apiKey = "eff192195d53420dbab02924232407"
             let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=\(city)&days=1&aqi=no&alerts=no"
 
-    
-
             guard let url = URL(string: urlString) else {
                 completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
                 return
@@ -37,7 +35,6 @@ class WeatherService: ObservableObject {
                 }
                 
                 do {
-                   
                     let decoder = JSONDecoder()
                     let weatherData = try decoder.decode(WeatherData.self, from: data)
                     completion(.success(weatherData))

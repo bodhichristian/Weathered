@@ -131,11 +131,11 @@ struct WeatherView: View {
     }
 }
 
-//struct WeatherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeatherView(weatherData: nil, showingDetails: .constant(true))
-//    }
-//}
+struct WeatherView_Previews: PreviewProvider {
+    static var previews: some View {
+        WeatherView(weatherData: SampleWeatherData, viewingDetails: .constant(true))
+    }
+}
 
 
 
