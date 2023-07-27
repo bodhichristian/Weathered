@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SkyView: View {
-    @State private var cloudThickness = Cloud.Thickness.ultra
+    @State private var cloudThickness = Cloud.Thickness.regular
     @State private var time = 0.7
     
-    @State private var stormType = Storm.Contents.rain
+    @State private var stormType = Storm.Contents.none
     @State private var rainIntensity = 500.0
     @State private var rainAngle = 0.0
     

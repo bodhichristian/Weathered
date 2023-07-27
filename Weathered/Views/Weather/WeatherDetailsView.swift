@@ -13,8 +13,8 @@ struct WeatherDetailsView: View {
     // Background color
     let tintColor: Color
     
-    let residueType: Storm.Contents
-    let resiudeStrength: Double
+//    let residueType: Storm.Contents
+//    let resiudeStrength: Double
     
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -22,10 +22,10 @@ struct WeatherDetailsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ResidueView(type: residueType, strength: resiudeStrength)
-                .frame(height: 62)
-                .offset(y: 230)
-                .zIndex(1)
+//            ResidueView(type: residueType, strength: resiudeStrength)
+//                .frame(height: 62)
+//                .offset(y: 230)
+//                .zIndex(1)
             
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
@@ -91,7 +91,7 @@ struct WeatherDetailsView: View {
 
 struct WeatherDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetailsView(weatherData: nil, tintColor: .blue, residueType: .rain, resiudeStrength: 600)
+        WeatherDetailsView(weatherData: nil, tintColor: .blue)
             .preferredColorScheme(.dark)
     }
 }

@@ -13,17 +13,16 @@ struct WeatherView: View {
     
     @Binding var viewingDetails: Bool
     
-    @State private var cloudThickness = Cloud.Thickness.thick
     @State private var time = 0.1
-    
-    @State private var stormType = Storm.Contents.none
-    @State private var rainIntensity = 500.0
-    @State private var rainAngle = 0.0
+
     
     @State private var lightningMaxBolts = 4.0
     @State private var lightningForkProbability = 20.0
     
     @State private var showingControls = false
+    
+    let residueType =  Storm.Contents.rain
+    let resiudeStrength = 0.0
     
     var low: Int {
         Int(weatherData.forecast.forecastday[0].day.mintempF)
@@ -38,65 +37,91 @@ struct WeatherView: View {
             ZStack {
                 SkyView()
                 
-                WeatherDetailsView(
-                    weatherData: weatherData,
-                    tintColor: backgroundTopStops.interpolated(amount: time),
-                    residueType: stormType,
-                    resiudeStrength: rainIntensity
-                )
+                VStack(spacing: 0){
+                    ResidueView(type: residueType, strength: resiudeStrength)
+                        .frame(height: 62)
+                        .offset(y: 240)
+                        .zIndex(1)
+                    
+                    WeatherDetailsView(
+                        weatherData: weatherData,
+                        tintColor: backgroundTopStops.interpolated(amount: time)
+                    )
+                }
                 
                 // Current Weather conditions
                 // Extract to sepearate view
                 
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(weatherData.location.name)
-                            .lineLimit(1)
-                            .font(.largeTitle)
-                            .fontWeight(.medium)
+                VStack(alignment: .center, spacing: 8) {
+                    Text(weatherData.location.name)
+                        .lineLimit(1)
+                        .font(.system(size: 45))
                         
-                        Text(weatherData.current.condition.text)
-                        
-                        HStack {
-                            Text("L \(low)°")
+                    
+                    Text(weatherData.location.region)
+                        .font(.headline)
+                        .opacity(0.8)
+                        .padding(.bottom, 5)
+
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Feels like \(Int(weatherData.current.feelslikeF))° F")
+                                .font(.headline)
+                            Text(weatherData.current.condition.text)
                             
-                            Text("H \(high)°")
+                            HStack {
+                                Text("L \(low)°")
+                                
+                                Text("H \(high)°")
+                                
+                            }
                             
                         }
                         
+                        
+                        
+                        Spacer()
+                        
+                        Text("\(Int(weatherData.current.tempF))°")
+                            .font(.system(size: 96))
+                            .fontWeight(.ultraLight)
+                            .offset( y: -18)
+                                                    
                     }
-                    .shadow(color: .black, radius: 7)
-                    .padding(20)
-                    
-                    
-                    Spacer()
-                    
-                    Text("\(Int(weatherData.current.tempF))°")
-                        .font(.system(size: 96))
-                        .fontWeight(.ultraLight)
-                        .shadow(color: .black, radius: 7)
                     
                 }
-                .offset(y: -130)
-                .padding()
+                .padding(.horizontal, 20)
+                .padding(.leading, 5)
+                .shadow(color: .black.opacity(0.6), radius: 6)
+                .offset(y: -150)
                 
                 
                 
-                
+                // DATE & TIME
                 
                 VStack {
+                    Text(weatherData.location.localtime.getDate())
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .shadow(radius: 3)
+                    
                     Text(weatherData.location.localtime.getTime())
                         .font(.system(size: 70))
                         //.fontDesign(.serif)
                         .fontWeight(.medium)
-                        .padding(.top, 15)
                     
-                    Text(weatherData.location.region)
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom, 1)
-                    
-                    Text(weatherData.location.localtime.getDate())
-                        .font(.title)
+//                    HStack {
+//                        Text(weatherData.location.localtime.getDate())
+//                            .frame(width: 120)
+//                        Text(weatherData.location.region)
+//
+//                            .padding(.bottom, 1)
+//                            .frame(width: 120)
+//
+//
+//                    }
+//                    .font(.title3)
+
                     Spacer()
                 }
                 .shadow(radius: 6)
@@ -133,7 +158,11 @@ struct WeatherView: View {
 
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherView(weatherData: SampleWeatherData, viewingDetails: .constant(true))
+        WeatherView(
+            weatherData: SampleWeatherData,
+            viewingDetails: .constant(true)
+            
+        )
     }
 }
 
