@@ -36,7 +36,7 @@ struct SearchView: View {
             }
             .offset(y: -80)
             .onTapGesture {
-                withAnimation{
+                withAnimation(.spring()){
                     viewingDetails = true
                 }
             }

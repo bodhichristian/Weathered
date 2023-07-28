@@ -103,41 +103,43 @@ struct WeatherView: View {
                 .padding(.leading, 5)
                 .shadow(color: .black.opacity(0.6), radius: 6, y: 4)
                 
-                VStack {
-                    
-                    
-                    //                    HStack {
-                    //                        Text(weatherData.location.localtime.getDate())
-                    //                            .frame(width: 120)
-                    //                        Text(weatherData.location.region)
-                    //
-                    //                            .padding(.bottom, 1)
-                    //                            .frame(width: 120)
-                    //
-                    //
-                    //                    }
-                    //                    .font(.title3)
-                    
-                    Spacer()
-                }
-                .shadow(radius: 6)
-                
-                
+
                 
                 
                 LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
                 
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button {
-                        withAnimation {
-                            viewingDetails = false
+                
+                ZStack(alignment: .topLeading) {
+                    VStack {
+                        HStack {
+                            Button {
+                                withAnimation(.spring()) {
+                                    viewingDetails = false
+                                }
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30)
+                                    .shadow(radius: 6, y: 4)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .padding(.leading, 30)
+                            .padding(.top, 90)
+                            Spacer()
                         }
-                    } label: {
-                        Text("Search")
+                        Spacer()
+
                     }
                 }
+                .ignoresSafeArea()
+                
+            }
+            // This toolbar is currently necessary to keep the alpha layer intentionally empty
+            // This is a temporary solution while the weather animation depends on the alpha layer
+            // Removing content from this toolbar will result in a WeatherView UI that animates undesireably.
+            .toolbar {
+                Text("")
             }
             .preferredColorScheme(.dark)
         }
