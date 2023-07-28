@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct SkyView: View {
+    let time: Double
+    
     @State private var cloudThickness = Cloud.Thickness.regular
-    @State private var time = 0.7
+    
     
     @State private var stormType = Storm.Contents.none
     @State private var rainIntensity = 500.0
@@ -51,7 +53,7 @@ struct SkyView: View {
 
 struct SkyView_Previews: PreviewProvider {
     static var previews: some View {
-        SkyView()
+        SkyView(time: 0.5)
             .preferredColorScheme(.dark)
     }
 }

@@ -29,6 +29,25 @@ extension String {
         }
         return ""
     }
+    
+    func calculateTimeOfDay() -> Double? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd H:mm"
+        
+        if let date = dateFormatter.date(from: self) {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.hour, .minute], from: date)
+            
+            if let hour = components.hour, let minute = components.minute {
+                let totalMinutes = Double(hour * 60 + minute)
+                let totalTimeOfDay = totalMinutes / (24.0 * 60.0)
+                return totalTimeOfDay
+            }
+        }
+        
+        // Return nil if the string is not in the correct format or if the conversion fails
+        return nil
+    }
 }
 
 
