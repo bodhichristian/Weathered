@@ -51,30 +51,39 @@ struct WeatherDetailsView: View {
                             .padding(.bottom, 10)
                         
                             HStack(spacing: 10) {
+                                Spacer()
+                                
                                 WeatherDetailGridItem(
                                     metric: "Sunrise",
                                     value: weatherData?.forecast.forecastday[0].astro.sunrise ?? "",
-                                    iconName: "sunrise"
+                                    iconName: "sunrise",
+                                    color: .yellow
                                 )
                                 
                                 WeatherDetailGridItem(
                                     metric: "Sunset",
                                     value: weatherData?.forecast.forecastday[0].astro.sunset ?? "",
-                                    iconName: "sunset"
+                                    iconName: "sunset",
+                                    color: .orange
                                 )
                                 
                                 WeatherDetailGridItem(
                                     metric: "Moonrise",
                                     value: weatherData?.forecast.forecastday[0].astro.moonrise ?? "",
-                                    iconName: "moon.stars"
+                                    iconName: "moon.stars",
+                                    color: .blue
                                 )
                                 
                                 WeatherDetailGridItem(
                                     metric: "Moonset",
                                     value: weatherData?.forecast.forecastday[0].astro.moonset ?? "",
-                                    iconName: "moon.zzz"
+                                    iconName: "moon.zzz",
+                                    color: .indigo
                                 )
+                                
+                                Spacer()
                             }
+                            .offset(x: -10)
                         
                         .padding(.leading, 20)
                     }

@@ -70,7 +70,7 @@ struct WeatherView: View {
                         .font(.headline)
                         .opacity(0.8)
                         .padding(.top, 6)
-                        .padding(.bottom, 30)
+                        .padding(.bottom, 25)
                     
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 6) {
@@ -92,8 +92,8 @@ struct WeatherView: View {
                             .offset( y: -18)
                         
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, -20)
+                    .padding(.horizontal, 30)
+                    .padding(.bottom, -15)
                     
                     WeatherDetailsView(
                         weatherData: weatherData,
