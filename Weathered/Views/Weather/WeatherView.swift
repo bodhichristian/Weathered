@@ -14,7 +14,7 @@ struct WeatherView: View {
     @Binding var viewingDetails: Bool
     
     @State private var time = 0.1
-
+    
     
     @State private var lightningMaxBolts = 4.0
     @State private var lightningForkProbability = 20.0
@@ -22,7 +22,7 @@ struct WeatherView: View {
     @State private var showingControls = false
     
     let residueType =  Storm.Contents.rain
-    let resiudeStrength = 0.0
+    let resiudeStrength = 100.0
     
     var low: Int {
         Int(weatherData.forecast.forecastday[0].day.mintempF)
@@ -31,38 +31,47 @@ struct WeatherView: View {
     var high: Int {
         Int(weatherData.forecast.forecastday[0].day.maxtempF)
     }
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 SkyView()
                 
-                VStack(spacing: 0){
-                    ResidueView(type: residueType, strength: resiudeStrength)
-                        .frame(height: 62)
-                        .offset(y: 240)
-                        .zIndex(1)
-                    
-                    WeatherDetailsView(
-                        weatherData: weatherData,
-                        tintColor: backgroundTopStops.interpolated(amount: time)
-                    )
-                }
+                
+                ResidueView(type: residueType, strength: resiudeStrength)
+                    .frame(height: 62)
+                    .offset(y: -65)
+                    .zIndex(1)
+                
                 
                 // Current Weather conditions
                 // Extract to sepearate view
                 
-                VStack(alignment: .center, spacing: 8) {
+                VStack(alignment: .center, spacing: 0) {
+                    Text(weatherData.location.localtime.getDate())
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .shadow(radius: 3)
+                    
+                    Text(weatherData.location.localtime.getTime())
+                        .font(.system(size: 70))
+                    //.fontDesign(.serif)
+                        .fontWeight(.medium)
+                    
+                    
+                    
                     Text(weatherData.location.name)
                         .lineLimit(1)
                         .font(.system(size: 45))
-                        
+                        .padding(.top, -10)
+                    
                     
                     Text(weatherData.location.region)
                         .font(.headline)
                         .opacity(0.8)
-                        .padding(.bottom, 5)
-
+                        .padding(.top, 6)
+                        .padding(.bottom, 30)
+                    
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 6) {
                             Text("Feels like \(Int(weatherData.current.feelslikeF))° F")
@@ -73,55 +82,42 @@ struct WeatherView: View {
                                 Text("L \(low)°")
                                 
                                 Text("H \(high)°")
-                                
                             }
-                            
                         }
-                        
-                        
-                        
                         Spacer()
                         
                         Text("\(Int(weatherData.current.tempF))°")
                             .font(.system(size: 96))
                             .fontWeight(.ultraLight)
                             .offset( y: -18)
-                                                    
+                        
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, -20)
                     
+                    WeatherDetailsView(
+                        weatherData: weatherData,
+                        tintColor: backgroundTopStops.interpolated(amount: time)
+                    )
                 }
-                .padding(.horizontal, 20)
                 .padding(.leading, 5)
-                .shadow(color: .black.opacity(0.6), radius: 6)
-                .offset(y: -150)
-                
-                
-                
-                // DATE & TIME
+                .shadow(color: .black.opacity(0.6), radius: 6, y: 4)
                 
                 VStack {
-                    Text(weatherData.location.localtime.getDate())
-                        .font(.title3)
-                        .fontWeight(.medium)
-                        .shadow(radius: 3)
                     
-                    Text(weatherData.location.localtime.getTime())
-                        .font(.system(size: 70))
-                        //.fontDesign(.serif)
-                        .fontWeight(.medium)
                     
-//                    HStack {
-//                        Text(weatherData.location.localtime.getDate())
-//                            .frame(width: 120)
-//                        Text(weatherData.location.region)
-//
-//                            .padding(.bottom, 1)
-//                            .frame(width: 120)
-//
-//
-//                    }
-//                    .font(.title3)
-
+                    //                    HStack {
+                    //                        Text(weatherData.location.localtime.getDate())
+                    //                            .frame(width: 120)
+                    //                        Text(weatherData.location.region)
+                    //
+                    //                            .padding(.bottom, 1)
+                    //                            .frame(width: 120)
+                    //
+                    //
+                    //                    }
+                    //                    .font(.title3)
+                    
                     Spacer()
                 }
                 .shadow(radius: 6)
@@ -135,9 +131,9 @@ struct WeatherView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
                     Button {
-                            withAnimation {
-                                viewingDetails = false
-                            }
+                        withAnimation {
+                            viewingDetails = false
+                        }
                     } label: {
                         Text("Search")
                     }

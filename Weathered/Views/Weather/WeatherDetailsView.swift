@@ -83,9 +83,9 @@ struct WeatherDetailsView: View {
                     
                 
             }
-            .padding(.top, 200)
+            //.padding(.top, 200)
         }
-        .offset(y: 10)
+        //.offset(y: 10)
     }
 }
 
