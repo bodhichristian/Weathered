@@ -21,8 +21,8 @@ struct WeatherView: View {
     
     @State private var showingControls = false
     
-    let residueType =  Storm.Contents.rain
-    let resiudeStrength = 100.0
+    let residueType =  Storm.Contents.none
+    let resiudeStrength = 0.0
     
     var low: Int {
         Int(weatherData.forecast.forecastday[0].day.mintempF)

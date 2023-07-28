@@ -98,6 +98,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA3E7DB82A74716000119ECA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA972A5C29CF3DED000E270E /* WeatherView.swift */,
+				AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */,
+				AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */,
+				AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		AA611A5B2A6EDC5300B55BBA /* Precipitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,10 +170,7 @@
 		AA611A672A6EFEEA00B55BBA /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				AA972A5C29CF3DED000E270E /* WeatherView.swift */,
-				AAD8C45129D5FF4B008742CB /* WeatherDetailsView.swift */,
-				AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */,
-				AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */,
+				AA3E7DB82A74716000119ECA /* Views */,
 				AA611A642A6EF4C400B55BBA /* ViewModels */,
 			);
 			path = Weather;

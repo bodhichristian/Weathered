@@ -13,8 +13,6 @@ struct WeatherDetailsView: View {
     // Background color
     let tintColor: Color
     
-//    let residueType: Storm.Contents
-//    let resiudeStrength: Double
     
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -22,10 +20,7 @@ struct WeatherDetailsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-//            ResidueView(type: residueType, strength: resiudeStrength)
-//                .frame(height: 62)
-//                .offset(y: 230)
-//                .zIndex(1)
+
             
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
