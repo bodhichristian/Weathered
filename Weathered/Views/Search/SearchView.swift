@@ -63,8 +63,8 @@ struct SearchView: View {
             timer?.invalidate()
             
             // Start a new timer with a 2-second delay
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-                // This block will be executed after 2 seconds of the user stopping typing
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                // This block will be executed 1 second after user stops typing
                 DispatchQueue.main.async {
                     viewModel.query = query
                     viewModel.fetchWeatherData()
