@@ -12,7 +12,21 @@ struct SkyView: View {
     
     
     
-    @State private var cloudThickness = Cloud.Thickness.regular
+    var cloudThickness: Cloud.Thickness {
+        switch weatherData.current.condition.code {
+        case 1000:
+            return .none
+        case 1003:
+            return .light
+        case 1006, 1063, 1066, 1069, 1072, 1150, 1180, 1210, 1216, 1222:
+            return .regular
+        case 1009, 1153, 1183, 1198, 1213, 1240, 1249, 1255, 1261:
+            return .thick
+        default:
+            return .ultra
+        }
+        
+    }
     
     
     @State private var stormType = Storm.Contents.none

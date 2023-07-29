@@ -27,7 +27,7 @@ let SampleWeatherData = WeatherData(
         condition: Condition(
             text: "Partly cloudy",
             icon: "https://example.com/icons/partly_cloudy.png",
-            code: 1003
+            code: 1009
         ),
         windMph: 5.8,
         windKph: 9.3,
