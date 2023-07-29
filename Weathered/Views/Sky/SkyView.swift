@@ -29,9 +29,41 @@ struct SkyView: View {
     }
     
     
-    @State private var stormType = Storm.Contents.none
-    @State private var rainIntensity = 500.0
-    @State private var rainAngle = 0.0
+    var stormType: Storm.Contents {
+        switch weatherData.current.condition.code {
+        case 1000, 1003, 1006, 1009, 1030:
+            return .none
+        case 1066, 1114, 1210, 1213, 1216, 1219, 1222, 1225, 1237, 1279, 1282:
+            return .snow
+        default:
+            return .rain
+        }
+    }
+    
+    
+    
+    
+    var stormIntensity: Double {
+        switch weatherData.current.condition.code {
+            // Description includes 'Patchy'
+        case 1063, 1066, 1069, 1072, 1150, 1180, 1210, 1222, 1273, 1279:
+            return 50.0
+            // Description includes 'Light'
+        case 1153, 1183, 1198, 1204, 1213, 1240, 1249, 1255, 1261:
+            return 500.0
+            
+            // Description includes 'Torrential'
+        case 1246:
+            return 1500.0
+            
+        default:
+            return 800.0
+        }
+    }
+    
+    
+    
+    @State private var precipitationAngle = 0.0
     
     var time: Double {
         weatherData.location.localtime.calculateTimeOfDay() ?? 0.5
@@ -56,7 +88,7 @@ struct SkyView: View {
             )
             
             if stormType != .none{
-                StormView(type: stormType, direction: .degrees(rainAngle), strength: Int(rainIntensity))
+                StormView(type: stormType, direction: .degrees(precipitationAngle), strength: Int(stormIntensity))
             }
             
         }
@@ -66,7 +98,7 @@ struct SkyView: View {
                 backgroundBottomStops.interpolated(amount: time)
             ], startPoint: .top, endPoint: .bottom)
         )
-
+        
     }
 }
 
