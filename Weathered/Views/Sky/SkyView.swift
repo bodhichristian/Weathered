@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SkyView: View {
-    let time: Double
+    let weatherData: WeatherData
+    
+    
     
     @State private var cloudThickness = Cloud.Thickness.regular
     
@@ -17,7 +19,9 @@ struct SkyView: View {
     @State private var rainIntensity = 500.0
     @State private var rainAngle = 0.0
     
-
+    var time: Double {
+        weatherData.location.localtime.calculateTimeOfDay() ?? 0.5
+    }
     
     var starOpacity: Double {
         let color = starStops.interpolated(amount: time)
@@ -48,12 +52,13 @@ struct SkyView: View {
                 backgroundBottomStops.interpolated(amount: time)
             ], startPoint: .top, endPoint: .bottom)
         )
+
     }
 }
 
 struct SkyView_Previews: PreviewProvider {
     static var previews: some View {
-        SkyView(time: 0.5)
+        SkyView(weatherData: SampleWeatherData)
             .preferredColorScheme(.dark)
     }
 }

@@ -35,7 +35,7 @@ struct WeatherView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                SkyView(time: weatherData.location.localtime.calculateTimeOfDay() ?? 0.0)
+                SkyView(weatherData: weatherData)
                 
                 
                 ResidueView(type: residueType, strength: resiudeStrength)
