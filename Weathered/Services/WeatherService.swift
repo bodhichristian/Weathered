@@ -12,7 +12,7 @@ import Foundation
 
 class WeatherService: ObservableObject {    
     func fetchWeatherData(for city: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
-            let apiKey = "eff192195d53420dbab02924232407"
+            let apiKey = "YOUR API KEY HERE"
             let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=\(city)&days=1&aqi=no&alerts=no"
 
             guard let url = URL(string: urlString) else {
