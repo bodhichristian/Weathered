@@ -7,4 +7,4 @@ A SwiftUI app for searching and displaying the weather.
 
 * Local conditions dictate the animations provided for the sky--including daylight, stars, clouds, rain, snow, and precipitation intensity
 
-![‎Weathered App Showcase ‎001](https://github.com/bodhichristian/Weathered/assets/110639779/47f2de28-7947-40a2-b492-43424baeb4e8)
+![‎Weathered App Showcase ‎001](https://github.com/bodhichristian/Weathered/assets/110639779/11ed463d-1f1b-4ab7-a381-e736a415bcb1)
