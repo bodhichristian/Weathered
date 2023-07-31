@@ -10,41 +10,53 @@ import Foundation
 // MARK: WeatherService
 // A service class for fetching weather data
 
-class WeatherService: ObservableObject {    
+class WeatherService: ObservableObject {
+    // This function fetches weather data for a given city using the WeatherAPI.
+    // The completion handler returns a Result object containing either WeatherData on success or an Error on failure.
     func fetchWeatherData(for city: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
-            let apiKey = "ENTER YOUR API KEY HERE"
-            let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=\(city)&days=1&aqi=no&alerts=no"
+        let apiKey = "ENTER YOUR API KEY HERE" // Replace this with your actual WeatherAPI API key.
+        let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(apiKey)&q=\(city)&days=1&aqi=no&alerts=no"
 
-            guard let url = URL(string: urlString) else {
-                completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+        // Create a URL object from the constructed URL string.
+        guard let url = URL(string: urlString) else {
+            // If the URL is invalid, call the completion handler with a failure result and return early.
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+
+        let session = URLSession.shared
+        // Create a data task to fetch data from the WeatherAPI using the provided URL.
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error = error {
+                // If there's an error during the network request, call the completion handler with a failure result and return early.
+                completion(.failure(error))
+                print("Error 1: " + error.localizedDescription)
                 return
             }
-            
-            let session = URLSession.shared
-            let task = session.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    completion(.failure(error))
-                    print("Error 1: " + error.localizedDescription)
-                    return
-                }
-                
-                guard let data = data else {
-                    completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
-                    print("No data received")
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let weatherData = try decoder.decode(WeatherData.self, from: data)
-                    completion(.success(weatherData))
-                    print(weatherData)
-                } catch {
-                    completion(.failure(error))
-                    print("ERROR 2: " + error.localizedDescription)
-                }
+
+            // Check if data is received from the server.
+            guard let data = data else {
+                // If no data is received, call the completion handler with a failure result and return early.
+                completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
+                print("No data received")
+                return
             }
-            
-            task.resume()
+
+            do {
+                // Try to decode the received JSON data into a WeatherData object using JSONDecoder.
+                let decoder = JSONDecoder()
+                let weatherData = try decoder.decode(WeatherData.self, from: data)
+                // If decoding is successful, call the completion handler with the WeatherData object.
+                completion(.success(weatherData))
+                print(weatherData)
+            } catch {
+                // If there's an error during JSON decoding, call the completion handler with a failure result and return early.
+                completion(.failure(error))
+                print("ERROR 2: " + error.localizedDescription)
+            }
         }
+
+        // Resume the data task to initiate the network request.
+        task.resume()
+    }
 }
