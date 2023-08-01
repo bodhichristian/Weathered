@@ -1,6 +1,6 @@
 # Weathered
 
-A SwiftUI app for searching and displaying the weather.It uses MVVM architecture and a WeatherService class for retrieving a JSON response from weatherapi.com and displaying current conditions for the searched city.
+A SwiftUI app for searching and displaying the weather. Weathered is organized using MVVM architecture and ultilizes a WeatherService class for retrieving a JSON response from weatherapi.com. 
 
 * An API key from weatherapi.com is required to run the project with real data.
   * Enter your API Key in Weathered/Services/WeatherService
