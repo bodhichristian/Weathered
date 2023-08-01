@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
+    
     @State private var searchText = ""
     @State private var locationName: String?
     @State private var timer: Timer?

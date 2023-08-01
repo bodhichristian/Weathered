@@ -11,7 +11,7 @@ import Foundation
 // A service class for fetching weather data
 
 class WeatherService: ObservableObject {
-    // This function fetches weather data for a given city using the WeatherAPI.
+    // This function fetches weather data for a given city using WeatherAPI.
     // The completion handler returns a Result object containing either WeatherData on success or an Error on failure.
     func fetchWeatherData(for city: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
         let apiKey = "ENTER YOUR API KEY HERE" // Replace this with your actual WeatherAPI API key.
@@ -28,7 +28,8 @@ class WeatherService: ObservableObject {
         // Create a data task to fetch data from the WeatherAPI using the provided URL.
         let task = session.dataTask(with: url) { data, response, error in
             if let error = error {
-                // If there's an error during the network request, call the completion handler with a failure result and return early.
+                // If there's an error during the network request,
+                // call the completion handler with a failure result and return early.
                 completion(.failure(error))
                 print("Error 1: " + error.localizedDescription)
                 return

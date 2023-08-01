@@ -170,8 +170,8 @@
 		AA611A672A6EFEEA00B55BBA /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				AA3E7DB82A74716000119ECA /* Views */,
 				AA611A642A6EF4C400B55BBA /* ViewModels */,
+				AA3E7DB82A74716000119ECA /* Views */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -179,13 +179,7 @@
 		AA611A682A6EFF3B00B55BBA /* Sky */ = {
 			isa = PBXGroup;
 			children = (
-				AA846C722A70AE7600C4D61E /* SkyView.swift */,
-				AAA8266429E480CA00C74D6C /* SunView.swift */,
-				AA972A7E29D1D022000E270E /* StarsView.swift */,
-				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
-				AA972A8429D23863000E270E /* StormView.swift */,
-				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
-				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
+				AAC3A1022A782F6400C89E3F /* Views */,
 			);
 			path = Sky;
 			sourceTree = "<group>";
@@ -268,6 +262,20 @@
 				AABC2C0D2A713F89004EFF49 /* SearchView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		AAC3A1022A782F6400C89E3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA846C722A70AE7600C4D61E /* SkyView.swift */,
+				AAA8266429E480CA00C74D6C /* SunView.swift */,
+				AA972A7E29D1D022000E270E /* StarsView.swift */,
+				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
+				AA972A8429D23863000E270E /* StormView.swift */,
+				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
+				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

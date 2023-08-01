@@ -1,12 +1,17 @@
 //
-//  Location.swift
+//  WeatherData.swift
 //  Weathered
 //
 //  Created by christian on 7/24/23.
 //
 
 
-// MARK: JSON Response
+import Foundation
+
+// MARK: - WeatherData
+// A model to handle decoded JSON response from
+// WeatherAPI.com
+// JSON Response:
 /*
  {
      "location": {
@@ -1033,9 +1038,6 @@
  }
  */
 
-import Foundation
-
-// MARK: - Welcome
 struct WeatherData: Codable {
     let location: Location
     let current: Current

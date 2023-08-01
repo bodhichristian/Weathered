@@ -17,7 +17,6 @@ struct WeatherDetailRowView: View {
         
         VStack(spacing: 0) {
             HStack(spacing: 2) {
-                
                 Image(systemName: iconName)
                     .resizable()
                     .scaledToFit()
@@ -37,7 +36,6 @@ struct WeatherDetailRowView: View {
                         .font(.headline)
                         .fontWeight(.medium)
                     
-                    
                     Rectangle()
                         .foregroundStyle(.clear)
                         .frame(width: 42, height: 20)
@@ -48,13 +46,9 @@ struct WeatherDetailRowView: View {
                                 .opacity(0.8)
 
                             Spacer()
-
                         }
                     }
-                        
                 }
-                
-                
             }
             .fontWeight(.light)
             .foregroundStyle(.white)

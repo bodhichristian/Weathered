@@ -14,11 +14,8 @@ struct WeatherView: View {
     @Binding var viewingDetails: Bool
     
     @State private var time = 0.1
-    
-    
     @State private var lightningMaxBolts = 4.0
     @State private var lightningForkProbability = 20.0
-    
     @State private var showingControls = false
     
     let residueType =  Storm.Contents.none
@@ -43,96 +40,11 @@ struct WeatherView: View {
                     .offset(y: -65)
                     .zIndex(1)
                 
-                
-                // Current Weather conditions
-                // Extract to sepearate view
-                
-                VStack(alignment: .center, spacing: 0) {
-                    Text(weatherData.location.localtime.getDate())
-                        .font(.title3)
-                        .fontWeight(.medium)
-                        .shadow(radius: 3)
-                    
-                    Text(weatherData.location.localtime.getTime())
-                        .font(.system(size: 70))
-                    //.fontDesign(.serif)
-                        .fontWeight(.medium)
-                    
-                    
-                    
-                    Text(weatherData.location.name)
-                        .lineLimit(1)
-                        .font(.system(size: 45))
-                        .padding(.top, -10)
-                    
-                    
-                    Text(weatherData.location.region)
-                        .font(.headline)
-                        .opacity(0.8)
-                        .padding(.top, 6)
-                        .padding(.bottom, 25)
-                    
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("Feels like \(Int(weatherData.current.feelslikeF))° F")
-                                .font(.headline)
-                            Text(weatherData.current.condition.text)
-                            
-                            HStack {
-                                Text("L \(low)°")
-                                
-                                Text("H \(high)°")
-                            }
-                        }
-                        Spacer()
-                        
-                        Text("\(Int(weatherData.current.tempF))°")
-                            .font(.system(size: 96))
-                            .fontWeight(.ultraLight)
-                            .offset( y: -18)
-                        
-                    }
-                    .padding(.horizontal, 30)
-                    .padding(.bottom, -15)
-                    
-                    WeatherDetailsView(
-                        weatherData: weatherData,
-                        tintColor: backgroundTopStops.interpolated(amount: time)
-                    )
-                }
-                .padding(.leading, 5)
-                .shadow(color: .black.opacity(0.6), radius: 6, y: 4)
-                
-
-                
+                weatherDetails // Current Location and Weather conditions
                 
                 LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
                 
-                
-                ZStack(alignment: .topLeading) {
-                    VStack {
-                        HStack {
-                            Button {
-                                withAnimation(.spring()) {
-                                    viewingDetails = false
-                                }
-                            } label: {
-                                Image(systemName: "magnifyingglass")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                    .shadow(radius: 6, y: 4)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .padding(.leading, 30)
-                            .padding(.top, 90)
-                            Spacer()
-                        }
-                        Spacer()
-
-                    }
-                }
-                .ignoresSafeArea()
+               backToSearch
                 
             }
             // This toolbar is currently necessary to keep the alpha layer intentionally empty
@@ -165,104 +77,92 @@ struct WeatherView_Previews: PreviewProvider {
 }
 
 
+extension WeatherView {
+    // All weather details, inside and outside of rounded rect
+    private var weatherDetails: some View {
+        VStack(alignment: .center, spacing: 0) {
+            Text(weatherData.location.localtime.getDate())
+                .font(.title3)
+                .fontWeight(.medium)
+                .shadow(radius: 3)
+            
+            Text(weatherData.location.localtime.getTime())
+                .font(.system(size: 70))
+            //.fontDesign(.serif)
+                .fontWeight(.medium)
+            
+            
+            
+            Text(weatherData.location.name)
+                .lineLimit(1)
+                .font(.system(size: 45))
+                .padding(.top, -10)
+            
+            
+            Text(weatherData.location.region)
+                .font(.headline)
+                .opacity(0.8)
+                .padding(.top, 6)
+                .padding(.bottom, 25)
+            
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Feels like \(Int(weatherData.current.feelslikeF))° F")
+                        .font(.headline)
+                    Text(weatherData.current.condition.text)
+                    
+                    HStack {
+                        Text("L \(low)°")
+                        
+                        Text("H \(high)°")
+                    }
+                }
+                Spacer()
+                
+                Text("\(Int(weatherData.current.tempF))°")
+                    .font(.system(size: 96))
+                    .fontWeight(.ultraLight)
+                    .offset( y: -18)
+                
+            }
+            .padding(.horizontal, 30)
+            .padding(.bottom, -15)
+            
+            WeatherDetailsView(
+                weatherData: weatherData,
+                tintColor: backgroundTopStops.interpolated(amount: time)
+            )
+        }
+        .padding(.leading, 5)
+        .shadow(color: .black.opacity(0.6), radius: 6, y: 4)
 
+    }
+    // Magnifying glass button
+    private var backToSearch: some View {
+        ZStack(alignment: .topLeading) {
+            VStack {
+                HStack {
+                    Button {
+                        withAnimation(.spring()) {
+                            viewingDetails = false
+                        }
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30)
+                            .shadow(radius: 6, y: 4)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.leading, 30)
+                    .padding(.top, 90)
+                    Spacer()
+                }
+                Spacer()
 
+            }
+        }
+        .ignoresSafeArea()
+    }
+}
 
-// FOR DEBUG
-// Modififer to add controls console
-
-//        .safeAreaInset(edge: .bottom) {
-//            VStack {
-//                Button {
-//                    withAnimation{
-//                        showingControls.toggle()
-//                    }
-//                } label: {
-//                    Label("Weather Effects", systemImage: "arrow.up.and.down.and.sparkles")
-//                }
-//                .padding(8)
-//
-//                if showingControls {
-//                    VStack{
-//                        Text(formattedTime)
-//                            .font(.title)
-//                            .fontWeight(.medium)
-//                            .padding(.top)
-//
-//                        HStack {
-//                            Text("Time:")
-//
-//                            Slider(value: $time)
-//                        }
-//
-//                        HStack {
-//                            Text("Cloud Coverage")
-//                                .fontWeight(.medium)
-//                            Spacer()
-//                        }
-//                        .padding(4)
-//
-//                        Picker("Thickness", selection: $cloudThickness) {
-//                            ForEach(Cloud.Thickness.allCases, id: \.self) { thickness in
-//                                Text(String(describing: thickness).capitalized)
-//                            }
-//                        }
-//                        .pickerStyle(.segmented)
-//
-//                        HStack {
-//                            Text("Precipitation")
-//                                .fontWeight(.medium)
-//                            Spacer()
-//                        }
-//                        .padding(4)
-//                        Picker("Precipitation", selection: $stormType) {
-//                            ForEach(Storm.Contents.allCases, id: \.self) { stormType in
-//                                Text(String(describing: stormType).capitalized)
-//                            }
-//                        }
-//                        .pickerStyle(.segmented)
-//                        VStack{
-//                            HStack {
-//                                Text("Intensity")
-//                                Slider(value: $rainIntensity, in: 0...1000)
-//                            }
-//                            .padding(.horizontal)
-//
-//                            HStack {
-//                                Text("Angle:")
-//                                Slider(value: $rainAngle, in: 0...90)
-//                            }
-//                            .padding(.horizontal)
-//                        }
-//
-//                        Divider()
-//
-//                        HStack {
-//                            Text("Lightning")
-//                                .fontWeight(.medium)
-//                            Spacer()
-//                        }
-//                        .padding(4)
-//
-//                        VStack {
-//                            HStack {
-//                                Text("Max Bolts:")
-//                                Slider(value: $lightningMaxBolts, in: 0...10)
-//                            }
-//                            .padding(.horizontal)
-//
-//                            HStack {
-//                                Text("Fork %:")
-//                                Slider(value: $lightningForkProbability, in: 0...100)
-//                            }
-//                            .padding(.horizontal)
-//                        }
-//
-//                    }
-//                    .transition(.move(edge: .bottom))
-//                }
-//            }
-//            .padding(5)
-//            .frame(maxWidth: .infinity)
-//            .background(.regularMaterial)
-//        }

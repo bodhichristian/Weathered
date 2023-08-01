@@ -13,15 +13,12 @@ struct WeatherDetailsView: View {
     // Background color
     let tintColor: Color
     
-    
     let columns = [
         GridItem(.adaptive(minimum: 100))
     ]
     
     var body: some View {
         VStack(spacing: 0) {
-
-            
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(tintColor.opacity(0.25))
@@ -87,9 +84,7 @@ struct WeatherDetailsView: View {
                     
                 
             }
-            //.padding(.top, 200)
         }
-        //.offset(y: 10)
     }
 }
 
