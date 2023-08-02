@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA093DDF2A72B1250099A958 /* SampleWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */; };
+		AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */; };
 		AA389B342A6EB4C100EF6E2F /* WeatherDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */; };
 		AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */; };
 		AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleWeatherData.swift; sourceTree = "<group>"; };
+		AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIKey.swift; sourceTree = "<group>"; };
 		AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowView.swift; sourceTree = "<group>"; };
 		AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningBolt.swift; sourceTree = "<group>"; };
 		AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lightning.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				AA611A622A6EF1B900B55BBA /* WeatherService.swift */,
+				AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				AA611A632A6EF1B900B55BBA /* WeatherService.swift in Sources */,
 				AAE243AB29E502E90061910D /* MeteorShower.swift in Sources */,
 				AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */,
+				AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */,
 				AA846C752A70B2E800C4D61E /* GradientStops.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* WeatherView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
