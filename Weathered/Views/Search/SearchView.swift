@@ -15,16 +15,30 @@ struct SearchView: View {
     @State private var timer: Timer?
     
     @Binding var viewingDetails: Bool
+    @Binding var fontDesign: Font.Design
     
     var body: some View {
         ZStack {
             LinearGradient(colors: [.midnightStart, .midnightEnd], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
+
             VStack {
                 if let location = viewModel.weatherData?.location {
+                    HStack(spacing: 0){
+                        Text("°")
+                            .foregroundColor(.clear)
+                            .fontDesign(fontDesign)
+                        
+                        
+                        Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                            .font(.system(size: 80))
+                            .fontDesign(fontDesign)
+
+                    }
                     Text(location.name)
                         .font(.largeTitle)
+                        .fontDesign(fontDesign)
                         .fontWeight(.medium)
                         .foregroundStyle(.white)
                         .lineLimit(1)
@@ -35,12 +49,13 @@ struct SearchView: View {
                         .lineLimit(1)
                 }
             }
-            .offset(y: -80)
+            .offset(y: -120)
             .onTapGesture {
                 withAnimation(.spring()){
                     viewingDetails = true
                 }
             }
+            
             
             
             // Search Field
@@ -58,6 +73,58 @@ struct SearchView: View {
                 .padding()
                 .frame(width: 350, height: 40)
             }
+            
+            ZStack(alignment: .topTrailing) {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Menu {
+                            Section(header: Text("Font Design")) {
+                                Button {
+                                    fontDesign = .default
+                                } label: {
+                                    Text("Default")
+                                }
+                                
+                                Button {
+                                    fontDesign = .monospaced
+                                } label: {
+                                    Text("Monospaced")
+                                        .fontDesign(.monospaced)
+                                }
+                                
+                                Button {
+                                    fontDesign = .serif
+                                } label: {
+                                    Text("Serif")
+                                        .fontDesign(.serif)
+                                }
+                                
+                                Button {
+                                    fontDesign = .rounded
+                                } label: {
+                                    Text("Rounded")
+                                        .fontDesign(.rounded)
+                                }
+                                
+                            }
+                            
+                        } label: {
+                            Image(systemName: "gear")
+                                .resizable()
+                                .foregroundColor(.white)
+                                .scaledToFit()
+                                .frame(width: 30)
+                                .shadow(radius: 6, y: 4)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.trailing, 30)
+                    }
+                    
+                }
+            }
+            
         }
         .onChange(of: searchText) { query in
             // Invalidate the previous timer when the user types again
@@ -78,7 +145,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewingDetails: .constant(false))
+        SearchView(viewingDetails: .constant(false), fontDesign: .constant(.default))
             .environmentObject(WeatherViewModel())
     }
 }

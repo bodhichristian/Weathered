@@ -10,13 +10,15 @@ import SwiftUI
 
 struct WeatherView: View {
     let weatherData: WeatherData
-    
+    let fontDesign: Font.Design
     @Binding var viewingDetails: Bool
+    
     
     @State private var time = 0.1
     @State private var lightningMaxBolts = 4.0
     @State private var lightningForkProbability = 20.0
     @State private var showingControls = false
+    
     
     let residueType =  Storm.Contents.none
     let resiudeStrength = 0.0
@@ -44,7 +46,7 @@ struct WeatherView: View {
                 
                 LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
                 
-               backToSearch
+                backToSearch
                 
             }
             // This toolbar is currently necessary to keep the alpha layer intentionally empty
@@ -57,21 +59,14 @@ struct WeatherView: View {
         }
         
     }
-    
-    // Convert time double into a neatly formatted string
-    var formattedTime: String {
-        let start = Calendar.current.startOfDay(for: Date.now)
-        let advanced = start.addingTimeInterval(time * 24 * 60 * 60)
-        return advanced.formatted(date: .omitted, time: .shortened)
-    }
 }
 
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherView(
             weatherData: SampleWeatherData,
+            fontDesign: .default,
             viewingDetails: .constant(true)
-            
         )
     }
 }
@@ -83,18 +78,20 @@ extension WeatherView {
         VStack(alignment: .center, spacing: 0) {
             Text(weatherData.location.localtime.getDate())
                 .font(.title3)
+                .fontDesign(fontDesign)
                 .fontWeight(.medium)
                 .shadow(radius: 3)
             
             Text(weatherData.location.localtime.getTime())
                 .font(.system(size: 70))
-            //.fontDesign(.serif)
+                .fontDesign(fontDesign)
                 .fontWeight(.medium)
             
             
             
             Text(weatherData.location.name)
                 .lineLimit(1)
+                .fontDesign(fontDesign)
                 .font(.system(size: 45))
                 .padding(.top, -10)
             
@@ -105,12 +102,16 @@ extension WeatherView {
                 .padding(.top, 6)
                 .padding(.bottom, 25)
             
+            
+            // MARK: Temperature Stack
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Feels like \(Int(weatherData.current.feelslikeF))° F")
+                    // Feels like
+                    Text("Feels like \(Int(weatherData.current.feelslikeF))°F")
                         .font(.headline)
+                    // Current conditions text description
                     Text(weatherData.current.condition.text)
-                    
+                    // Current day's low and high temps
                     HStack {
                         Text("L \(low)°")
                         
@@ -119,8 +120,10 @@ extension WeatherView {
                 }
                 Spacer()
                 
+                // Current Temperature
                 Text("\(Int(weatherData.current.tempF))°")
                     .font(.system(size: 96))
+                    .fontDesign(fontDesign)
                     .fontWeight(.ultraLight)
                     .offset( y: -18)
                 
@@ -135,7 +138,7 @@ extension WeatherView {
         }
         .padding(.leading, 5)
         .shadow(color: .black.opacity(0.6), radius: 6, y: 4)
-
+        
     }
     // Magnifying glass button
     private var backToSearch: some View {
@@ -158,8 +161,8 @@ extension WeatherView {
                     .padding(.top, 90)
                     Spacer()
                 }
+                
                 Spacer()
-
             }
         }
         .ignoresSafeArea()
