@@ -32,7 +32,7 @@ class WeatherService: ObservableObject {
                 // If there's an error during the network request,
                 // call the completion handler with a failure result and return early.
                 completion(.failure(error))
-                print("Error 1: " + error.localizedDescription)
+                print(error.localizedDescription)
                 return
             }
 
@@ -54,7 +54,7 @@ class WeatherService: ObservableObject {
             } catch {
                 // If there's an error during JSON decoding, call the completion handler with a failure result and return early.
                 completion(.failure(error))
-                print("ERROR 2: " + error.localizedDescription)
+                print(error.localizedDescription)
             }
         }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ImageMorphing
 
 struct SearchView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
@@ -17,12 +18,14 @@ struct SearchView: View {
     @Binding var viewingDetails: Bool
     @Binding var fontDesign: Font.Design
     
+    @State private var selectedImage = 0
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [.midnightStart, .midnightEnd], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-
+            
             VStack {
                 if let location = viewModel.weatherData?.location {
                     HStack(spacing: 0){
@@ -34,7 +37,7 @@ struct SearchView: View {
                         Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
                             .font(.system(size: 80))
                             .fontDesign(fontDesign)
-
+                        
                     }
                     Text(location.name)
                         .font(.largeTitle)
@@ -49,7 +52,6 @@ struct SearchView: View {
                         .lineLimit(1)
                 }
             }
-            .offset(y: -120)
             .onTapGesture {
                 withAnimation(.spring()){
                     viewingDetails = true
@@ -57,26 +59,17 @@ struct SearchView: View {
             }
             
             
-            
-            // Search Field
-            ZStack {
-                Capsule()
-                    .foregroundStyle(.ultraThinMaterial)
-                    .frame(width: 350, height: 40)
-                
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("Search for a location", text: $searchText)
-                    
+            MorphingImage(systemName: SFSymbolsWeatherIcons[selectedImage])
+                .frame(width: 250, height: 250)
+                .foregroundColor(.white)
+                .onAppear {
+                    startAnimation()
                 }
-                .foregroundStyle(.white)
-                .padding()
-                .frame(width: 350, height: 40)
-            }
+            
             
             ZStack(alignment: .topTrailing) {
                 VStack {
-                    Spacer()
+                    
                     HStack {
                         Spacer()
                         Menu {
@@ -121,7 +114,24 @@ struct SearchView: View {
                         .buttonStyle(PlainButtonStyle())
                         .padding(.trailing, 30)
                     }
+                    Spacer()
                     
+                    // Search Field
+                    ZStack {
+                        Capsule()
+                            .foregroundStyle(.thinMaterial)
+                            .frame(width: 350, height: 40)
+                        
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                            TextField("Search for a location", text: $searchText)
+                            
+                        }
+                        .foregroundStyle(.white)
+                        .padding()
+                        .frame(width: 350, height: 40)
+                    }
+                    .padding()
                 }
             }
             
@@ -130,13 +140,25 @@ struct SearchView: View {
             // Invalidate the previous timer when the user types again
             timer?.invalidate()
             
-            // Start a new timer with a 2-second delay
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                // This block will be executed 1 second after user stops typing
+            // Start a new timer with a 0.5-second delay
+            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                // This block will be executed  after user stops typing
                 DispatchQueue.main.async {
                     viewModel.query = query
                     viewModel.fetchWeatherData()
                 }
+            }
+        }
+        
+    }
+    
+    private func startAnimation() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            let lastIndex = SFSymbolsWeatherIcons.count - 1
+            if selectedImage == lastIndex {
+                selectedImage = 0
+            } else {
+                selectedImage += 1
             }
         }
         

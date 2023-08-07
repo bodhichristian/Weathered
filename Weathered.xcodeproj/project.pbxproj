@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AA093DDF2A72B1250099A958 /* SampleWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */; };
 		AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */; };
+		AA2D9D1A2A7EC54B009FC955 /* ImageMorphing in Frameworks */ = {isa = PBXBuildFile; productRef = AA2D9D192A7EC54B009FC955 /* ImageMorphing */; };
+		AA2D9D1C2A7EC5D5009FC955 /* WeatherImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D1B2A7EC5D5009FC955 /* WeatherImages.swift */; };
 		AA389B342A6EB4C100EF6E2F /* WeatherDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */; };
 		AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */; };
 		AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */; };
@@ -50,6 +52,7 @@
 /* Begin PBXFileReference section */
 		AA093DDE2A72B1250099A958 /* SampleWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleWeatherData.swift; sourceTree = "<group>"; };
 		AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIKey.swift; sourceTree = "<group>"; };
+		AA2D9D1B2A7EC5D5009FC955 /* WeatherImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImages.swift; sourceTree = "<group>"; };
 		AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowView.swift; sourceTree = "<group>"; };
 		AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningBolt.swift; sourceTree = "<group>"; };
 		AA607DEF29E1CE1B00DBE8C3 /* Lightning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lightning.swift; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2D9D1A2A7EC54B009FC955 /* ImageMorphing in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,11 +254,12 @@
 		AA972A7029CF9F41000E270E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				AA846C742A70B2E800C4D61E /* GradientStops.swift */,
+				AA2D9D1B2A7EC5D5009FC955 /* WeatherImages.swift */,
 				AA972A7229CF9F5E000E270E /* Color-Custom.swift */,
 				AA972A7729CFA3E2000E270E /* Color-Interpolation.swift */,
-				AA972A7529CFA219000E270E /* Array-GradientStop.swift */,
-				AA846C742A70B2E800C4D61E /* GradientStops.swift */,
 				AA846C762A70B89E00C4D61E /* String-DateFormat.swift */,
+				AA972A7529CFA219000E270E /* Array-GradientStop.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -297,6 +302,9 @@
 			dependencies = (
 			);
 			name = Weathered;
+			packageProductDependencies = (
+				AA2D9D192A7EC54B009FC955 /* ImageMorphing */,
+			);
 			productName = Weathered;
 			productReference = AA972A5729CF3DED000E270E /* Weathered.app */;
 			productType = "com.apple.product-type.application";
@@ -325,6 +333,9 @@
 				Base,
 			);
 			mainGroup = AA972A4E29CF3DED000E270E;
+			packageReferences = (
+				AA2D9D182A7EC54B009FC955 /* XCRemoteSwiftPackageReference "ImageMorphing" */,
+			);
 			productRefGroup = AA972A5829CF3DED000E270E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -358,6 +369,7 @@
 				AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */,
 				AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */,
 				AA846C752A70B2E800C4D61E /* GradientStops.swift in Sources */,
+				AA2D9D1C2A7EC5D5009FC955 /* WeatherImages.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* WeatherView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
 				AA972A8129D23491000E270E /* Storm.swift in Sources */,
@@ -585,6 +597,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA2D9D182A7EC54B009FC955 /* XCRemoteSwiftPackageReference "ImageMorphing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kodlian/ImageMorphing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA2D9D192A7EC54B009FC955 /* ImageMorphing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA2D9D182A7EC54B009FC955 /* XCRemoteSwiftPackageReference "ImageMorphing" */;
+			productName = ImageMorphing;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA972A4F29CF3DED000E270E /* Project object */;
 }
