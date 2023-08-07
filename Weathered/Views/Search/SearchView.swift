@@ -26,45 +26,52 @@ struct SearchView: View {
                 .ignoresSafeArea()
             
             
-            VStack {
-                if let location = viewModel.weatherData?.location {
-                    HStack(spacing: 0){
-                        Text("°")
-                            .foregroundColor(.clear)
+            ZStack {
+                if viewModel.weatherData == nil {
+                    MorphingImage(systemName: SFSymbolsWeatherIcons[selectedImage])
+                        .frame(width: 150, height: 150)
+                        .foregroundColor(.white)
+                        .onAppear {
+                            startAnimation()
+                        }
+                }
+                
+                VStack {
+                    if let location = viewModel.weatherData?.location {
+                        HStack(spacing: 0){
+                            Text("°")
+                                .foregroundColor(.clear)
+                                .fontDesign(fontDesign)
+                            
+                            
+                            Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                                .font(.system(size: 80))
+                                .fontDesign(fontDesign)
+                            
+                        }
+                        Text(location.name)
+                            .font(.largeTitle)
                             .fontDesign(fontDesign)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
                         
-                        
-                        Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
-                            .font(.system(size: 80))
-                            .fontDesign(fontDesign)
-                        
+                        Text(location.region)
+                            .font(.title2)
+                            .foregroundColor(.lightCloudEnd)
+                            .lineLimit(1)
                     }
-                    Text(location.name)
-                        .font(.largeTitle)
-                        .fontDesign(fontDesign)
-                        .fontWeight(.medium)
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                    
-                    Text(location.region)
-                        .font(.title2)
-                        .foregroundColor(.lightCloudEnd)
-                        .lineLimit(1)
                 }
+                .onTapGesture {
+                    withAnimation(.spring()){
+                        viewingDetails = true
+                    }
             }
-            .onTapGesture {
-                withAnimation(.spring()){
-                    viewingDetails = true
-                }
+            
             }
             
             
-            MorphingImage(systemName: SFSymbolsWeatherIcons[selectedImage])
-                .frame(width: 250, height: 250)
-                .foregroundColor(.white)
-                .onAppear {
-                    startAnimation()
-                }
+
             
             
             ZStack(alignment: .topTrailing) {
