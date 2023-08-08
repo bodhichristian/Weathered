@@ -6,17 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 import ImageMorphing
 
 struct SearchView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
+    
+    @Query var user: [User]
+    
+    var fontDesign: Font.Design {
+        switch user[0].fontDesign {
+        
+        case "monospaced":
+            return .monospaced
+        case "serif":
+            return .serif
+        case "rounded":
+            return .rounded
+        default:
+            return .default
+        }
+    }
     
     @State private var searchText = ""
     @State private var locationName: String?
     @State private var timer: Timer?
     
     @Binding var viewingDetails: Bool
-    @Binding var fontDesign: Font.Design
     
     @State private var selectedImage = 0
     
@@ -27,11 +43,16 @@ struct SearchView: View {
             
             
             ZStack {
+                
+                // If weather data has not been fetched
                 if viewModel.weatherData == nil {
+                    // Morphing Image
+                    // Animates when the image passed is updated
                     MorphingImage(systemName: SFSymbolsWeatherIcons[selectedImage])
                         .frame(width: 150, height: 150)
                         .foregroundColor(.white)
                         .onAppear {
+                            // Start a timer that updates `selectedImage` at a set interval
                             startAnimation()
                         }
                 }
@@ -82,30 +103,27 @@ struct SearchView: View {
                         Menu {
                             Section(header: Text("Font Design")) {
                                 Button {
-                                    fontDesign = .default
+                                    user[0].fontDesign = "default"
                                 } label: {
                                     Text("Default")
                                 }
                                 
                                 Button {
-                                    fontDesign = .monospaced
+                                    user[0].fontDesign = "monospaced"
                                 } label: {
                                     Text("Monospaced")
-                                        .fontDesign(.monospaced)
                                 }
                                 
                                 Button {
-                                    fontDesign = .serif
+                                    user[0].fontDesign = "serif"
                                 } label: {
                                     Text("Serif")
-                                        .fontDesign(.serif)
                                 }
                                 
                                 Button {
-                                    fontDesign = .rounded
+                                    user[0].fontDesign = "rounded"
                                 } label: {
                                     Text("Rounded")
-                                        .fontDesign(.rounded)
                                 }
                                 
                             }
@@ -174,7 +192,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewingDetails: .constant(false), fontDesign: .constant(.default))
+        SearchView(viewingDetails: .constant(false))
             .environmentObject(WeatherViewModel())
     }
 }

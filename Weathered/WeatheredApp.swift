@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct WeatheredApp: App {
@@ -16,5 +17,6 @@ struct WeatheredApp: App {
             ContentView()
                 .environmentObject(viewModel)
         }
+        .modelContainer(for: User.self)
     }
 }

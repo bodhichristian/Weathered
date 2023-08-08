@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
+//@available(iOS 17.0, *)
 struct ContentView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
+    
+    @Query var user: [User]
     
     @State private var viewingDetails = false
     @State private var fontDesign: Font.Design = .default
@@ -21,15 +25,13 @@ struct ContentView: View {
                             viewingDetails: $viewingDetails)
             }
         } else {
-            SearchView(viewingDetails: $viewingDetails, fontDesign: $fontDesign)
+            SearchView(viewingDetails: $viewingDetails)
                 .environmentObject(viewModel)
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(WeatherViewModel())
-    }
+#Preview {
+    ContentView()
+        .modelContainer(for: User.self, inMemory: true)
 }
