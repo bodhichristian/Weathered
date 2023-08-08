@@ -11,8 +11,8 @@ import SwiftUI
 struct WeatherView: View {
     let weatherData: WeatherData
     let fontDesign: Font.Design
-    @Binding var viewingDetails: Bool
     
+    @Binding var viewingDetails: Bool
     
     @State private var time = 0.1
     @State private var lightningMaxBolts = 4.0

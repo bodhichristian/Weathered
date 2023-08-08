@@ -12,38 +12,27 @@ import ImageMorphing
 struct SearchView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     
-    @Query var user: [User]
+    @Query var favoriteLocations: [FavoriteLocation]
     
-    var fontDesign: Font.Design {
-        switch user[0].fontDesign {
-        
-        case "monospaced":
-            return .monospaced
-        case "serif":
-            return .serif
-        case "rounded":
-            return .rounded
-        default:
-            return .default
-        }
-    }
+    @Binding var viewingDetails: Bool
+    @Binding var fontDesign: Font.Design
     
     @State private var searchText = ""
     @State private var locationName: String?
     @State private var timer: Timer?
     
-    @Binding var viewingDetails: Bool
+    
     
     @State private var selectedImage = 0
     
     var body: some View {
         ZStack {
+            // Background Gradient
             LinearGradient(colors: [.midnightStart, .midnightEnd], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            
-            ZStack {
-                
+            VStack {
+                Spacer()
                 // If weather data has not been fetched
                 if viewModel.weatherData == nil {
                     // Morphing Image
@@ -55,18 +44,18 @@ struct SearchView: View {
                             // Start a timer that updates `selectedImage` at a set interval
                             startAnimation()
                         }
-                }
-                
-                VStack {
-                    if let location = viewModel.weatherData?.location {
+                } else if let location = viewModel.weatherData?.location {
+                    VStack {
                         HStack(spacing: 0){
+                            // This Text view is purposefully clear
+                            // Ensures center spacing of temperature, balancing the ° on the right
                             Text("°")
                                 .foregroundColor(.clear)
                                 .fontDesign(fontDesign)
                             
-                            
                             Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
                                 .font(.system(size: 80))
+                                .foregroundStyle(.white)
                                 .fontDesign(fontDesign)
                             
                         }
@@ -82,70 +71,22 @@ struct SearchView: View {
                             .foregroundColor(.lightCloudEnd)
                             .lineLimit(1)
                     }
-                }
-                .onTapGesture {
-                    withAnimation(.spring()){
-                        viewingDetails = true
-                    }
-            }
-            
-            }
-            
-            
-
-            
-            
-            ZStack(alignment: .topTrailing) {
-                VStack {
-                    
-                    HStack {
-                        Spacer()
-                        Menu {
-                            Section(header: Text("Font Design")) {
-                                Button {
-                                    user[0].fontDesign = "default"
-                                } label: {
-                                    Text("Default")
-                                }
-                                
-                                Button {
-                                    user[0].fontDesign = "monospaced"
-                                } label: {
-                                    Text("Monospaced")
-                                }
-                                
-                                Button {
-                                    user[0].fontDesign = "serif"
-                                } label: {
-                                    Text("Serif")
-                                }
-                                
-                                Button {
-                                    user[0].fontDesign = "rounded"
-                                } label: {
-                                    Text("Rounded")
-                                }
-                                
-                            }
-                            
-                        } label: {
-                            Image(systemName: "gear")
-                                .resizable()
-                                .foregroundColor(.white)
-                                .scaledToFit()
-                                .frame(width: 30)
-                                .shadow(radius: 6, y: 4)
+                    .onTapGesture {
+                        withAnimation(.spring()){
+                            viewingDetails = true
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.trailing, 30)
                     }
-                    Spacer()
-                    
+                }
+                
+                Spacer()
+                
+                // Settings Gear
+                HStack {
                     // Search Field
                     ZStack {
                         Capsule()
                             .foregroundStyle(.thinMaterial)
-                            .frame(width: 350, height: 40)
+                            .frame(width: 320, height: 40)
                         
                         HStack {
                             Image(systemName: "magnifyingglass")
@@ -154,12 +95,49 @@ struct SearchView: View {
                         }
                         .foregroundStyle(.white)
                         .padding()
-                        .frame(width: 350, height: 40)
+                        .frame(width: 320, height: 40)
                     }
-                    .padding()
+                    .padding(.vertical)
+                    
+                    Menu {
+                        Section(header: Text("Font Design")) {
+                            Button {
+                                fontDesign = .default
+                            } label: {
+                                Text("Default")
+                            }
+                            
+                            Button {
+                                fontDesign = .monospaced
+                            } label: {
+                                Text("Monospaced")
+                            }
+                            
+                            Button {
+                                fontDesign = .serif
+                            } label: {
+                                Text("Serif")
+                            }
+                            
+                            Button {
+                                fontDesign = .rounded
+                            } label: {
+                                Text("Rounded")
+                            }
+                            
+                        }
+                        
+                    } label: {
+                        Image(systemName: "gear")
+                            .resizable()
+                            .foregroundColor(.white)
+                            .scaledToFit()
+                            .frame(width: 30)
+                            .shadow(radius: 6, y: 4)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
-            
         }
         .onChange(of: searchText) { query in
             // Invalidate the previous timer when the user types again
@@ -190,9 +168,10 @@ struct SearchView: View {
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView(viewingDetails: .constant(false))
-            .environmentObject(WeatherViewModel())
-    }
+#Preview {
+    SearchView(viewingDetails: .constant(false),
+               fontDesign: .constant(.default)
+    )
+        .environmentObject(WeatherViewModel())
+        .modelContainer(for: FavoriteLocation.self, inMemory: true)
 }

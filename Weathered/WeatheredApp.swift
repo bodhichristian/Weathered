@@ -17,6 +17,6 @@ struct WeatheredApp: App {
             ContentView()
                 .environmentObject(viewModel)
         }
-        .modelContainer(for: User.self)
+        .modelContainer(for: FavoriteLocation.self)
     }
 }

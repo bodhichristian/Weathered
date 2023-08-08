@@ -12,7 +12,7 @@ import SwiftData
 struct ContentView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     
-    @Query var user: [User]
+    //@Query var favoriteLocations: [FavoriteLocation]
     
     @State private var viewingDetails = false
     @State private var fontDesign: Font.Design = .default
@@ -22,10 +22,13 @@ struct ContentView: View {
             if let weatherData = viewModel.weatherData {
                 WeatherView(weatherData: weatherData,
                             fontDesign: fontDesign,
-                            viewingDetails: $viewingDetails)
+                            viewingDetails: $viewingDetails
+                )
             }
         } else {
-            SearchView(viewingDetails: $viewingDetails)
+            SearchView(viewingDetails: $viewingDetails,
+                       fontDesign: $fontDesign
+            )
                 .environmentObject(viewModel)
         }
     }
@@ -33,5 +36,7 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: User.self, inMemory: true)
+        .modelContainer(for: FavoriteLocation.self, inMemory: true)
 }
+
+
