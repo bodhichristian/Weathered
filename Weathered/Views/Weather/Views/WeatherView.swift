@@ -64,7 +64,7 @@ struct WeatherView: View {
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherView(
-            weatherData: SampleWeatherData,
+            weatherData: SampleData.weather,
             fontDesign: .default,
             viewingDetails: .constant(true)
         )

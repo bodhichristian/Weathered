@@ -100,7 +100,7 @@ struct SkyView: View {
 
 struct SkyView_Previews: PreviewProvider {
     static var previews: some View {
-        SkyView(weatherData: SampleWeatherData)
+        SkyView(weatherData: SampleData.weather)
             .preferredColorScheme(.dark)
     }
 }

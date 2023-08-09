@@ -11,6 +11,7 @@ import ImageMorphing
 
 struct SearchView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
+    @Environment(\.modelContext) private var modelContext
     
     @Query var favoriteLocations: [FavoriteLocation]
     
@@ -44,102 +45,70 @@ struct SearchView: View {
                             // Start a timer that updates `selectedImage` at a set interval
                             startAnimation()
                         }
-                } else if let location = viewModel.weatherData?.location {
-                    VStack {
-                        HStack(spacing: 0){
-                            // This Text view is purposefully clear
-                            // Ensures center spacing of temperature, balancing the ° on the right
-                            Text("°")
-                                .foregroundColor(.clear)
+                } else {
+                    if let location = viewModel.weatherData?.location {
+                        VStack {
+                            HStack(spacing: 0){
+                                // This Text view is purposefully clear
+                                // Ensures center spacing of temperature, balancing the ° on the right
+                                Text("°")
+                                    .foregroundColor(.clear)
+                                    .fontDesign(fontDesign)
+                                
+                                Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                                    .font(.system(size: 80))
+                                    .foregroundStyle(.white)
+                                    .fontDesign(fontDesign)
+                                
+                            }
+                            Text(location.name)
+                                .font(.largeTitle)
                                 .fontDesign(fontDesign)
-                            
-                            Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
-                                .font(.system(size: 80))
+                                .fontWeight(.medium)
                                 .foregroundStyle(.white)
-                                .fontDesign(fontDesign)
+                                .lineLimit(1)
                             
+                            Text(location.region)
+                                .font(.title2)
+                                .foregroundColor(.lightCloudEnd)
+                                .lineLimit(1)
+                            
+                            Button {
+                                if let weatherData = viewModel.weatherData {
+                                    
+                                    let newFavorite = FavoriteLocation(
+                                        name: weatherData.location.name,
+                                        region: weatherData.location.region,
+                                        country: weatherData.location.country,
+                                        latitude: weatherData.location.lat,
+                                        longitude: weatherData.location.lon)
+                                    
+                                    modelContext.insert(newFavorite)
+                                }
+                                
+                            } label: {
+                                Label("Add to favorites", image: "heart")
+                            }
                         }
-                        Text(location.name)
-                            .font(.largeTitle)
-                            .fontDesign(fontDesign)
-                            .fontWeight(.medium)
-                            .foregroundStyle(.white)
-                            .lineLimit(1)
-                        
-                        Text(location.region)
-                            .font(.title2)
-                            .foregroundColor(.lightCloudEnd)
-                            .lineLimit(1)
-                    }
-                    .onTapGesture {
-                        withAnimation(.spring()){
-                            viewingDetails = true
+                        .onTapGesture {
+                            withAnimation(.spring()){
+                                viewingDetails = true
+                            }
                         }
                     }
                 }
                 
                 Spacer()
                 
-                // Settings Gear
+                
                 HStack {
-                    // Search Field
-                    ZStack {
-                        Capsule()
-                            .foregroundStyle(.thinMaterial)
-                            .frame(width: 320, height: 40)
-                        
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                            TextField("Search for a location", text: $searchText)
-                            
-                        }
-                        .foregroundStyle(.white)
-                        .padding()
-                        .frame(width: 320, height: 40)
-                    }
-                    .padding(.vertical)
-                    
-                    Menu {
-                        Section(header: Text("Font Design")) {
-                            Button {
-                                fontDesign = .default
-                            } label: {
-                                Text("Default")
-                            }
-                            
-                            Button {
-                                fontDesign = .monospaced
-                            } label: {
-                                Text("Monospaced")
-                            }
-                            
-                            Button {
-                                fontDesign = .serif
-                            } label: {
-                                Text("Serif")
-                            }
-                            
-                            Button {
-                                fontDesign = .rounded
-                            } label: {
-                                Text("Rounded")
-                            }
-                            
-                        }
-                        
-                    } label: {
-                        Image(systemName: "gear")
-                            .resizable()
-                            .foregroundColor(.white)
-                            .scaledToFit()
-                            .frame(width: 30)
-                            .shadow(radius: 6, y: 4)
-                    }
-                    .buttonStyle(PlainButtonStyle())
+                    searchBar
+                    settingsButton
                 }
+                
             }
         }
-        .onChange(of: searchText) { query in
+        .onChange(of: searchText) { 
             // Invalidate the previous timer when the user types again
             timer?.invalidate()
             
@@ -147,7 +116,7 @@ struct SearchView: View {
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
                 // This block will be executed  after user stops typing
                 DispatchQueue.main.async {
-                    viewModel.query = query
+                    viewModel.query = searchText
                     viewModel.fetchWeatherData()
                 }
             }
@@ -168,10 +137,73 @@ struct SearchView: View {
     }
 }
 
-#Preview {
-    SearchView(viewingDetails: .constant(false),
-               fontDesign: .constant(.default)
-    )
-        .environmentObject(WeatherViewModel())
-        .modelContainer(for: FavoriteLocation.self, inMemory: true)
+//#Preview {
+//    SearchView(viewingDetails: .constant(false),
+//               fontDesign: .constant(.default)
+//    )
+//        .environmentObject(WeatherViewModel())
+//        .modelContainer(for: FavoriteLocation.self, inMemory: true)
+//}
+
+
+extension SearchView {
+    
+    private var searchBar: some View {
+        ZStack {
+            Capsule()
+                .foregroundStyle(.thinMaterial)
+                .frame(width: 320, height: 40)
+            
+            HStack {
+                Image(systemName: "magnifyingglass")
+                TextField("Search for a location", text: $searchText)
+                
+            }
+            .foregroundStyle(.white)
+            .padding()
+            .frame(width: 320, height: 40)
+        }
+        .padding(.vertical)
+    }
+
+    private var settingsButton: some View {
+        Menu {
+            Section(header: Text("Font Design")) {
+                Button {
+                    fontDesign = .default
+                } label: {
+                    Text("Default")
+                }
+                
+                Button {
+                    fontDesign = .monospaced
+                } label: {
+                    Text("Monospaced")
+                }
+                
+                Button {
+                    fontDesign = .serif
+                } label: {
+                    Text("Serif")
+                }
+                
+                Button {
+                    fontDesign = .rounded
+                } label: {
+                    Text("Rounded")
+                }
+                
+            }
+            
+        } label: {
+            Image(systemName: "gear")
+                .resizable()
+                .foregroundColor(.white)
+                .scaledToFit()
+                .frame(width: 30)
+                .shadow(radius: 6, y: 4)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
 }
