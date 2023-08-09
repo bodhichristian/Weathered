@@ -100,6 +100,14 @@ struct SearchView: View {
                 
                 Spacer()
                 
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(favoriteLocations) { location in
+                            FavoriteLocationView(location: location)
+                        }
+                    }
+                    .padding(.leading)
+                }
                 
                 HStack {
                     searchBar
