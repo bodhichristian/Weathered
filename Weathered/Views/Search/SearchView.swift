@@ -38,7 +38,7 @@ struct SearchView: View {
                 if viewModel.weatherData == nil {
                     // Morphing Image
                     // Animates when the image passed is updated
-                    MorphingImage(systemName: SFSymbolsWeatherIcons[selectedImage])
+                    MorphingImage(systemName: WeatherAnimationArray[selectedImage])
                         .frame(width: 150, height: 150)
                         .foregroundColor(.white)
                         .onAppear {
@@ -75,7 +75,6 @@ struct SearchView: View {
                             
                             Button {
                                 if let weatherData = viewModel.weatherData {
-                                    
                                     let newFavorite = FavoriteLocation(
                                         name: weatherData.location.name,
                                         region: weatherData.location.region,
@@ -103,7 +102,7 @@ struct SearchView: View {
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach(favoriteLocations) { location in
-                            FavoriteLocationView(location: location)
+                            FavoriteLocationView(location: location, fontDesign: fontDesign)
                         }
                     }
                     .padding(.leading)
@@ -134,7 +133,7 @@ struct SearchView: View {
     
     private func startAnimation() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            let lastIndex = SFSymbolsWeatherIcons.count - 1
+            let lastIndex = WeatherAnimationArray.count - 1
             if selectedImage == lastIndex {
                 selectedImage = 0
             } else {

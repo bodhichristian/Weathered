@@ -10,7 +10,7 @@
 		AA093DDF2A72B1250099A958 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA093DDE2A72B1250099A958 /* SampleData.swift */; };
 		AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */; };
 		AA2D9D1A2A7EC54B009FC955 /* ImageMorphing in Frameworks */ = {isa = PBXBuildFile; productRef = AA2D9D192A7EC54B009FC955 /* ImageMorphing */; };
-		AA2D9D1C2A7EC5D5009FC955 /* WeatherImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D1B2A7EC5D5009FC955 /* WeatherImages.swift */; };
+		AA2D9D1C2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D1B2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift */; };
 		AA389B342A6EB4C100EF6E2F /* WeatherDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */; };
 		AA48D4592A8167350026DD28 /* FavoriteLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48D4582A8167350026DD28 /* FavoriteLocation.swift */; };
 		AA49FC452A82B97F003E7CCA /* FavoriteLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49FC442A82B97F003E7CCA /* FavoriteLocationView.swift */; };
@@ -40,6 +40,7 @@
 		AA972A8329D234C7000E270E /* StormDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8229D234C7000E270E /* StormDrop.swift */; };
 		AA972A8529D23863000E270E /* StormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8429D23863000E270E /* StormView.swift */; };
 		AAA8266529E480CA00C74D6C /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8266429E480CA00C74D6C /* SunView.swift */; };
+		AAB4248D2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4248C2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift */; };
 		AABC2C0E2A713F89004EFF49 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC2C0D2A713F89004EFF49 /* SearchView.swift */; };
 		AABC2C102A719380004EFF49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC2C0F2A719380004EFF49 /* ContentView.swift */; };
 		AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */; };
@@ -54,7 +55,7 @@
 /* Begin PBXFileReference section */
 		AA093DDE2A72B1250099A958 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIKey.swift; sourceTree = "<group>"; };
-		AA2D9D1B2A7EC5D5009FC955 /* WeatherImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImages.swift; sourceTree = "<group>"; };
+		AA2D9D1B2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SFSymbols-WeatherAnimationArray.swift"; sourceTree = "<group>"; };
 		AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowView.swift; sourceTree = "<group>"; };
 		AA48D4582A8167350026DD28 /* FavoriteLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocation.swift; sourceTree = "<group>"; };
 		AA49FC442A82B97F003E7CCA /* FavoriteLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationView.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		AA972A8229D234C7000E270E /* StormDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormDrop.swift; sourceTree = "<group>"; };
 		AA972A8429D23863000E270E /* StormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormView.swift; sourceTree = "<group>"; };
 		AAA8266429E480CA00C74D6C /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
+		AAB4248C2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SFSymbols-WeatherIcons.swift"; sourceTree = "<group>"; };
 		AABC2C0D2A713F89004EFF49 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		AABC2C0F2A719380004EFF49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AAD8C44929D5EBBD008742CB /* ResidueDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidueDrop.swift; sourceTree = "<group>"; };
@@ -277,7 +279,8 @@
 			isa = PBXGroup;
 			children = (
 				AA846C742A70B2E800C4D61E /* GradientStops.swift */,
-				AA2D9D1B2A7EC5D5009FC955 /* WeatherImages.swift */,
+				AAB4248C2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift */,
+				AA2D9D1B2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift */,
 				AA972A7229CF9F5E000E270E /* Color-Custom.swift */,
 				AA972A7729CFA3E2000E270E /* Color-Interpolation.swift */,
 				AA846C762A70B89E00C4D61E /* String-DateFormat.swift */,
@@ -391,7 +394,7 @@
 				AAD8C44A29D5EBBD008742CB /* ResidueDrop.swift in Sources */,
 				AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */,
 				AA846C752A70B2E800C4D61E /* GradientStops.swift in Sources */,
-				AA2D9D1C2A7EC5D5009FC955 /* WeatherImages.swift in Sources */,
+				AA2D9D1C2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift in Sources */,
 				AA972A5D29CF3DED000E270E /* WeatherView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
 				AA972A8129D23491000E270E /* Storm.swift in Sources */,
@@ -410,6 +413,7 @@
 				AA972A5B29CF3DED000E270E /* WeatheredApp.swift in Sources */,
 				AA611A662A6EF4D000B55BBA /* WeatherViewModel.swift in Sources */,
 				AA389B342A6EB4C100EF6E2F /* WeatherDetailRowView.swift in Sources */,
+				AAB4248D2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift in Sources */,
 				AAE243A729E502D30061910D /* Star.swift in Sources */,
 				AA972A7D29D1D016000E270E /* StarField.swift in Sources */,
 				AABC2C102A719380004EFF49 /* ContentView.swift in Sources */,

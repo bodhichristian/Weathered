@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct FavoriteLocationView: View {
+    let weatherService = WeatherService()
     let location: FavoriteLocation
+    let fontDesign: Font.Design
+    
+    @State private var weatherData: WeatherData?
     
     var body: some View {
             ZStack(alignment: .bottomLeading) {
@@ -20,20 +24,35 @@ struct FavoriteLocationView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("79°F")
+                        if let temp = weatherData?.current.tempF {
+                            Text("\(Int(temp))°F")
+                        }
+                        
                         Image(systemName: "cloud.rain")
                     }
                     .font(.title2)
 
                     Text(location.name)
+                        
                         .font(.headline)
                 }
+                .fontDesign(fontDesign)
                 .padding()
             }
             .padding(.vertical)
+            .onAppear {
+                weatherService.fetchWeatherData(for: location.name) { result in
+                    switch result {
+                    case .success(let data):
+                        weatherData = data
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
     }
 }
 
 #Preview {
-    FavoriteLocationView(location: SampleData.favoriteLocation)
+    FavoriteLocationView(location: SampleData.favoriteLocation, fontDesign: .default)
 }

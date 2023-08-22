@@ -10,7 +10,7 @@ import Foundation
 // This Array contains names of SF symbols
 // The animation that references this array will iterate in order
 
-public let SFSymbolsWeatherIcons: [String] = [
+public let WeatherAnimationArray: [String] = [
     "sun.min.fill",
     "sun.max",
     "sun.max.circle",
