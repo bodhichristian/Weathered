@@ -24,11 +24,13 @@ struct FavoriteLocationView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        if let temp = weatherData?.current.tempF {
-                            Text("\(Int(temp))°F")
+                        if let conditionCode = weatherData?.current.condition.code {
+                            Image(systemName: WeatherIconsDaytime[conditionCode] ?? "sun")
                         }
                         
-                        Image(systemName: "cloud.rain")
+                        if let temp = weatherData?.current.tempF {
+                            Text("\(Int(temp))°F")
+                        }                        
                     }
                     .font(.title2)
 
