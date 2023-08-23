@@ -100,13 +100,15 @@ struct SearchView: View {
                 
                 Spacer()
                 
-                HStack {
-                    Text("Favorite Locations")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                        .padding(.leading)
-                        .padding(.bottom, -10)
-                    Spacer()
+                if !favoriteLocations.isEmpty {
+                    HStack {
+                        Text("Favorite Locations")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .padding(.leading)
+                            .padding(.bottom, -10)
+                        Spacer()
+                    }
                 }
                 
                 ScrollView(.horizontal) {
