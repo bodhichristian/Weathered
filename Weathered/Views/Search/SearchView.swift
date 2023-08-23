@@ -47,31 +47,35 @@ struct SearchView: View {
                         }
                 } else {
                     if let location = viewModel.weatherData?.location {
-                        VStack {
-                            HStack(spacing: 0){
-                                // This Text view is purposefully clear
-                                // Ensures center spacing of temperature, balancing the ° on the right
-                                Text("°")
-                                    .foregroundColor(.clear)
-                                    .fontDesign(fontDesign)
-                                
+                        VStack(alignment: .leading) {
+                            
+                            VStack(alignment: .leading) {
                                 Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
                                     .font(.system(size: 80))
                                     .foregroundStyle(.white)
                                     .fontDesign(fontDesign)
                                 
+                                
+                                Text(location.name)
+                                    .font(.largeTitle)
+                                    .fontDesign(fontDesign)
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(.white)
+                                    .lineLimit(1)
+                                
+                                Text(location.region)
+                                    .font(.title2)
+                                    .foregroundColor(.lightCloudEnd)
+                                    .lineLimit(1)
                             }
-                            Text(location.name)
-                                .font(.largeTitle)
-                                .fontDesign(fontDesign)
-                                .fontWeight(.medium)
-                                .foregroundStyle(.white)
-                                .lineLimit(1)
-                            
-                            Text(location.region)
-                                .font(.title2)
-                                .foregroundColor(.lightCloudEnd)
-                                .lineLimit(1)
+                            .onTapGesture {
+                                withAnimation(.spring()){
+                                    if isSearching {
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                    }
+                                    viewingDetails = true
+                                }
+                            }
                             
                             Button {
                                 if let weatherData = viewModel.weatherData {
@@ -86,21 +90,24 @@ struct SearchView: View {
                                 }
                                 
                             } label: {
-                                Label("Add to favorites", image: "heart")
+                                
+                                Label("Add to favorites", systemImage: "heart")
                             }
                         }
-                        .onTapGesture {
-                            withAnimation(.spring()){
-                                if isSearching {
-                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                }
-                                viewingDetails = true
-                            }
-                        }
+                        .padding(.leading, -30)
                     }
                 }
                 
                 Spacer()
+                
+                HStack {
+                    Text("Favorite Locations")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading)
+                        .padding(.bottom, -10)
+                    Spacer()
+                }
                 
                 ScrollView(.horizontal) {
                     HStack {
