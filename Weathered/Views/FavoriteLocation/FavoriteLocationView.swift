@@ -26,17 +26,21 @@ struct FavoriteLocationView: View {
     var body: some View {
         
         ZStack(alignment: .bottomLeading) {
+            // Thin material frame
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 150, height: 100)
                 .foregroundStyle(.thinMaterial)
                 .shadow(color: .primary.opacity(0.5), radius: 2)
             
-            
+            // Current weather preview
             VStack(alignment: .leading) {
-                HStack {
+                HStack { // Icon and temperature
+                    // If a condition code has been received, display an icon
                     if let conditionCode = weatherData?.current.condition.code {
-                        Image(systemName:  daytime // Between 6:00am and 6:00pm
+                        Image(systemName:  daytime
+                              // Between 6:00am and 5:59pm
                               ? WeatherIconsDaytime[conditionCode] ?? "sun.fill"
+                              // Between 6:00pm and 5:59am
                               : WeatherIconsNighttime[conditionCode] ?? "moon.fill")
                         .resizable()
                         .scaledToFit()
@@ -50,8 +54,8 @@ struct FavoriteLocationView: View {
                 .font(.title2)
                 .bold()
                 
-                Text(location.name)
-                
+                Text(location.name.prefix(14))
+                    
                     .font(.headline)
             }
             .fontDesign(fontDesign)

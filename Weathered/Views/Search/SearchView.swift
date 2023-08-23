@@ -22,7 +22,7 @@ struct SearchView: View {
     @State private var locationName: String?
     @State private var timer: Timer?
     
-    
+    @State private var isSearching = false
     
     @State private var selectedImage = 0
     
@@ -91,6 +91,9 @@ struct SearchView: View {
                         }
                         .onTapGesture {
                             withAnimation(.spring()){
+                                if isSearching {
+                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                }
                                 viewingDetails = true
                             }
                         }
@@ -110,12 +113,23 @@ struct SearchView: View {
                 
                 HStack {
                     searchBar
-                    settingsButton
+                    
+                    if isSearching {
+                        Button { // Dismiss system keyboard
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            isSearching = false
+                        } label: {
+                            Text("Done")
+                        }
+                        .tint(.white)
+                    } else {
+                        settingsButton
+                    }
                 }
                 
             }
         }
-        .onChange(of: searchText) { 
+        .onChange(of: searchText) {
             // Invalidate the previous timer when the user types again
             timer?.invalidate()
             
@@ -164,7 +178,21 @@ extension SearchView {
             HStack {
                 Image(systemName: "magnifyingglass")
                 TextField("Search for a location", text: $searchText)
+                    .autocorrectionDisabled()
+                    .onTapGesture {
+                        isSearching = true
+                    }
+                Spacer()
                 
+                if isSearching {
+                    Button {
+                        searchText = ""
+                        viewModel.weatherData = nil
+                    } label: {
+                        Image(systemName: "x.circle.fill")
+                            .foregroundStyle(.white)
+                    }
+                }
             }
             .foregroundStyle(.white)
             .padding()
@@ -172,7 +200,7 @@ extension SearchView {
         }
         .padding(.vertical)
     }
-
+    
     private var settingsButton: some View {
         Menu {
             Section(header: Text("Font Design")) {
