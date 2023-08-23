@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct FavoriteLocationView: View {
+    @EnvironmentObject var viewModel: WeatherViewModel
+    
     let weatherService = WeatherService()
     let location: FavoriteLocation
     let fontDesign: Font.Design
+    
+    @Binding var viewingDetails: Bool
     
     @State private var weatherData: WeatherData?
     
@@ -20,6 +24,7 @@ struct FavoriteLocationView: View {
     }
     
     var body: some View {
+        
         ZStack(alignment: .bottomLeading) {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 150, height: 100)
@@ -33,9 +38,9 @@ struct FavoriteLocationView: View {
                         Image(systemName:  daytime // Between 6:00am and 6:00pm
                               ? WeatherIconsDaytime[conditionCode] ?? "sun.fill"
                               : WeatherIconsNighttime[conditionCode] ?? "moon.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
                     }
                     
                     if let temp = weatherData?.current.tempF {
@@ -53,6 +58,7 @@ struct FavoriteLocationView: View {
             .padding()
         }
         .padding(.vertical)
+        
         .onAppear {
             withAnimation(.bouncy) {
                 weatherService.fetchWeatherData(for: location.name) { result in
@@ -65,9 +71,20 @@ struct FavoriteLocationView: View {
                 }
             }
         }
+        
+        .onTapGesture {
+            withAnimation{
+                viewModel.weatherData = weatherData
+                viewingDetails = true
+            }
+        }
+        
     }
 }
 
 #Preview {
-    FavoriteLocationView(location: SampleData.favoriteLocation, fontDesign: .default)
+    FavoriteLocationView(location: SampleData.favoriteLocation, fontDesign: .default, viewingDetails: .constant(false))
 }
+
+
+//WeatherDetailsView(weatherData: weatherData, tintColor: backgroundTopStops.interpolated(amount: weatherData?.location.localtime.calculateTimeOfDay() ?? 0.5))

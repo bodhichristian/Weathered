@@ -102,7 +102,7 @@ struct SearchView: View {
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach(favoriteLocations.reversed()) { location in
-                            FavoriteLocationView(location: location, fontDesign: fontDesign)
+                            FavoriteLocationView(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
                         }
                     }
                     .padding(.leading)
