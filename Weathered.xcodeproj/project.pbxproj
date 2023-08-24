@@ -267,9 +267,9 @@
 			isa = PBXGroup;
 			children = (
 				AABC2C0F2A719380004EFF49 /* ContentView.swift */,
-				AA49FC432A82B94B003E7CCA /* FavoriteLocation */,
 				AABC2C0C2A713F79004EFF49 /* Search */,
 				AA611A672A6EFEEA00B55BBA /* Weather */,
+				AA49FC432A82B94B003E7CCA /* FavoriteLocation */,
 				AA611A682A6EFF3B00B55BBA /* Sky */,
 			);
 			path = Views;

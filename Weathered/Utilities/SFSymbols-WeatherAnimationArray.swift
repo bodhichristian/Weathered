@@ -12,24 +12,31 @@ import Foundation
 
 public let WeatherAnimationArray: [String] = [
     "sun.min.fill",
+    "cloud.snow.fill",
     "sun.max",
-    "sun.max.circle",
+    "moon.stars.fill",
     "cloud.sun",
+
     "sun.max.circle.fill",
     "cloud",
     "bolt",
-    "cloud.circle",
+    "moon.circle",
+
     "cloud.sun.fill",
     "sun.min",
     "cloud.drizzle",
     "moon",
-    "moon.circle",
-    "cloud.snow.fill",
-    "moon.stars.fill",
+    "cloud.circle",
+    "cloud.bolt.rain.fill",
+    "sun.max.circle",
+    "cloud.bolt.fill",
     "wind",
+    
     "moon.fill",
     "cloud.bolt",
     "moon.circle.fill",
+    "cloud.sleet.fill",
     "moon.stars",
+    "wind.snow",
     "moon.stars.circle.fill"
     ]

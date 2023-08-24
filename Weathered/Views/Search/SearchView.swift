@@ -56,7 +56,7 @@ struct SearchView: View {
                                 
                                 VStack(alignment: .leading) {
                                     Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
-                                        .font(.system(size: 80))
+                                        .font(.system(size: 100))
                                         .foregroundStyle(.white)
                                         .fontDesign(fontDesign)
                                     
@@ -97,7 +97,10 @@ struct SearchView: View {
                                 } label: {
                                     
                                     Label("Favorite", systemImage: locationIsFavorite ? "heart.fill" : "heart")
+                                        .symbolRenderingMode(.multicolor)
+                                        .padding(.top, 2)
                                 }
+                                .tint(.white)
                                 .disabled(locationIsFavorite)
                             }
                             .padding()
@@ -155,8 +158,8 @@ struct SearchView: View {
             // Invalidate the previous timer when the user types again
             timer?.invalidate()
             
-            // Start a new timer with a 0.5-second delay
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            // Start a new timer with a 1-second delay
+            timer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { _ in
                 // This block will be executed  after user stops typing
                 DispatchQueue.main.async {
                     viewModel.query = searchText
@@ -222,7 +225,6 @@ extension SearchView {
             .padding()
             .frame(width: 320, height: 40)
         }
-        //.padding(.vertical)
     }
     
     private var settingsButton: some View {
