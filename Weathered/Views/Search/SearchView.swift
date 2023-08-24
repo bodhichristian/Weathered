@@ -26,6 +26,10 @@ struct SearchView: View {
     
     @State private var selectedImage = 0
     
+    private var locationIsFavorite: Bool {
+        favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
+        }
+    
     var body: some View {
         ZStack {
             // Background Gradient
@@ -47,54 +51,59 @@ struct SearchView: View {
                         }
                 } else {
                     if let location = viewModel.weatherData?.location {
-                        VStack(alignment: .leading) {
-                            
+                        HStack(spacing: 0) {
                             VStack(alignment: .leading) {
-                                Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
-                                    .font(.system(size: 80))
-                                    .foregroundStyle(.white)
-                                    .fontDesign(fontDesign)
                                 
-                                
-                                Text(location.name)
-                                    .font(.largeTitle)
-                                    .fontDesign(fontDesign)
-                                    .fontWeight(.medium)
-                                    .foregroundStyle(.white)
-                                    .lineLimit(1)
-                                
-                                Text(location.region)
-                                    .font(.title2)
-                                    .foregroundColor(.lightCloudEnd)
-                                    .lineLimit(1)
-                            }
-                            .onTapGesture {
-                                withAnimation(.spring()){
-                                    if isSearching {
-                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                    }
-                                    viewingDetails = true
-                                }
-                            }
-                            
-                            Button {
-                                if let weatherData = viewModel.weatherData {
-                                    let newFavorite = FavoriteLocation(
-                                        name: weatherData.location.name,
-                                        region: weatherData.location.region,
-                                        country: weatherData.location.country,
-                                        latitude: weatherData.location.lat,
-                                        longitude: weatherData.location.lon)
+                                VStack(alignment: .leading) {
+                                    Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                                        .font(.system(size: 80))
+                                        .foregroundStyle(.white)
+                                        .fontDesign(fontDesign)
                                     
-                                    modelContext.insert(newFavorite)
+                                    
+                                    Text(location.name.prefix(25))
+                                        .font(.largeTitle)
+                                        .fontDesign(fontDesign)
+                                        .fontWeight(.medium)
+                                        .foregroundStyle(.white)
+                                        .lineLimit(1)
+                                    
+                                    Text(location.region)
+                                        .font(.title2)
+                                        .foregroundColor(.lightCloudEnd)
+                                        .lineLimit(1)
+                                }
+                                .onTapGesture {
+                                    withAnimation(.spring()){
+                                        if isSearching {
+                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                        }
+                                        viewingDetails = true
+                                    }
                                 }
                                 
-                            } label: {
-                                
-                                Label("Add to favorites", systemImage: "heart")
+                                Button {
+                                    if let weatherData = viewModel.weatherData {
+                                        let newFavorite = FavoriteLocation(
+                                            name: weatherData.location.name,
+                                            region: weatherData.location.region,
+                                            country: weatherData.location.country,
+                                            latitude: weatherData.location.lat,
+                                            longitude: weatherData.location.lon)
+                                        
+                                        modelContext.insert(newFavorite)
+                                    }
+                                    
+                                } label: {
+                                    
+                                    Label("Favorite", systemImage: locationIsFavorite ? "heart.fill" : "heart")
+                                }
+                                .disabled(locationIsFavorite)
                             }
+                            .padding()
+                            
+                            Spacer()
                         }
-                        .padding(.leading, -30)
                     }
                 }
                 
@@ -120,21 +129,25 @@ struct SearchView: View {
                     .padding(.leading)
                 }
                 
-                HStack {
+                HStack(spacing: 0) {
                     searchBar
-                    
+                        .offset(x: 5)
+                    Spacer()
                     if isSearching {
                         Button { // Dismiss system keyboard
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             isSearching = false
                         } label: {
                             Text("Done")
+                                .frame(width: 50, height: 30)
                         }
                         .tint(.white)
                     } else {
                         settingsButton
                     }
+                    Spacer()
                 }
+                .padding(.bottom)
                 
             }
         }
@@ -182,10 +195,11 @@ extension SearchView {
         ZStack {
             Capsule()
                 .foregroundStyle(.thinMaterial)
-                .frame(width: 320, height: 40)
+                .frame(width: 300, height: 40)
             
             HStack {
                 Image(systemName: "magnifyingglass")
+                    .padding(.leading, 5)
                 TextField("Search for a location", text: $searchText)
                     .autocorrectionDisabled()
                     .onTapGesture {
@@ -193,7 +207,7 @@ extension SearchView {
                     }
                 Spacer()
                 
-                if isSearching {
+                if isSearching && !searchText.isEmpty {
                     Button {
                         searchText = ""
                         viewModel.weatherData = nil
@@ -201,13 +215,14 @@ extension SearchView {
                         Image(systemName: "x.circle.fill")
                             .foregroundStyle(.white)
                     }
+                    .padding(.trailing, 5)
                 }
             }
             .foregroundStyle(.white)
             .padding()
             .frame(width: 320, height: 40)
         }
-        .padding(.vertical)
+        //.padding(.vertical)
     }
     
     private var settingsButton: some View {
@@ -244,7 +259,7 @@ extension SearchView {
                 .resizable()
                 .foregroundColor(.white)
                 .scaledToFit()
-                .frame(width: 30)
+                .frame(width: 50, height: 30)
                 .shadow(radius: 6, y: 4)
         }
         .buttonStyle(PlainButtonStyle())
