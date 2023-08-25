@@ -92,6 +92,11 @@ struct SearchView: View {
                                             longitude: weatherData.location.lon)
                                         
                                         modelContext.insert(newFavorite)
+                                        do {
+                                            try modelContext.save()
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
                                     }
                                     
                                 } label: {
@@ -125,8 +130,17 @@ struct SearchView: View {
                 
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(favoriteLocations.reversed()) { location in
+                        ForEach(favoriteLocations) { location in
                             FavoriteLocationView(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
+                                .contextMenu {
+                                    
+                                        Button {
+                                            modelContext.delete(location)
+                                        } label: {
+                                            Label("Delete", image: "trash")
+                                        }
+                                    }
+                                
                         }
                     }
                     .padding(.leading)
@@ -168,6 +182,13 @@ struct SearchView: View {
             }
         }
         
+    }
+    private func delete(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(favoriteLocations[index])
+            }
+        }
     }
     
     private func startAnimation() {
