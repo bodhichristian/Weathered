@@ -14,8 +14,6 @@ struct WeatheredApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
-            
             ContentView()
                 .environmentObject(viewModel)
         }
