@@ -23,12 +23,13 @@ struct ConditionsView: View {
     let residueType =  Storm.Contents.none
     let resiudeStrength = 0.0
     
-    var low: Int {
-        Int(weatherData.forecast.forecastday[0].day.mintempF)
-    }
-    
-    var high: Int {
-        Int(weatherData.forecast.forecastday[0].day.maxtempF)
+    var thunderStorm: Bool {
+        switch weatherData.current.condition.code {
+        case 1273, 1276, 1279, 1282:
+            return true
+        default:
+            return false
+        }
     }
     
     var body: some View {
@@ -54,7 +55,9 @@ struct ConditionsView: View {
                 .padding(.leading, 5)
                 .shadow(color: .black.opacity(0.6), radius: 6, y: 4)
                 
-                LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
+                if thunderStorm{
+                    LightningView(maximumBolts: Int(lightningMaxBolts), forkProbability: Int(lightningForkProbability))
+                }
                 
                 backToSearchButton
             }
