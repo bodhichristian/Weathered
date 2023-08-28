@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeatherDetailsView: View {
+struct SecondaryDetailsView: View {
     let weatherData: WeatherData?
 
     // Background color
@@ -88,14 +88,14 @@ struct WeatherDetailsView: View {
     }
 }
 
-struct WeatherDetailsView_Previews: PreviewProvider {
+struct SecondaryDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetailsView(weatherData: nil, tintColor: .blue)
+        SecondaryDetailsView(weatherData: nil, tintColor: .blue)
             .preferredColorScheme(.dark)
     }
 }
 
-extension WeatherDetailsView {
+extension SecondaryDetailsView {
     private var rightNowDetails: some View {
         Group {
             WeatherDetailRowView(

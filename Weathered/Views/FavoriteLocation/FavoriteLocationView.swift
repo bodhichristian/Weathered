@@ -30,7 +30,7 @@ struct FavoriteLocationView: View {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 150, height: 100)
                 .foregroundStyle(.thinMaterial)
-                .shadow(color: .primary.opacity(0.5), radius: 2)
+                //.shadow(color: .primary.opacity(0.5), radius: 2)
             
             // Current weather preview
             VStack(alignment: .leading) {
@@ -45,6 +45,7 @@ struct FavoriteLocationView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
+                        .symbolRenderingMode(.multicolor)
                     }
                     
                     if let temp = weatherData?.current.tempF {
@@ -86,9 +87,6 @@ struct FavoriteLocationView: View {
     }
 }
 
-#Preview {
-    FavoriteLocationView(location: SampleData.favoriteLocation, fontDesign: .default, viewingDetails: .constant(false))
-}
-
-
-//WeatherDetailsView(weatherData: weatherData, tintColor: backgroundTopStops.interpolated(amount: weatherData?.location.localtime.calculateTimeOfDay() ?? 0.5))
+//#Preview {
+//    FavoriteLocationView(location: SampleData.favoriteLocation, fontDesign: .default, viewingDetails: .constant(false))
+//}

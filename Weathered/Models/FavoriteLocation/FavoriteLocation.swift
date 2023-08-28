@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class FavoriteLocation: ObservableObject {
+final class FavoriteLocation {
     let id: UUID
     let name: String
     let region: String
@@ -18,12 +18,13 @@ final class FavoriteLocation: ObservableObject {
     let latitude: Double
     let longitude: Double
     
-    init(name: String,
+    init(id: UUID = UUID(),
+         name: String,
          region: String,
          country: String,
          latitude: Double,
          longitude: Double) {
-        self.id = UUID()
+        self.id = id
         self.name = name
         self.region = region
         self.country = country

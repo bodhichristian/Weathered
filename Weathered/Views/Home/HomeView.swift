@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import ImageMorphing
 
-struct SearchView: View {
+struct HomeView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     @Environment(\.modelContext) private var modelContext
     
@@ -44,6 +44,7 @@ struct SearchView: View {
                     // Animates when the image passed is updated
                     MorphingImage(systemName: WeatherAnimationArray[selectedImage])
                         .frame(width: 150, height: 150)
+                        .symbolRenderingMode(.multicolor)
                         .foregroundColor(.white)
                         .onAppear {
                             // Start a timer that updates `selectedImage` at a set interval
@@ -205,7 +206,7 @@ struct SearchView: View {
 }
 
 //#Preview {
-//    SearchView(viewingDetails: .constant(false),
+//    HomeView(viewingDetails: .constant(false),
 //               fontDesign: .constant(.default)
 //    )
 //        .environmentObject(WeatherViewModel())
@@ -213,7 +214,7 @@ struct SearchView: View {
 //}
 
 
-extension SearchView {
+extension HomeView {
     
     private var searchBar: some View {
         ZStack {
