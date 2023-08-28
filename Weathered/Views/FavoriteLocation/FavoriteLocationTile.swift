@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoriteLocationView: View {
+struct FavoriteLocationTile: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     
     let weatherService = WeatherService()
@@ -21,6 +21,15 @@ struct FavoriteLocationView: View {
     var daytime: Bool {
         (weatherData?.location.localtime.calculateTimeOfDay() ?? 0.5) > 0.25
         && (weatherData?.location.localtime.calculateTimeOfDay() ?? 0.5 < 0.75)
+    }
+    
+    var prefix: Int {
+        switch fontDesign {
+        case .monospaced:
+            return 10
+        default:
+            return 14
+        }
     }
     
     var body: some View {
@@ -55,7 +64,7 @@ struct FavoriteLocationView: View {
                 .font(.title2)
                 .bold()
                 
-                Text(location.name.prefix(14))
+                Text(location.name.prefix(prefix))
                     
                     .font(.headline)
             }

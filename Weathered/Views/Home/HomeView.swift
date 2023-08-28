@@ -164,7 +164,7 @@ extension HomeView {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(favoriteLocations) { location in
-                        FavoriteLocationView(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
+                        FavoriteLocationTile(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
                             .contextMenu {
                                 
                                     Button {
