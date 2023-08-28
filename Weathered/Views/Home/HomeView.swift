@@ -25,10 +25,7 @@ struct HomeView: View {
     @State private var animationTimer: Timer?
     @State private var searchTimer: Timer?
     @State private var isSearching = false
-    
-    
-   
-    
+
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
         }
@@ -43,74 +40,19 @@ struct HomeView: View {
                 Spacer()
                 // If weather data has not been fetched
                 if viewModel.weatherData == nil {
-                    // Morphing Image
-                    // Animates when the image passed is updated
                     MorphingImage(systemName: WeatherAnimationArray[selectedImage])
                         .frame(width: 150, height: 150)
                         .symbolRenderingMode(.multicolor)
                         .foregroundColor(.white)
                         .onAppear {
-                            // Start a timer that updates `selectedImage` at a set interval
-                            startAnimation()
+                            startAnimation() // Start a timer that updates `selectedImage` at a set interval
                         }
                 } else {
                     if let location = viewModel.weatherData?.location {
                         HStack(spacing: 0) {
                             VStack(alignment: .leading) {
-                                
-                                VStack(alignment: .leading) {
-                                    Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
-                                        .font(.system(size: 100))
-                                        .foregroundStyle(.white)
-                                        .fontDesign(fontDesign)
-                                    
-                                    
-                                    Text(location.name.prefix(25))
-                                        .font(.largeTitle)
-                                        .fontDesign(fontDesign)
-                                        .fontWeight(.medium)
-                                        .foregroundStyle(.white)
-                                        .lineLimit(1)
-                                    
-                                    Text(location.region)
-                                        .font(.title2)
-                                        .foregroundColor(.lightCloudEnd)
-                                        .lineLimit(1)
-                                }
-                                .onTapGesture {
-                                    withAnimation(.spring()){
-                                        if isSearching {
-                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                        }
-                                        viewingDetails = true
-                                    }
-                                }
-                                
-                                Button {
-                                    if let weatherData = viewModel.weatherData {
-                                        let newFavorite = FavoriteLocation(
-                                            name: weatherData.location.name,
-                                            region: weatherData.location.region,
-                                            country: weatherData.location.country,
-                                            latitude: weatherData.location.lat,
-                                            longitude: weatherData.location.lon)
-                                        
-                                        modelContext.insert(newFavorite)
-                                        do {
-                                            try modelContext.save()
-                                        } catch {
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                    
-                                } label: {
-                                    
-                                    Label("Favorite", systemImage: locationIsFavorite ? "heart.fill" : "heart")
-                                        .symbolRenderingMode(.multicolor)
-                                        .padding(.top, 2)
-                                }
-                                .tint(.white)
-                                .disabled(locationIsFavorite)
+                                searchResultsView
+                                addToFavoritesView
                             }
                             .padding()
                             
@@ -120,94 +62,25 @@ struct HomeView: View {
                 }
                 
                 Spacer()
-                
-                if !favoriteLocations.isEmpty {
-                    HStack {
-                        Text("Favorite Locations")
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                            .padding(.leading)
-                            .padding(.bottom, -10)
-                        Spacer()
-                    }
-                }
-                
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach(favoriteLocations) { location in
-                            FavoriteLocationView(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
-                                .contextMenu {
-                                    
-                                        Button {
-                                            modelContext.delete(location)
-                                        } label: {
-                                            Label("Delete", image: "trash")
-                                        }
-                                    }
-                        }
-                    }
-                    .padding(.leading)
-                }
-                
-                HStack(spacing: 0) {
-                    searchBar
-                        .offset(x: 5)
-                    Spacer()
-                    if isSearching {
-                        Button { // Dismiss system keyboard
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                            isSearching = false
-                        } label: {
-                            Text("Done")
-                                .frame(width: 50, height: 30)
-                        }
-                        .tint(.white)
-                    } else {
-                        settingsButton
-                    }
-                    Spacer()
-                }
-                .padding(.bottom)
-                
+                favoriteLocationsView // Visible if user has added a favorite location
+                toolBarView // Search and Settings
             }
         }
         .onChange(of: searchText) {
-            // Invalidate the previous timer when the user types again
-            //searchTimer?.invalidate()
-            
             // Start a new timer with a 1-second delay
             searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-                // This block will be executed  after user stops typing
+                // This block will be executed after user stops typing
                 DispatchQueue.main.async {
                     viewModel.query = searchText
                     viewModel.fetchWeatherData()
                 }
             }
         }
-        
-    }
-    private func delete(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(favoriteLocations[index])
-            }
-        }
-    }
-    
-    private func startAnimation() {
-        searchTimer?.invalidate()
-        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            let lastIndex = WeatherAnimationArray.count - 1
-            if selectedImage == lastIndex {
-                selectedImage = 0
-            } else {
-                selectedImage += 1
-            }
-        }
-        
     }
 }
 
+// Known Issue:
+// Xcode 15.0 beta 1 bug causing models to fail when previews use a modelContainer
 //#Preview {
 //    HomeView(viewingDetails: .constant(false),
 //               fontDesign: .constant(.default)
@@ -216,8 +89,118 @@ struct HomeView: View {
 //        .modelContainer(for: FavoriteLocation.self, inMemory: true)
 //}
 
-
 extension HomeView {
+    private var searchResultsView: some View {
+        VStack(alignment: .leading) {
+            Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+                .font(.system(size: 100))
+                .foregroundStyle(.white)
+                .fontDesign(fontDesign)
+            
+            
+            Text(viewModel.weatherData?.location.name.prefix(25) ?? "")
+                .font(.largeTitle)
+                .fontDesign(fontDesign)
+                .fontWeight(.medium)
+                .foregroundStyle(.white)
+                .lineLimit(1)
+            
+            Text(viewModel.weatherData?.location.region ?? "")
+                .font(.title2)
+                .foregroundColor(.lightCloudEnd)
+                .lineLimit(1)
+        }
+        .onTapGesture {
+            withAnimation(.spring()){
+                if isSearching {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+                viewingDetails = true
+            }
+        }
+    }
+    
+    private var addToFavoritesView: some View {
+        Button {
+            if let weatherData = viewModel.weatherData {
+                let newFavorite = FavoriteLocation(
+                    name: weatherData.location.name,
+                    region: weatherData.location.region,
+                    country: weatherData.location.country,
+                    latitude: weatherData.location.lat,
+                    longitude: weatherData.location.lon)
+                
+                modelContext.insert(newFavorite)
+                do {
+                    try modelContext.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+        } label: {
+            
+            Label("Favorite", systemImage: locationIsFavorite ? "heart.fill" : "heart")
+                .symbolRenderingMode(.multicolor)
+                .padding(.top, 2)
+        }
+        .tint(.white)
+        .disabled(locationIsFavorite)
+    }
+    
+    private var favoriteLocationsView: some View {
+        VStack {
+            if !favoriteLocations.isEmpty {
+                HStack {
+                    Text("Favorite Locations")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading)
+                        .padding(.bottom, -10)
+                    Spacer()
+                }
+            }
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(favoriteLocations) { location in
+                        FavoriteLocationView(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
+                            .contextMenu {
+                                
+                                    Button {
+                                        modelContext.delete(location)
+                                    } label: {
+                                        Label("Delete", image: "trash")
+                                    }
+                                }
+                    }
+                }
+                .padding(.leading)
+            }
+        }
+    }
+    
+    private var toolBarView: some View {
+        HStack(spacing: 0) {
+            searchBar
+                .offset(x: 5)
+            Spacer()
+            if isSearching {
+                Button { // Dismiss system keyboard
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    isSearching = false
+                } label: {
+                    Text("Done")
+                        .frame(width: 50, height: 30)
+                }
+                .tint(.white)
+            } else {
+                settingsButton
+            }
+            Spacer()
+        }
+        .padding(.bottom)
+    }
     
     private var searchBar: some View {
         ZStack {
@@ -292,4 +275,23 @@ extension HomeView {
         .buttonStyle(PlainButtonStyle())
     }
     
+    private func delete(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(favoriteLocations[index])
+            }
+        }
+    }
+    
+    private func startAnimation() {
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            let lastIndex = WeatherAnimationArray.count - 1
+            if selectedImage == lastIndex {
+                selectedImage = 0
+            } else {
+                selectedImage += 1
+            }
+        }
+    }
 }
