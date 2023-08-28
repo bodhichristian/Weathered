@@ -60,13 +60,14 @@ struct ConditionsView: View {
                 }
                 
                 backToSearchButton
+                
             }
             /*
              This toolbar is currently necessary to keep the alpha layer intentionally empty
              This is a temporary solution while the weather animation depends on the alpha layer
              Removing content from this toolbar will result in a WeatherView UI that animates undesireably.
-            */
-             .toolbar {
+             */
+            .toolbar {
                 Text("")
             }
             .preferredColorScheme(.dark)

@@ -20,11 +20,14 @@ struct HomeView: View {
     
     @State private var searchText = ""
     @State private var locationName: String?
-    @State private var timer: Timer?
-    
-    @State private var isSearching = false
     
     @State private var selectedImage = 0
+    @State private var animationTimer: Timer?
+    @State private var searchTimer: Timer?
+    @State private var isSearching = false
+    
+    
+   
     
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
@@ -171,10 +174,10 @@ struct HomeView: View {
         }
         .onChange(of: searchText) {
             // Invalidate the previous timer when the user types again
-            timer?.invalidate()
+            searchTimer?.invalidate()
             
             // Start a new timer with a 1-second delay
-            timer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { _ in
+            searchTimer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { _ in
                 // This block will be executed  after user stops typing
                 DispatchQueue.main.async {
                     viewModel.query = searchText
@@ -193,7 +196,9 @@ struct HomeView: View {
     }
     
     private func startAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        animationTimer?.invalidate()
+        
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             let lastIndex = WeatherAnimationArray.count - 1
             if selectedImage == lastIndex {
                 selectedImage = 0
