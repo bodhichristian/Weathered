@@ -30,6 +30,9 @@ struct LightningView: View {
             }
         }
         .ignoresSafeArea()
+        .onAppear {
+            lightning.strike()
+        }
         .onTapGesture {
             lightning.strike()
         }
