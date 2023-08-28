@@ -14,7 +14,8 @@ class WeatherService: ObservableObject {
     // This function fetches weather data for a given city using WeatherAPI.
     // The completion handler returns a Result object containing either WeatherData on success or an Error on failure.
     func fetchWeatherData(for city: String, completion: @escaping (Result<WeatherData, Error>) -> Void) {
-        let apiKey = "ENTER YOUR API KEY HERE" // Replace this with your actual WeatherAPI API key.
+        // Uncomment the following line
+        // let apiKey = "ENTER YOUR API KEY HERE" // Replace this string with your WeatherAPI API key.
         // Replace interpolated `christiansKey` with `apiKey`
         let urlString = "https://api.weatherapi.com/v1/forecast.json?key=\(christiansKey)&q=\(city)&days=1&aqi=no&alerts=no"
 
