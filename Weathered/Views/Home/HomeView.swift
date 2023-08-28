@@ -144,7 +144,6 @@ struct HomeView: View {
                                             Label("Delete", image: "trash")
                                         }
                                     }
-                                
                         }
                     }
                     .padding(.leading)
@@ -174,10 +173,10 @@ struct HomeView: View {
         }
         .onChange(of: searchText) {
             // Invalidate the previous timer when the user types again
-            searchTimer?.invalidate()
+            //searchTimer?.invalidate()
             
             // Start a new timer with a 1-second delay
-            searchTimer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { _ in
+            searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
                 // This block will be executed  after user stops typing
                 DispatchQueue.main.async {
                     viewModel.query = searchText
@@ -196,9 +195,8 @@ struct HomeView: View {
     }
     
     private func startAnimation() {
-        animationTimer?.invalidate()
-        
-        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             let lastIndex = WeatherAnimationArray.count - 1
             if selectedImage == lastIndex {
                 selectedImage = 0
