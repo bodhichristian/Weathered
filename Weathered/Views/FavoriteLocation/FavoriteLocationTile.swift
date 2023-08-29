@@ -37,7 +37,7 @@ struct FavoriteLocationTile: View {
         ZStack(alignment: .bottomLeading) {
             // Thin material frame
             RoundedRectangle(cornerRadius: 10)
-                .frame(width: 150, height: 100)
+                .frame(width: 165, height: 110) // 3:2
                 .foregroundStyle(.thinMaterial)
                 //.shadow(color: .primary.opacity(0.5), radius: 2)
             

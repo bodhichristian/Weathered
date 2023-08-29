@@ -40,15 +40,13 @@ struct HomeView: View {
                 Spacer()
                 // If weather data has not been fetched
                 if viewModel.weatherData == nil {
-                    MorphingImage(systemName: WeatherAnimationArray[selectedImage])
-                        .frame(width: 150, height: 150)
-                        .symbolRenderingMode(.multicolor)
-                        .foregroundColor(.white)
+                    MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
+                        .frame(width: 175, height: 175)
                         .onAppear {
                             startAnimation() // Start a timer that updates `selectedImage` at a set interval
                         }
                 } else {
-                    if let location = viewModel.weatherData?.location {
+                    if viewModel.weatherData?.location != nil {
                         HStack(spacing: 0) {
                             VStack(alignment: .leading) {
                                 searchResultsView
@@ -285,7 +283,7 @@ extension HomeView {
     
     private func startAnimation() {
         searchTimer?.invalidate()
-        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 1.3, repeats: true) { _ in
             let lastIndex = WeatherAnimationArray.count - 1
             if selectedImage == lastIndex {
                 selectedImage = 0
