@@ -13,7 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     @Environment(\.modelContext) private var modelContext
     
-    @Query var favoriteLocations: [FavoriteLocation]
+    @Query(sort: \FavoriteLocation.name) var favoriteLocations: [FavoriteLocation]
     
     @Binding var viewingDetails: Bool
     @Binding var fontDesign: Font.Design
