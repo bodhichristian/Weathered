@@ -25,9 +25,11 @@ struct HomeView: View {
     @State private var selectedImage = 0
     @State private var animationTimer: Timer?
     @State private var searchTimer: Timer?
+    @State private var mapRotationTimer: Timer?
     @State private var isSearching = false
     
     @State private var position: MapCameraPosition = .automatic
+    @State private var heading: Double = 0.0
     
     @StateObject var locationManager = LocationManager()
 
@@ -84,20 +86,24 @@ struct HomeView: View {
                 DispatchQueue.main.async {
                     viewModel.query = searchText
                     viewModel.fetchWeatherData()
+                    
+                    if let location = viewModel.weatherData?.location {
+                        withAnimation {
+                            position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 15000, heading: heading,  pitch: 60))
+                        }
+                    }
                 }
             }
             
-            if let location = viewModel.weatherData?.location {
-                withAnimation {
-                    position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 15000))
-                }
-            }
+            
         }
         .onAppear {
             locationManager.checkIfLocationServicesIsEnabled()
             if let userLocation = locationManager.manager?.location {
-                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 15000))
+                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 15000, heading: heading, pitch: 60))
             }
+
+
         }
     }
 }
@@ -317,4 +323,5 @@ extension HomeView {
             }
         }
     }
+    
 }
