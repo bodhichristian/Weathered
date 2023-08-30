@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 import SwiftData
 import ImageMorphing
 
@@ -13,7 +14,7 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     @Environment(\.modelContext) private var modelContext
     
-    @Query(sort: \FavoriteLocation.name) var favoriteLocations: [FavoriteLocation]
+    @Query(sort: \FavoriteLocation.name, order: .forward, animation: .smooth) var favoriteLocations: [FavoriteLocation]
     
     @Binding var viewingDetails: Bool
     @Binding var fontDesign: Font.Design
@@ -25,6 +26,10 @@ struct HomeView: View {
     @State private var animationTimer: Timer?
     @State private var searchTimer: Timer?
     @State private var isSearching = false
+    
+    @State private var position: MapCameraPosition = .automatic
+    
+    @StateObject var locationManager = LocationManager()
 
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
@@ -32,9 +37,14 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
+            
+                Map(position: $position)
+            
+            
             // Background Gradient
             LinearGradient(colors: [.midnightStart, .midnightEnd], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
+                .opacity(0.9)
             
             VStack {
                 Spacer()
@@ -72,6 +82,12 @@ struct HomeView: View {
                     viewModel.query = searchText
                     viewModel.fetchWeatherData()
                 }
+            }
+        }
+        .onAppear {
+            locationManager.checkIfLocationServicesIsEnabled()
+            if let location = locationManager.manager?.location {
+                position = .camera(MapCamera(centerCoordinate: location.coordinate, distance: 500))
             }
         }
     }

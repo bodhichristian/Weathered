@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA093DDF2A72B1250099A958 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA093DDE2A72B1250099A958 /* SampleData.swift */; };
+		AA2A3E432A9E6952002C461A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A3E422A9E6952002C461A /* LocationManager.swift */; };
 		AA2B25DF2A9D3110009A4994 /* PrimaryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */; };
 		AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */; };
 		AA2D9D1A2A7EC54B009FC955 /* ImageMorphing in Frameworks */ = {isa = PBXBuildFile; productRef = AA2D9D192A7EC54B009FC955 /* ImageMorphing */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		AA093DDE2A72B1250099A958 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		AA2A3E422A9E6952002C461A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryDetailsView.swift; sourceTree = "<group>"; };
 		AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIKey.swift; sourceTree = "<group>"; };
 		AA2D9D1B2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SFSymbols-WeatherAnimationArray.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				AA611A622A6EF1B900B55BBA /* WeatherService.swift */,
 				AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */,
+				AA2A3E422A9E6952002C461A /* LocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -349,7 +352,7 @@
 		AA972A4F29CF3DED000E270E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = NO;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
@@ -432,6 +435,7 @@
 				AA846C702A7036D800C4D61E /* WeatherDetailGridItem.swift in Sources */,
 				AA972A7629CFA219000E270E /* Array-GradientStop.swift in Sources */,
 				AA972A7F29D1D022000E270E /* StarsView.swift in Sources */,
+				AA2A3E432A9E6952002C461A /* LocationManager.swift in Sources */,
 				AA972A6B29CF407C000E270E /* CloudGroup.swift in Sources */,
 				AA2B25DF2A9D3110009A4994 /* PrimaryDetailsView.swift in Sources */,
 				AA607DF029E1CE1B00DBE8C3 /* Lightning.swift in Sources */,
@@ -571,6 +575,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Weathered/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please enable Location Services to allow Weathered to provide weather data about your current location.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please enable Location Services to allow Weathered to provide weather data about your current location.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please enable Location Services to allow Weathered to provide weather data about your current location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -599,6 +607,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Weathered/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please enable Location Services to allow Weathered to provide weather data about your current location.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please enable Location Services to allow Weathered to provide weather data about your current location.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please enable Location Services to allow Weathered to provide weather data about your current location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

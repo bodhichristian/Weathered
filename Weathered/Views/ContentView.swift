@@ -29,7 +29,9 @@ struct ContentView: View {
                 fontDesign: $fontDesign
             )
                 .environmentObject(viewModel)
+                
         }
+        
     }
 }
 
