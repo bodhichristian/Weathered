@@ -38,7 +38,8 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             
-                Map(position: $position)
+            Map(position: $position)
+                .mapStyle(.imagery(elevation: .realistic))
             
             
             // Background Gradient
@@ -51,7 +52,8 @@ struct HomeView: View {
                 // If weather data has not been fetched
                 if viewModel.weatherData == nil {
                     MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
-                        .frame(width: 175, height: 175)
+                        .frame(width: 200, height: 200)
+                        .foregroundStyle(.white)
                         .onAppear {
                             startAnimation() // Start a timer that updates `selectedImage` at a set interval
                         }
@@ -168,7 +170,7 @@ extension HomeView {
                 HStack {
                     Text("Favorite Locations")
                         .font(.callout)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white.opacity(0.7))
                         .padding(.leading)
                         .padding(.bottom, -10)
                     Spacer()
@@ -197,7 +199,7 @@ extension HomeView {
     private var toolBarView: some View {
         HStack(spacing: 0) {
             searchBar
-                .offset(x: 5)
+                .offset(x: 10)
             Spacer()
             if isSearching {
                 Button { // Dismiss system keyboard
@@ -220,7 +222,7 @@ extension HomeView {
         ZStack {
             Capsule()
                 .foregroundStyle(.thinMaterial)
-                .frame(width: 300, height: 40)
+                .frame(width: 310, height: 40)
             
             HStack {
                 Image(systemName: "magnifyingglass")
