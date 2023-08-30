@@ -74,6 +74,7 @@ struct HomeView: View {
                 Spacer()
                 favoriteLocationsView // Visible if user has added a favorite location
                 toolBarView // Search and Settings
+                    .padding(.bottom, 10)
             }
         }
         .onChange(of: searchText) {
@@ -85,11 +86,17 @@ struct HomeView: View {
                     viewModel.fetchWeatherData()
                 }
             }
+            
+            if let location = viewModel.weatherData?.location {
+                withAnimation {
+                    position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 15000))
+                }
+            }
         }
         .onAppear {
             locationManager.checkIfLocationServicesIsEnabled()
-            if let location = locationManager.manager?.location {
-                position = .camera(MapCamera(centerCoordinate: location.coordinate, distance: 500))
+            if let userLocation = locationManager.manager?.location {
+                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 15000))
             }
         }
     }
