@@ -30,6 +30,7 @@ struct HomeView: View {
     
     @State private var position: MapCameraPosition = .automatic
     @State private var heading: Double = 0.0
+    @State private var mapStyle: MapStyle = .imagery(elevation: .realistic)
     
     @StateObject var locationManager = LocationManager()
 
@@ -41,7 +42,7 @@ struct HomeView: View {
         ZStack {
             
             Map(position: $position)
-                .mapStyle(.imagery(elevation: .realistic))
+                .mapStyle(mapStyle)
             
             
             // Background Gradient
@@ -74,6 +75,15 @@ struct HomeView: View {
                 }
                 
                 Spacer()
+                
+                if let currentLocation = locationManager.manager?.location?.coordinate {
+                    let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                    
+                    CurrentLocationView(currentLocation: location)
+                        .padding(.bottom, 20)
+                }
+                
+                
                 favoriteLocationsView // Visible if user has added a favorite location
                 toolBarView // Search and Settings
                     .padding(.bottom, 10)
@@ -89,7 +99,7 @@ struct HomeView: View {
                     
                     if let location = viewModel.weatherData?.location {
                         withAnimation {
-                            position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 15000, heading: heading,  pitch: 60))
+                            position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: heading,  pitch: 60))
                         }
                     }
                 }
@@ -100,7 +110,7 @@ struct HomeView: View {
         .onAppear {
             locationManager.checkIfLocationServicesIsEnabled()
             if let userLocation = locationManager.manager?.location {
-                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 15000, heading: heading, pitch: 60))
+                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
             }
 
 
@@ -266,6 +276,20 @@ extension HomeView {
     
     private var settingsButton: some View {
         Menu {
+            Section(header: Text("Map Style")) {
+                Button {
+                    mapStyle = .standard(elevation: .realistic, pointsOfInterest: .excludingAll)
+                    
+                } label: {
+                    Text("Explore")
+                }
+                Button {
+                    mapStyle = .imagery(elevation: .realistic)
+                } label: {
+                    Text("Satellite")
+                }
+            }
+            
             Section(header: Text("Font Design")) {
                 Button {
                     fontDesign = .default
