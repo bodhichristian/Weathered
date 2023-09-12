@@ -51,7 +51,6 @@ struct HomeView: View {
                 .opacity(0.9)
             
             VStack {
-                //Spacer()
                 // If weather data has not been fetched
                 if viewModel.weatherData == nil {
                     Spacer()
@@ -80,7 +79,6 @@ struct HomeView: View {
                             .offset(y: isSearching ? -60 : 0)
                             .padding()
                             
-                            //Spacer()
                         }
                     }
                 }
