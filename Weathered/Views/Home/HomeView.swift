@@ -33,10 +33,10 @@ struct HomeView: View {
     @State private var mapStyle: MapStyle = .imagery(elevation: .realistic)
     
     @StateObject var locationManager = LocationManager()
-
+    
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
-        }
+    }
     
     var body: some View {
         ZStack {
@@ -81,12 +81,13 @@ struct HomeView: View {
                     
                     CurrentLocationView(currentLocation: location)
                         .padding(.bottom, 20)
+                        .offset(y: isSearching ? 1000 : 0)
                 }
                 
                 
                 favoriteLocationsView // Visible if user has added a favorite location
                 toolBarView // Search and Settings
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 20)
             }
         }
         .onChange(of: searchText) {
@@ -112,8 +113,8 @@ struct HomeView: View {
             if let userLocation = locationManager.manager?.location {
                 position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
             }
-
-
+            
+            
         }
     }
 }
@@ -206,12 +207,12 @@ extension HomeView {
                         FavoriteLocationTile(location: location, fontDesign: fontDesign, viewingDetails: $viewingDetails)
                             .contextMenu {
                                 
-                                    Button {
-                                        modelContext.delete(location)
-                                    } label: {
-                                        Label("Delete", image: "trash")
-                                    }
+                                Button {
+                                    modelContext.delete(location)
+                                } label: {
+                                    Label("Delete", image: "trash")
                                 }
+                            }
                     }
                 }
                 .padding(.leading)

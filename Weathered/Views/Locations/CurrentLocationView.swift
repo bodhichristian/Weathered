@@ -27,12 +27,19 @@ struct CurrentLocationView: View {
     var body: some View {
         VStack {
             HStack {
-                VStack(alignment: .leading) {
-                    HStack {
-                        if let weatherData {
+                if let weatherData {
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
                             Image(systemName: "location")
                                 .font(.title2)
                             
+                            Text("\(Int(weatherData.current.tempF))°F" )
+                                .font(.title2)
+                                .bold()
+                        }
+                        
+                        HStack {
                             Image(systemName:  daytime
                                   // Between 6:00am and 5:59pm
                                   ? WeatherIconsDaytime[weatherData.current.condition.code] ?? ""
@@ -42,23 +49,15 @@ struct CurrentLocationView: View {
                             .scaledToFit()
                             .frame(width: 30, height: 30)
                             .symbolRenderingMode(.multicolor)
-                            
-                            
-                            Text("\(Int(weatherData.current.tempF))°F" )
-                                .font(.title2)
+                            Text(weatherData.location.name)
+                                .bold()
+                            Text(weatherData.location.region)
                         }
+                        
                     }
-                    
-                    HStack {
-                        Text(weatherData?.location.name ?? "")
-                            .bold()
-                        Text(weatherData?.location.region ?? "")
-                    }
-                    
+                    .foregroundStyle(.white.opacity(0.7))
+                    .padding(.leading)
                 }
-                .foregroundStyle(.white.opacity(0.7))
-                .padding(.leading)
-                
                 Spacer()
             }
             
