@@ -51,44 +51,57 @@ struct HomeView: View {
                 .opacity(0.9)
             
             VStack {
-                Spacer()
+                //Spacer()
                 // If weather data has not been fetched
                 if viewModel.weatherData == nil {
+                    Spacer()
                     MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
                         .frame(width: 200, height: 200)
+                        .padding(.top, 20)
                         .foregroundStyle(.white)
+                        .offset(y: isSearching ? -60 : 0)
                         .onAppear {
                             startAnimation() // Start a timer that updates `selectedImage` at a set interval
                         }
+                    Spacer()
+                    Spacer()
+                    Spacer()
                 } else {
                     if viewModel.weatherData?.location != nil {
                         HStack(spacing: 0) {
                             VStack(alignment: .leading) {
+                                Spacer()
                                 searchResultsView
                                 addToFavoritesView
+                                Spacer()
+                                Spacer()
+                                Spacer()
                             }
+                            .offset(y: isSearching ? -60 : 0)
                             .padding()
                             
-                            Spacer()
+                            //Spacer()
                         }
                     }
                 }
-                
-                Spacer()
-                
-                if let currentLocation = locationManager.manager?.location?.coordinate {
-                    let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-                    
-                    CurrentLocationView(currentLocation: location)
-                        .padding(.bottom, 20)
-                        .offset(y: isSearching ? 1000 : 0)
-                }
-                
-                
-                favoriteLocationsView // Visible if user has added a favorite location
-                toolBarView // Search and Settings
-                    .padding(.bottom, 20)
             }
+                VStack {
+                    Spacer()
+                    
+                    if let currentLocation = locationManager.manager?.location?.coordinate {
+                        let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                        
+                        CurrentLocationView(currentLocation: location)
+                            .padding(.bottom, 20)
+                            .offset(y: isSearching ? 1000 : 0)
+                    }
+                    
+                    
+                    favoriteLocationsView // Visible if user has added a favorite location
+                    toolBarView // Search and Settings
+                        .padding(.bottom, 20)
+                }
+            
         }
         .onChange(of: searchText) {
             // Start a new timer with a 1-second delay
@@ -228,7 +241,9 @@ extension HomeView {
             if isSearching {
                 Button { // Dismiss system keyboard
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    isSearching = false
+                    withAnimation {
+                        isSearching = false
+                    }
                 } label: {
                     Text("Done")
                         .frame(width: 50, height: 30)
