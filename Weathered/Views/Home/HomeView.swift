@@ -41,10 +41,7 @@ struct HomeView: View {
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
     }
-    
-    
-    
-    
+
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -75,7 +72,7 @@ struct HomeView: View {
                         Spacer()
                         Spacer()
                     } else {
-                        if userLocationKnown && searchResultsNeeded {
+                        if viewModel.weatherData != nil && searchResultsNeeded {
                             HStack {
                                 VStack(alignment: .leading) {
                                     Spacer()
@@ -98,6 +95,11 @@ struct HomeView: View {
                 }
                     VStack {
                         Spacer()
+                        GreetingView(fontDesign: fontDesign)
+                        
+                        
+                        Spacer()
+                        Spacer()
                         
                         if viewModel.weatherData == nil {
                             if let currentLocation = locationManager.manager?.location?.coordinate {
@@ -116,11 +118,12 @@ struct HomeView: View {
                 
             }
             .onChange(of: searchText) {
-                searchResultsNeeded = true
+                
                 // Start a new timer with a 1-second delay
                 searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
                     // This block will be executed after user stops typing
                     DispatchQueue.main.async {
+                        searchResultsNeeded = true
                         viewModel.query = searchText
                         viewModel.fetchWeatherData()
                         

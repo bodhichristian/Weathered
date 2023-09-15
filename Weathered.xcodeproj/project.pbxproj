@@ -42,6 +42,7 @@
 		AA972A8329D234C7000E270E /* StormDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8229D234C7000E270E /* StormDrop.swift */; };
 		AA972A8529D23863000E270E /* StormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA972A8429D23863000E270E /* StormView.swift */; };
 		AA99D12A2A9E0E8F00163C77 /* MorphingImageCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA99D1292A9E0E8F00163C77 /* MorphingImageCL.swift */; };
+		AAA2328A2AB4D27300985F7F /* GreetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA232892AB4D27300985F7F /* GreetingView.swift */; };
 		AAA8266529E480CA00C74D6C /* SunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8266429E480CA00C74D6C /* SunView.swift */; };
 		AAB4248D2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB4248C2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift */; };
 		AABC2C0E2A713F89004EFF49 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABC2C0D2A713F89004EFF49 /* HomeView.swift */; };
@@ -93,6 +94,7 @@
 		AA972A8229D234C7000E270E /* StormDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormDrop.swift; sourceTree = "<group>"; };
 		AA972A8429D23863000E270E /* StormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StormView.swift; sourceTree = "<group>"; };
 		AA99D1292A9E0E8F00163C77 /* MorphingImageCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingImageCL.swift; sourceTree = "<group>"; };
+		AAA232892AB4D27300985F7F /* GreetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingView.swift; sourceTree = "<group>"; };
 		AAA8266429E480CA00C74D6C /* SunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunView.swift; sourceTree = "<group>"; };
 		AAB4248C2A94D64A004C63BB /* SFSymbols-WeatherIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SFSymbols-WeatherIcons.swift"; sourceTree = "<group>"; };
 		AABC2C0D2A713F89004EFF49 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				AABC2C0D2A713F89004EFF49 /* HomeView.swift */,
+				AAA232892AB4D27300985F7F /* GreetingView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				AA972A5D29CF3DED000E270E /* ConditionsView.swift in Sources */,
 				AA972A6929CF3E7E000E270E /* Cloud.swift in Sources */,
 				AA972A8129D23491000E270E /* Storm.swift in Sources */,
+				AAA2328A2AB4D27300985F7F /* GreetingView.swift in Sources */,
 				AA611A602A6EDCF400B55BBA /* WeatherData.swift in Sources */,
 				AABC2C0E2A713F89004EFF49 /* HomeView.swift in Sources */,
 				AA972A7829CFA3E2000E270E /* Color-Interpolation.swift in Sources */,
