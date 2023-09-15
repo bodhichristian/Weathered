@@ -34,6 +34,7 @@ struct GreetingView: View {
                     .font(.system(size: 48))
                     .fontWeight(.semibold)
                     .fontDesign(fontDesign)
+                    .foregroundStyle(.white)
                     .padding()
                 Spacer()
             }

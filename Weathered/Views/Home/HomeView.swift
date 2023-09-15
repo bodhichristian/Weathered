@@ -95,7 +95,9 @@ struct HomeView: View {
                 }
                     VStack {
                         Spacer()
-                        GreetingView(fontDesign: fontDesign)
+                        if viewModel.weatherData == nil {
+                            GreetingView(fontDesign: fontDesign)
+                        }
                         
                         
                         Spacer()
