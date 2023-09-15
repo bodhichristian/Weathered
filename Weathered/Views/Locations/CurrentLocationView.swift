@@ -12,6 +12,7 @@ import MapKit
 struct CurrentLocationView: View {
     let currentLocation: CLLocationCoordinate2D
     let weatherService = WeatherService()
+    let fontDesign: Font.Design
     
     @State private var weatherData: WeatherData?
     
@@ -36,6 +37,7 @@ struct CurrentLocationView: View {
                             
                             Text("\(Int(weatherData.current.tempF))°F" )
                                 .font(.title2)
+                                .fontDesign(fontDesign)
                                 .bold()
                         }
                         
@@ -49,9 +51,12 @@ struct CurrentLocationView: View {
                             .scaledToFit()
                             .frame(width: 30, height: 30)
                             .symbolRenderingMode(.multicolor)
-                            Text(weatherData.location.name)
-                                .bold()
-                            Text(weatherData.location.region)
+                            HStack {
+                                Text(weatherData.location.name)
+                                    .bold()
+                                Text(weatherData.location.region)
+                            }
+                            .fontDesign(fontDesign)
                         }
                         
                     }
@@ -77,5 +82,5 @@ struct CurrentLocationView: View {
 }
 
 #Preview {
-    CurrentLocationView(currentLocation: CLLocationCoordinate2DMake(SampleData.weather.location.lat, SampleData.weather.location.lon))
+    CurrentLocationView(currentLocation: CLLocationCoordinate2DMake(SampleData.weather.location.lat, SampleData.weather.location.lon), fontDesign: .default)
 }

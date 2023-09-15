@@ -26,8 +26,10 @@ struct HomeView: View {
     @State private var animationTimer: Timer?
     @State private var searchTimer: Timer?
     @State private var mapRotationTimer: Timer?
-    @State private var isSearching = false
     
+    @State private var isSearching = false
+    @State private var searchResultsNeeded = false
+ 
     @State private var position: MapCameraPosition = .automatic
     @State private var heading: Double = 0.0
     @State private var mapStyle: MapStyle = .imagery(elevation: .realistic)
@@ -38,94 +40,106 @@ struct HomeView: View {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
     }
     
+    
+    
+    
     var body: some View {
-        ZStack {
-            
-            Map(position: $position)
-                .mapStyle(mapStyle)
-            
-            
-            // Background Gradient
-            LinearGradient(colors: [.midnightStart, .midnightEnd], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-                .opacity(0.9)
-            
-            VStack {
-                // If weather data has not been fetched
-                if viewModel.weatherData == nil {
-                    Spacer()
-                    MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
-                        .frame(width: 200, height: 200)
-                        .padding(.top, 20)
-                        .foregroundStyle(.white)
-                        .offset(y: isSearching ? -60 : 0)
-                        .onAppear {
-                            startAnimation() // Start a timer that updates `selectedImage` at a set interval
-                        }
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                } else {
-                    if viewModel.weatherData?.location != nil {
-                        HStack(spacing: 0) {
-                            VStack(alignment: .leading) {
-                                Spacer()
-                                searchResultsView
-                                addToFavoritesView
-                                Spacer()
-                                Spacer()
+        GeometryReader { geo in
+            ZStack {
+                
+                Map(position: $position)
+                    .mapStyle(mapStyle)
+                    .ignoresSafeArea()
+                
+                
+                // Background Gradient
+                LinearGradient(colors: [.midnightEnd, .midnightStart], startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                    .opacity(0.9)
+                
+                VStack {
+                    // If location is not available
+                    if locationManager.manager?.location == nil {
+                        Spacer()
+                        MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
+                            .frame(width: 200, height: 200)
+                            .padding(.top, 20)
+                            .foregroundStyle(.white)
+                            .offset(y: isSearching ? -60 : 0)
+                            .onAppear {
+                                startAnimation() // Start a timer that updates `selectedImage` at a set interval
+                            }
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                    } else {
+                        if viewModel.weatherData?.location != nil && searchResultsNeeded {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Spacer()
+                                    searchResultsView
+                                    addToFavoritesView
+                                    Spacer()
+                                    Spacer()
+                                    Spacer()
+                                }
+                                .offset(y: isSearching ? -60 : 0)
+                                .onTapGesture {
+                                    hideResults()
+                                }
+                                .padding()
+                                
                                 Spacer()
                             }
-                            .offset(y: isSearching ? -60 : 0)
-                            .padding()
-                            
                         }
                     }
                 }
-            }
-                VStack {
-                    Spacer()
-                    
-                    if let currentLocation = locationManager.manager?.location?.coordinate {
-                        let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                    VStack {
+                        Spacer()
                         
-                        CurrentLocationView(currentLocation: location)
-                            .padding(.bottom, 20)
-                            .offset(y: isSearching ? 1000 : 0)
+                        if viewModel.weatherData == nil {
+                            if let currentLocation = locationManager.manager?.location?.coordinate {
+                                let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                                
+                                CurrentLocationView(currentLocation: location, fontDesign: fontDesign)
+                                    .padding(.bottom, 20)
+                                    .offset(y: isSearching ? 1000 : 0)
+                            }
+                        }
+                        
+                        
+                        favoriteLocationsView // Visible if user has added a favorite location
+                        toolBarView // Search and Settings
                     }
-                    
-                    
-                    favoriteLocationsView // Visible if user has added a favorite location
-                    toolBarView // Search and Settings
-                        .padding(.bottom, 20)
-                }
-            
-        }
-        .onChange(of: searchText) {
-            // Start a new timer with a 1-second delay
-            searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-                // This block will be executed after user stops typing
-                DispatchQueue.main.async {
-                    viewModel.query = searchText
-                    viewModel.fetchWeatherData()
-                    
-                    if let location = viewModel.weatherData?.location {
-                        withAnimation {
-                            position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: heading,  pitch: 60))
+                
+            }
+            .onChange(of: searchText) {
+                searchResultsNeeded = true
+                // Start a new timer with a 1-second delay
+                searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+                    // This block will be executed after user stops typing
+                    DispatchQueue.main.async {
+                        viewModel.query = searchText
+                        viewModel.fetchWeatherData()
+                        
+                        if let location = viewModel.weatherData?.location {
+                            withAnimation {
+                                position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: heading,  pitch: 60))
+                            }
                         }
                     }
                 }
+                
+                
             }
-            
-            
-        }
-        .onAppear {
-            locationManager.checkIfLocationServicesIsEnabled()
-            if let userLocation = locationManager.manager?.location {
-                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
+            .onAppear {
+                locationManager.checkIfLocationServicesIsEnabled()
+                if let userLocation = locationManager.manager?.location {
+                    position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
+                }
+                
+                
             }
-            
-            
         }
     }
 }
@@ -223,6 +237,10 @@ extension HomeView {
                                 } label: {
                                     Label("Delete", image: "trash")
                                 }
+                            }
+                        
+                            .onTapGesture {
+                                hideResults()
                             }
                     }
                 }
@@ -340,6 +358,10 @@ extension HomeView {
                 .shadow(radius: 6, y: 4)
         }
         .buttonStyle(PlainButtonStyle())
+    }
+    
+    private func hideResults() {
+        searchResultsNeeded = false
     }
     
     private func delete(offsets: IndexSet) {
