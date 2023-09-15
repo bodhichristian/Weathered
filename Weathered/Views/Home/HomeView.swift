@@ -19,13 +19,15 @@ struct HomeView: View {
     @Binding var viewingDetails: Bool
     @Binding var fontDesign: Font.Design
     
+    @StateObject var locationManager = LocationManager()
+    @State private var userLocationKnown = false
+    
     @State private var searchText = ""
     @State private var locationName: String?
     
     @State private var selectedImage = 0
     @State private var animationTimer: Timer?
     @State private var searchTimer: Timer?
-    @State private var mapRotationTimer: Timer?
     
     @State private var isSearching = false
     @State private var searchResultsNeeded = false
@@ -34,7 +36,7 @@ struct HomeView: View {
     @State private var heading: Double = 0.0
     @State private var mapStyle: MapStyle = .imagery(elevation: .realistic)
     
-    @StateObject var locationManager = LocationManager()
+   
     
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
@@ -59,7 +61,7 @@ struct HomeView: View {
                 
                 VStack {
                     // If location is not available
-                    if locationManager.manager?.location == nil {
+                    if !userLocationKnown {
                         Spacer()
                         MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
                             .frame(width: 200, height: 200)
@@ -73,7 +75,7 @@ struct HomeView: View {
                         Spacer()
                         Spacer()
                     } else {
-                        if viewModel.weatherData?.location != nil && searchResultsNeeded {
+                        if userLocationKnown && searchResultsNeeded {
                             HStack {
                                 VStack(alignment: .leading) {
                                     Spacer()
@@ -135,6 +137,7 @@ struct HomeView: View {
             .onAppear {
                 locationManager.checkIfLocationServicesIsEnabled()
                 if let userLocation = locationManager.manager?.location {
+                    userLocationKnown = true
                     position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
                 }
                 
