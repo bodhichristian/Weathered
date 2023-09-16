@@ -12,6 +12,8 @@ import ImageMorphing
 
 struct HomeView: View {
     @EnvironmentObject var weatherVM: WeatherViewModel
+    @EnvironmentObject var locationVM: LocationViewModel
+    
     @Environment(\.modelContext) private var modelContext
     
     @Query(sort: \FavoriteLocation.name, order: .forward, animation: .smooth) var favoriteLocations: [FavoriteLocation]
@@ -19,24 +21,14 @@ struct HomeView: View {
     @Binding var viewingDetails: Bool
     @Binding var fontDesign: Font.Design
     
-    @StateObject var locationManager = LocationManager()
-    @State private var userLocationKnown = false        
-    
     @State private var searchText = ""
-    @State private var locationName: String?
     
     @State private var selectedImage = 0
     @State private var animationTimer: Timer?
-    @State private var searchTimer: Timer?
     
+    @State private var searchTimer: Timer?
     @State private var isSearching = false
     @State private var searchResultsNeeded = false
-    
-    @State private var position: MapCameraPosition = .automatic
-    @State private var heading: Double = 0.0
-    @State private var mapStyle: MapStyle = .imagery(elevation: .realistic)
-    
-    
     
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == weatherVM.weatherData?.location.name ?? searchText }
@@ -46,8 +38,8 @@ struct HomeView: View {
         GeometryReader { geo in
             ZStack {
                 
-                Map(position: $position)
-                    .mapStyle(mapStyle)
+                Map(position: $locationVM.position)
+                    .mapStyle(locationVM.mapStyle)
                     .ignoresSafeArea()
                 
                 
@@ -58,7 +50,7 @@ struct HomeView: View {
                 
                 VStack {
                     // If location is not available
-                    if !userLocationKnown {
+                    if !locationVM.userLocationKnown {
                         Spacer()
                         MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
                             .frame(width: 200, height: 200)
@@ -104,7 +96,7 @@ struct HomeView: View {
                     Spacer()
                     
                     if !searchResultsNeeded {
-                        if let currentLocation = locationManager.manager?.location?.coordinate {
+                        if let currentLocation = locationVM.locationManager.manager?.location?.coordinate {
                             let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
                             
                             CurrentLocationView(currentLocation: location, fontDesign: fontDesign)
@@ -131,7 +123,7 @@ struct HomeView: View {
                         
                         if let location = weatherVM.weatherData?.location {
                             withAnimation {
-                                position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: heading,  pitch: 60))
+                                locationVM.position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: locationVM.heading,  pitch: 60))
                             }
                         }
                     }
@@ -140,13 +132,7 @@ struct HomeView: View {
                 
             }
             .onAppear {
-                locationManager.checkIfLocationServicesIsEnabled()
-                if let userLocation = locationManager.manager?.location {
-                    userLocationKnown = true
-                    position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
-                }
-                
-                
+                locationVM.updateUserLocation()
             }
         }
     }
@@ -318,13 +304,13 @@ extension HomeView {
         Menu {
             Section(header: Text("Map Style")) {
                 Button {
-                    mapStyle = .standard(elevation: .realistic, pointsOfInterest: .excludingAll)
+                    locationVM.mapStyle = .standard(elevation: .realistic, pointsOfInterest: .excludingAll)
                     
                 } label: {
                     Text("Explore")
                 }
                 Button {
-                    mapStyle = .imagery(elevation: .realistic)
+                    locationVM.mapStyle = .imagery(elevation: .realistic)
                 } label: {
                     Text("Satellite")
                 }

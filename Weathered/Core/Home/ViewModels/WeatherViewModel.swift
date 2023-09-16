@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class WeatherViewModel: ObservableObject {
     @Published var weatherData: WeatherData?
     

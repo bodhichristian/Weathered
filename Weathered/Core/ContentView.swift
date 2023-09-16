@@ -9,14 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: WeatherViewModel
+    @EnvironmentObject var weatherVM: WeatherViewModel
+    @EnvironmentObject var locationVM: LocationViewModel
+    
     
     @State private var viewingDetails = false
     @State private var fontDesign: Font.Design = .default
     
     var body: some View {
         if viewingDetails {
-            if let weatherData = viewModel.weatherData {
+            if let weatherData = weatherVM.weatherData {
                 ConditionsView(
                     weatherData: weatherData,
                     fontDesign: fontDesign,
@@ -28,8 +30,7 @@ struct ContentView: View {
                 viewingDetails: $viewingDetails,
                 fontDesign: $fontDesign
             )
-                .environmentObject(viewModel)
-                
+
         }
         
     }

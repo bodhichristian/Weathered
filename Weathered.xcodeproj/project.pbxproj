@@ -164,12 +164,12 @@
 			path = FavoriteLocation;
 			sourceTree = "<group>";
 		};
-		AA49FC432A82B94B003E7CCA /* Locations */ = {
+		AA49FC432A82B94B003E7CCA /* FavoriteLocations */ = {
 			isa = PBXGroup;
 			children = (
 				AA49FC442A82B97F003E7CCA /* FavoriteLocationTile.swift */,
 			);
-			path = Locations;
+			path = FavoriteLocations;
 			sourceTree = "<group>";
 		};
 		AA611A5B2A6EDC5300B55BBA /* Precipitation */ = {
@@ -295,7 +295,7 @@
 			children = (
 				AABC2C0F2A719380004EFF49 /* ContentView.swift */,
 				AABC2C0C2A713F79004EFF49 /* Home */,
-				AA49FC432A82B94B003E7CCA /* Locations */,
+				AA49FC432A82B94B003E7CCA /* FavoriteLocations */,
 				AA611A672A6EFEEA00B55BBA /* Weather */,
 				AA611A682A6EFF3B00B55BBA /* Sky */,
 			);

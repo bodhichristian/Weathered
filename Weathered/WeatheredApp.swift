@@ -10,12 +10,13 @@ import SwiftData
 
 @main
 struct WeatheredApp: App {
-    @StateObject var viewModel = WeatherViewModel()
-    
+    @StateObject var weatherVM = WeatherViewModel()
+    @StateObject var locationVM = LocationViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(viewModel)
+                .environmentObject(weatherVM)
+                .environmentObject(locationVM)
         }
         .modelContainer(for: FavoriteLocation.self)
     }
