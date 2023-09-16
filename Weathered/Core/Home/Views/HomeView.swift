@@ -46,7 +46,7 @@ struct HomeView: View {
                 // Background Gradient
                 LinearGradient(colors: [.midnightEnd, .midnightStart], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
-                    .opacity(0.9)
+                    .opacity(0.85)
                 
                 VStack {
                     // If location is not available
