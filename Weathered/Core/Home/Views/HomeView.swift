@@ -11,7 +11,7 @@ import SwiftData
 import ImageMorphing
 
 struct HomeView: View {
-    @EnvironmentObject var viewModel: WeatherViewModel
+    @EnvironmentObject var weatherVM: WeatherViewModel
     @Environment(\.modelContext) private var modelContext
     
     @Query(sort: \FavoriteLocation.name, order: .forward, animation: .smooth) var favoriteLocations: [FavoriteLocation]
@@ -39,7 +39,7 @@ struct HomeView: View {
     
     
     private var locationIsFavorite: Bool {
-        favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
+        favoriteLocations.contains { $0.name == weatherVM.weatherData?.location.name ?? searchText }
     }
     
     var body: some View {
@@ -72,7 +72,7 @@ struct HomeView: View {
                         Spacer()
                         Spacer()
                     } else {
-                        if viewModel.weatherData != nil && searchResultsNeeded {
+                        if weatherVM.weatherData != nil && searchResultsNeeded {
                             HStack {
                                 VStack(alignment: .leading) {
                                     Spacer()
@@ -126,10 +126,10 @@ struct HomeView: View {
                     // This block will be executed after user stops typing
                     DispatchQueue.main.async {
                         searchResultsNeeded = true
-                        viewModel.query = searchText
-                        viewModel.fetchWeatherData()
+                        weatherVM.query = searchText
+                        weatherVM.fetchWeatherData()
                         
-                        if let location = viewModel.weatherData?.location {
+                        if let location = weatherVM.weatherData?.location {
                             withAnimation {
                                 position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: heading,  pitch: 60))
                             }
@@ -165,20 +165,20 @@ struct HomeView: View {
 extension HomeView {
     private var searchResultsView: some View {
         VStack(alignment: .leading) {
-            Text("\(Int(viewModel.weatherData?.current.tempF ?? 0))°")
+            Text("\(Int(weatherVM.weatherData?.current.tempF ?? 0))°")
                 .font(.system(size: 100))
                 .foregroundStyle(.white)
                 .fontDesign(fontDesign)
             
             
-            Text(viewModel.weatherData?.location.name.prefix(25) ?? "")
+            Text(weatherVM.weatherData?.location.name.prefix(25) ?? "")
                 .font(.largeTitle)
                 .fontDesign(fontDesign)
                 .fontWeight(.medium)
                 .foregroundStyle(.white)
                 .lineLimit(1)
             
-            Text(viewModel.weatherData?.location.region ?? "")
+            Text(weatherVM.weatherData?.location.region ?? "")
                 .font(.title2)
                 .foregroundColor(.lightCloudEnd)
                 .lineLimit(1)
@@ -195,7 +195,7 @@ extension HomeView {
     
     private var addToFavoritesView: some View {
         Button {
-            if let weatherData = viewModel.weatherData {
+            if let weatherData = weatherVM.weatherData {
                 let newFavorite = FavoriteLocation(
                     name: weatherData.location.name,
                     region: weatherData.location.region,
@@ -300,7 +300,7 @@ extension HomeView {
                 if isSearching && !searchText.isEmpty {
                     Button {
                         searchText = ""
-                        viewModel.weatherData = nil
+                        weatherVM.weatherData = nil
                     } label: {
                         Image(systemName: "x.circle.fill")
                             .foregroundStyle(.white)
