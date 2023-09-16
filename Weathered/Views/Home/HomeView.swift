@@ -20,7 +20,7 @@ struct HomeView: View {
     @Binding var fontDesign: Font.Design
     
     @StateObject var locationManager = LocationManager()
-    @State private var userLocationKnown = false
+    @State private var userLocationKnown = false        
     
     @State private var searchText = ""
     @State private var locationName: String?
@@ -95,7 +95,7 @@ struct HomeView: View {
                 }
                 VStack {
                     Spacer()
-                    if viewModel.weatherData == nil {
+                    if !searchResultsNeeded {
                         GreetingView(fontDesign: fontDesign)
                     }
                     
@@ -103,7 +103,7 @@ struct HomeView: View {
                     Spacer()
                     Spacer()
                     
-                    if viewModel.weatherData == nil {
+                    if !searchResultsNeeded {
                         if let currentLocation = locationManager.manager?.location?.coordinate {
                             let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
                             
