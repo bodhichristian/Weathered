@@ -15,14 +15,20 @@ struct GreetingView: View {
         let hour = calendar.component(.hour, from: Date())
         
         if 6..<12 ~= hour {
-            return "Good morning"
+            return """
+            Good
+            morning
+            """
         } else if 12..<18 ~= hour {
             return """
             Good
             afternoon
             """
         } else {
-            return "Good evening"
+            return """
+            Good
+            evening
+            """
         }
     }
     

@@ -31,17 +31,17 @@ struct HomeView: View {
     
     @State private var isSearching = false
     @State private var searchResultsNeeded = false
- 
+    
     @State private var position: MapCameraPosition = .automatic
     @State private var heading: Double = 0.0
     @State private var mapStyle: MapStyle = .imagery(elevation: .realistic)
     
-   
+    
     
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == viewModel.weatherData?.location.name ?? searchText }
     }
-
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -93,30 +93,30 @@ struct HomeView: View {
                         }
                     }
                 }
-                    VStack {
-                        Spacer()
-                        if viewModel.weatherData == nil {
-                            GreetingView(fontDesign: fontDesign)
-                        }
-                        
-                        
-                        Spacer()
-                        Spacer()
-                        
-                        if viewModel.weatherData == nil {
-                            if let currentLocation = locationManager.manager?.location?.coordinate {
-                                let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-                                
-                                CurrentLocationView(currentLocation: location, fontDesign: fontDesign)
-                                    .padding(.bottom, 20)
-                                    .offset(y: isSearching ? 1000 : 0)
-                            }
-                        }
-                        
-                        
-                        favoriteLocationsView // Visible if user has added a favorite location
-                        toolBarView // Search and Settings
+                VStack {
+                    Spacer()
+                    if viewModel.weatherData == nil {
+                        GreetingView(fontDesign: fontDesign)
                     }
+                    
+                    
+                    Spacer()
+                    Spacer()
+                    
+                    if viewModel.weatherData == nil {
+                        if let currentLocation = locationManager.manager?.location?.coordinate {
+                            let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                            
+                            CurrentLocationView(currentLocation: location, fontDesign: fontDesign)
+                                .padding(.bottom, 20)
+                                .offset(y: isSearching ? 1000 : 0)
+                        }
+                    }
+                    
+                    
+                    favoriteLocationsView // Visible if user has added a favorite location
+                    toolBarView // Search and Settings
+                }
                 
             }
             .onChange(of: searchText) {
