@@ -15,7 +15,7 @@ SwiftData is used to persist the user's favorite locations. These models are cre
 ### MapKit & CoreLocation
 MapKit is used to provide an immersive visual element as context in HomeView. If the device's location is not shared with Weathered, MapKit's satellite image of Earth will be the background view. If a user enables Location Services, the background view is a local map. In settings, the user may toggle between Satellite and Explore MapStyles.
 
-### WeatherAnimations
+### Weather Animations
 Local conditions for searched cities dictate the animations provided for the sky--including daylight, stars, clouds, rain, snow, lightning, and condition intensity.
 
 ## 📲 Running in the Simulator
