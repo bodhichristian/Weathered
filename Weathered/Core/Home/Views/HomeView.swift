@@ -30,7 +30,7 @@ struct HomeView: View {
     @State private var isSearching = false
     @State private var searchResultsNeeded = false
     
-    @State private var mapOpacity = 0.0
+    @State private var curtainOpacity = 1.0
     
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == weatherVM.weatherData?.location.name ?? searchText }
@@ -39,69 +39,78 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
+                // If location is not available
+//                if !locationVM.userLocationKnown {
+//                    VStack {
+//                        Spacer()
+//                        MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
+//                            .frame(width: 200, height: 200)
+//                            .padding(.top, 20)
+//                            .foregroundStyle(.white)
+//                            .offset(y: isSearching ? -60 : 0)
+//                            .onAppear {
+//                                startAnimation() // Start a timer that updates `selectedImage` at a set interval
+//                            }
+//                        Spacer()
+//                        Spacer()
+//                        Spacer()
+//                    }
+//                }
                 
                 Map(position: $locationVM.position)
                     .mapStyle(locationVM.mapStyle)
                     .ignoresSafeArea()
-                    .opacity(mapOpacity)
-                    .onAppear {
-                        withAnimation(.linear(duration: 1.2)){
-                            mapOpacity = 1.0
-                        }
-                    }
-                // Background Gradient
+                
+                
+                // Gradient Overlay
                 LinearGradient(colors: [.midnightEnd, .midnightStart], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                     .opacity(0.85)
                 
-                VStack {
-                    // If location is not available
-                    if !locationVM.userLocationKnown {
-                        Spacer()
-                        MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
-                            .frame(width: 200, height: 200)
-                            .padding(.top, 20)
-                            .foregroundStyle(.white)
-                            .offset(y: isSearching ? -60 : 0)
-                            .onAppear {
-                                startAnimation() // Start a timer that updates `selectedImage` at a set interval
-                            }
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                    } else {
-                        if weatherVM.weatherData != nil && searchResultsNeeded {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Spacer()
-                                    searchResultsView
-                                    addToFavoritesView
-                                    Spacer()
-                                    Spacer()
-                                    Spacer()
-                                }
-                                .offset(y: isSearching ? -60 : 0)
-                                .onTapGesture {
-                                    hideResults()
-                                }
-                                .padding()
-                                
-                                Spacer()
-                            }
+                // Curtain reveals Map
+                Color.black
+                    .ignoresSafeArea()
+                    .opacity(curtainOpacity)
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 0.8)){
+                            curtainOpacity = 0.0
                         }
                     }
+                
+                VStack {
+                    
+                    if weatherVM.weatherData != nil && searchResultsNeeded {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Spacer()
+                                searchResultsView
+                                addToFavoritesView
+                                Spacer()
+                                Spacer()
+                                Spacer()
+                            }
+                            .offset(y: isSearching ? -60 : 0)
+                            .onTapGesture {
+                                hideResults()
+                            }
+                            .padding()
+                            
+                            Spacer()
+                        }
+                    }
+                    
                 }
                 VStack {
                     Spacer()
                     if !searchResultsNeeded {
                         GreetingView(fontDesign: fontDesign)
-                    }
-                    
-                    
-                    Spacer()
-                    Spacer()
-                    
-                    if !searchResultsNeeded {
+                        
+                        
+                        
+                        Spacer()
+                        Spacer()
+                        
+                        
                         if let currentLocation = locationVM.locationManager.manager?.location?.coordinate {
                             let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
                             
@@ -138,7 +147,9 @@ struct HomeView: View {
                 
             }
             .onAppear {
-                locationVM.updateUserLocation()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+                    locationVM.updateUserLocation()
+                }
             }
         }
     }
@@ -382,6 +393,7 @@ extension HomeView {
                 selectedImage += 1
             }
         }
+        
     }
     
 }
