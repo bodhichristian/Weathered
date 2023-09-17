@@ -12,7 +12,7 @@ A SwiftUI app for searching and displaying the weather. Weathered is built using
 
 ### 📲 Running in the Simulator
 * An API key from weatherapi.com is required to run the project with real data.
-  * Enter your API Key in Weathered/Services/WeatherService
+  * Enter your API Key in Weathered/Services/WeatherService. Instructions are in the file.
 
 * Local conditions dictate the animations provided for the sky--including daylight, stars, clouds, rain, snow, and precipitation intensity
 
