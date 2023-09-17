@@ -12,6 +12,7 @@ import SwiftData
 struct WeatheredApp: App {
     @StateObject var weatherVM = WeatherViewModel()
     @StateObject var locationVM = LocationViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

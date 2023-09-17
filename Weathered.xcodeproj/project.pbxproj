@@ -124,13 +124,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA3E7DB82A74716000119ECA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		AA4035602AB61F940078C634 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +143,19 @@
 				AA611A652A6EF4D000B55BBA /* WeatherViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AA4035682AB739860078C634 /* WeatherDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AA972A5C29CF3DED000E270E /* ConditionsView.swift */,
+				AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */,
+				AAD8C45129D5FF4B008742CB /* SecondaryDetailsView.swift */,
+				AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */,
+				AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */,
+				AAFCD8F62A9D2AE70018285E /* SolarLunarEventsView.swift */,
+			);
+			path = WeatherDetails;
 			sourceTree = "<group>";
 		};
 		AA48D4572A81671B0026DD28 /* FavoriteLocation */ = {
@@ -215,13 +221,8 @@
 		AA611A672A6EFEEA00B55BBA /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				AA972A5C29CF3DED000E270E /* ConditionsView.swift */,
-				AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */,
-				AAD8C45129D5FF4B008742CB /* SecondaryDetailsView.swift */,
-				AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */,
-				AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */,
-				AAFCD8F62A9D2AE70018285E /* SolarLunarEventsView.swift */,
-				AA3E7DB82A74716000119ECA /* Views */,
+				AA4035682AB739860078C634 /* WeatherDetails */,
+				AA611A682A6EFF3B00B55BBA /* WeatherAnimations */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -296,7 +297,6 @@
 				AABC2C0F2A719380004EFF49 /* ContentView.swift */,
 				AABC2C0C2A713F79004EFF49 /* Home */,
 				AA611A672A6EFEEA00B55BBA /* Weather */,
-				AA611A682A6EFF3B00B55BBA /* WeatherAnimations */,
 			);
 			path = Core;
 			sourceTree = "<group>";
