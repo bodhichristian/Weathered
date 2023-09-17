@@ -74,7 +74,6 @@ struct FavoriteLocationTile: View {
         .padding(.vertical)
         
         .onAppear {
-            withAnimation(.bouncy) {
                 weatherService.fetchWeatherData(for: location.name) { result in
                     switch result {
                     case .success(let data):
@@ -83,11 +82,11 @@ struct FavoriteLocationTile: View {
                         print(error.localizedDescription)
                     }
                 }
-            }
+            
         }
         
         .onTapGesture {
-            withAnimation{
+            withAnimation(.easeInOut(duration: 1.0)){
                 viewModel.weatherData = weatherData
                 viewingDetails = true
             }

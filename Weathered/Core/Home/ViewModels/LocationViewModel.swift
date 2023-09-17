@@ -29,7 +29,7 @@ class LocationViewModel: ObservableObject {
         if let userLocation = locationManager.manager?.location {
             withAnimation{
                 userLocationKnown = true
-                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 20000, heading: heading, pitch: 60))
+                position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 18000, heading: heading, pitch: 60))
             }
         }
         

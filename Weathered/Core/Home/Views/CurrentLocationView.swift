@@ -33,7 +33,7 @@ struct CurrentLocationView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Image(systemName: "location")
-                                .font(.title2)
+                                .font(.title3)
                             
                             Text("\(Int(weatherData.current.tempF))°F" )
                                 .font(.title2)
@@ -49,7 +49,7 @@ struct CurrentLocationView: View {
                                   : WeatherIconsNighttime[weatherData.current.condition.code] ?? "")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 30, height: 30)
+                            .frame(width: 15, height: 15)
                             .symbolRenderingMode(.multicolor)
                             HStack {
                                 Text(weatherData.location.name)

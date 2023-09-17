@@ -94,7 +94,7 @@ extension ConditionsView {
             VStack {
                 HStack {
                     Button {
-                        withAnimation(.spring()) {
+                        withAnimation(.easeInOut(duration: 1.0)){
                             viewingDetails = false
                         }
                     } label: {

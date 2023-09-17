@@ -30,6 +30,8 @@ struct HomeView: View {
     @State private var isSearching = false
     @State private var searchResultsNeeded = false
     
+    @State private var mapOpacity = 0.0
+    
     private var locationIsFavorite: Bool {
         favoriteLocations.contains { $0.name == weatherVM.weatherData?.location.name ?? searchText }
     }
@@ -41,8 +43,12 @@ struct HomeView: View {
                 Map(position: $locationVM.position)
                     .mapStyle(locationVM.mapStyle)
                     .ignoresSafeArea()
-                    
-                
+                    .opacity(mapOpacity)
+                    .onAppear {
+                        withAnimation(.linear(duration: 1.2)){
+                            mapOpacity = 1.0
+                        }
+                    }
                 // Background Gradient
                 LinearGradient(colors: [.midnightEnd, .midnightStart], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
