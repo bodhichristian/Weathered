@@ -11,10 +11,10 @@
 		AA2A3E432A9E6952002C461A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A3E422A9E6952002C461A /* LocationManager.swift */; };
 		AA2B25DF2A9D3110009A4994 /* PrimaryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */; };
 		AA2D9D172A7A77AD009FC955 /* WeatherAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D162A7A77AD009FC955 /* WeatherAPIKey.swift */; };
-		AA2D9D1A2A7EC54B009FC955 /* ImageMorphing in Frameworks */ = {isa = PBXBuildFile; productRef = AA2D9D192A7EC54B009FC955 /* ImageMorphing */; };
 		AA2D9D1C2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2D9D1B2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift */; };
 		AA389B342A6EB4C100EF6E2F /* WeatherDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */; };
 		AA4035632AB61FAD0078C634 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4035622AB61FAD0078C634 /* LocationViewModel.swift */; };
+		AA4035652AB730CE0078C634 /* MorphingWeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4035642AB730CE0078C634 /* MorphingWeatherIcons.swift */; };
 		AA48D4592A8167350026DD28 /* FavoriteLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48D4582A8167350026DD28 /* FavoriteLocation.swift */; };
 		AA49FC452A82B97F003E7CCA /* FavoriteLocationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49FC442A82B97F003E7CCA /* FavoriteLocationTile.swift */; };
 		AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */; };
@@ -67,6 +67,7 @@
 		AA2D9D1B2A7EC5D5009FC955 /* SFSymbols-WeatherAnimationArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SFSymbols-WeatherAnimationArray.swift"; sourceTree = "<group>"; };
 		AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailRowView.swift; sourceTree = "<group>"; };
 		AA4035622AB61FAD0078C634 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		AA4035642AB730CE0078C634 /* MorphingWeatherIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingWeatherIcons.swift; sourceTree = "<group>"; };
 		AA48D4582A8167350026DD28 /* FavoriteLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocation.swift; sourceTree = "<group>"; };
 		AA49FC442A82B97F003E7CCA /* FavoriteLocationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationTile.swift; sourceTree = "<group>"; };
 		AA607DED29E1CD6C00DBE8C3 /* LightningBolt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningBolt.swift; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA2D9D1A2A7EC54B009FC955 /* ImageMorphing in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,12 +127,6 @@
 		AA3E7DB82A74716000119ECA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA972A5C29CF3DED000E270E /* ConditionsView.swift */,
-				AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */,
-				AAD8C45129D5FF4B008742CB /* SecondaryDetailsView.swift */,
-				AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */,
-				AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */,
-				AAFCD8F62A9D2AE70018285E /* SolarLunarEventsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -144,6 +138,7 @@
 				AAA232892AB4D27300985F7F /* GreetingView.swift */,
 				AADA77172AA751D700A12AEA /* CurrentLocationView.swift */,
 				AA49FC442A82B97F003E7CCA /* FavoriteLocationTile.swift */,
+				AA4035642AB730CE0078C634 /* MorphingWeatherIcons.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -220,17 +215,29 @@
 		AA611A672A6EFEEA00B55BBA /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				AA972A5C29CF3DED000E270E /* ConditionsView.swift */,
+				AA2B25DE2A9D3110009A4994 /* PrimaryDetailsView.swift */,
+				AAD8C45129D5FF4B008742CB /* SecondaryDetailsView.swift */,
+				AA389B332A6EB4C100EF6E2F /* WeatherDetailRowView.swift */,
+				AA846C6F2A7036D800C4D61E /* WeatherDetailGridItem.swift */,
+				AAFCD8F62A9D2AE70018285E /* SolarLunarEventsView.swift */,
 				AA3E7DB82A74716000119ECA /* Views */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
 		};
-		AA611A682A6EFF3B00B55BBA /* Sky */ = {
+		AA611A682A6EFF3B00B55BBA /* WeatherAnimations */ = {
 			isa = PBXGroup;
 			children = (
-				AAC3A1022A782F6400C89E3F /* Views */,
+				AA846C722A70AE7600C4D61E /* SkyView.swift */,
+				AAA8266429E480CA00C74D6C /* SunView.swift */,
+				AA972A7E29D1D022000E270E /* StarsView.swift */,
+				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
+				AA972A8429D23863000E270E /* StormView.swift */,
+				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
+				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
 			);
-			path = Sky;
+			path = WeatherAnimations;
 			sourceTree = "<group>";
 		};
 		AA972A4E29CF3DED000E270E = {
@@ -289,7 +296,7 @@
 				AABC2C0F2A719380004EFF49 /* ContentView.swift */,
 				AABC2C0C2A713F79004EFF49 /* Home */,
 				AA611A672A6EFEEA00B55BBA /* Weather */,
-				AA611A682A6EFF3B00B55BBA /* Sky */,
+				AA611A682A6EFF3B00B55BBA /* WeatherAnimations */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -318,20 +325,6 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		AAC3A1022A782F6400C89E3F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AA846C722A70AE7600C4D61E /* SkyView.swift */,
-				AAA8266429E480CA00C74D6C /* SunView.swift */,
-				AA972A7E29D1D022000E270E /* StarsView.swift */,
-				AA972A6E29CF42D0000E270E /* CloudsView.swift */,
-				AA972A8429D23863000E270E /* StormView.swift */,
-				AAD8C44F29D5FD12008742CB /* ResidueView.swift */,
-				AA607DF129E1F37E00DBE8C3 /* LightningView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -349,7 +342,6 @@
 			);
 			name = Weathered;
 			packageProductDependencies = (
-				AA2D9D192A7EC54B009FC955 /* ImageMorphing */,
 			);
 			productName = Weathered;
 			productReference = AA972A5729CF3DED000E270E /* Weathered.app */;
@@ -380,7 +372,6 @@
 			);
 			mainGroup = AA972A4E29CF3DED000E270E;
 			packageReferences = (
-				AA2D9D182A7EC54B009FC955 /* XCRemoteSwiftPackageReference "ImageMorphing" */,
 			);
 			productRefGroup = AA972A5829CF3DED000E270E /* Products */;
 			projectDirPath = "";
@@ -445,6 +436,7 @@
 				AA607DEE29E1CD6C00DBE8C3 /* LightningBolt.swift in Sources */,
 				AA846C702A7036D800C4D61E /* WeatherDetailGridItem.swift in Sources */,
 				AA972A7629CFA219000E270E /* Array-GradientStop.swift in Sources */,
+				AA4035652AB730CE0078C634 /* MorphingWeatherIcons.swift in Sources */,
 				AA972A7F29D1D022000E270E /* StarsView.swift in Sources */,
 				AA2A3E432A9E6952002C461A /* LocationManager.swift in Sources */,
 				AA972A6B29CF407C000E270E /* CloudGroup.swift in Sources */,
@@ -663,25 +655,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AA2D9D182A7EC54B009FC955 /* XCRemoteSwiftPackageReference "ImageMorphing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kodlian/ImageMorphing.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AA2D9D192A7EC54B009FC955 /* ImageMorphing */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA2D9D182A7EC54B009FC955 /* XCRemoteSwiftPackageReference "ImageMorphing" */;
-			productName = ImageMorphing;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA972A4F29CF3DED000E270E /* Project object */;
 }

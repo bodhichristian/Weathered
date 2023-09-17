@@ -8,7 +8,6 @@
 import SwiftUI
 import MapKit
 import SwiftData
-import ImageMorphing
 
 struct HomeView: View {
     @EnvironmentObject var weatherVM: WeatherViewModel
@@ -23,9 +22,6 @@ struct HomeView: View {
     
     @State private var searchText = ""
     
-    @State private var selectedImage = 0
-    @State private var animationTimer: Timer?
-    
     @State private var searchTimer: Timer?
     @State private var isSearching = false
     @State private var searchResultsNeeded = false
@@ -39,28 +35,9 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                // If location is not available
-//                if !locationVM.userLocationKnown {
-//                    VStack {
-//                        Spacer()
-//                        MorphingImageCL(systemName: WeatherAnimationArray[selectedImage])
-//                            .frame(width: 200, height: 200)
-//                            .padding(.top, 20)
-//                            .foregroundStyle(.white)
-//                            .offset(y: isSearching ? -60 : 0)
-//                            .onAppear {
-//                                startAnimation() // Start a timer that updates `selectedImage` at a set interval
-//                            }
-//                        Spacer()
-//                        Spacer()
-//                        Spacer()
-//                    }
-//                }
-                
                 Map(position: $locationVM.position)
                     .mapStyle(locationVM.mapStyle)
                     .ignoresSafeArea()
-                
                 
                 // Gradient Overlay
                 LinearGradient(colors: [.midnightEnd, .midnightStart], startPoint: .top, endPoint: .bottom)
@@ -77,8 +54,28 @@ struct HomeView: View {
                         }
                     }
                 
-                VStack {
+                VStack { // Greeting, Favorite Locations, Search
+                    Spacer()
+                    if !searchResultsNeeded {
+                        GreetingView(fontDesign: fontDesign)
+
+                        Spacer()
+                        Spacer()
+                        
+                        if let currentLocation = locationVM.locationManager.manager?.location?.coordinate {
+                            let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+                            
+                            CurrentLocationView(currentLocation: location, fontDesign: fontDesign)
+                                .padding(.bottom, 20)
+                                .offset(y: isSearching ? 1000 : 0)
+                        }
+                    }
                     
+                    favoriteLocationsView // Visible if user has added a favorite location
+                    toolBarView // Search and Settings
+                }
+                
+                VStack { // Search Results
                     if weatherVM.weatherData != nil && searchResultsNeeded {
                         HStack {
                             VStack(alignment: .leading) {
@@ -98,58 +95,13 @@ struct HomeView: View {
                             Spacer()
                         }
                     }
-                    
                 }
-                VStack {
-                    Spacer()
-                    if !searchResultsNeeded {
-                        GreetingView(fontDesign: fontDesign)
-                        
-                        
-                        
-                        Spacer()
-                        Spacer()
-                        
-                        
-                        if let currentLocation = locationVM.locationManager.manager?.location?.coordinate {
-                            let location = CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-                            
-                            CurrentLocationView(currentLocation: location, fontDesign: fontDesign)
-                                .padding(.bottom, 20)
-                                .offset(y: isSearching ? 1000 : 0)
-                        }
-                    }
-                    
-                    
-                    favoriteLocationsView // Visible if user has added a favorite location
-                    toolBarView // Search and Settings
-                }
-                
             }
             .onChange(of: searchText) {
-                
-                // Start a new timer with a 1-second delay
-                searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-                    // This block will be executed after user stops typing
-                    DispatchQueue.main.async {
-                        searchResultsNeeded = true
-                        weatherVM.query = searchText
-                        weatherVM.fetchWeatherData()
-                        
-                        if let location = weatherVM.weatherData?.location {
-                            withAnimation {
-                                locationVM.position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: locationVM.heading,  pitch: 60))
-                            }
-                        }
-                    }
-                }
-                
-                
+                createQuery()
             }
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
-                    locationVM.updateUserLocation()
-                }
+                updateMap()
             }
         }
     }
@@ -187,7 +139,7 @@ extension HomeView {
                 .lineLimit(1)
         }
         .onTapGesture {
-            withAnimation(.spring()){
+            withAnimation(.easeIn(duration: 0.3)){
                 if isSearching {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
@@ -383,17 +335,27 @@ extension HomeView {
         }
     }
     
-    private func startAnimation() {
-        searchTimer?.invalidate()
-        searchTimer = Timer.scheduledTimer(withTimeInterval: 1.3, repeats: true) { _ in
-            let lastIndex = WeatherAnimationArray.count - 1
-            if selectedImage == lastIndex {
-                selectedImage = 0
-            } else {
-                selectedImage += 1
+    private func createQuery() {
+        // Start a new timer with a 1-second delay
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            // This block will be executed after user stops typing
+            DispatchQueue.main.async {
+                searchResultsNeeded = true
+                weatherVM.query = searchText
+                weatherVM.fetchWeatherData()
+                
+                if let location = weatherVM.weatherData?.location {
+                    withAnimation {
+                        locationVM.position = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon), distance: 20000, heading: locationVM.heading,  pitch: 60))
+                    }
+                }
             }
         }
-        
     }
     
+    private func updateMap() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            locationVM.updateUserLocation()
+        }
+    }
 }
