@@ -7,10 +7,16 @@
 ![Static Badge](https://img.shields.io/badge/WeatherAPI-gray)
 ![Static Badge](https://img.shields.io/badge/MVVM-gray)
 
-A SwiftUI app for searching and displaying the weather. Weathered is built using MVVM architecture and ultilizes a WeatherService class for retrieving a JSON response from weatherapi.com. Users may save FavoriteLocations, with persistence from SwiftData. Upon initial app launch, user is prompted with enabling Location Services to enhance the MapKit experience. Local conditions for searched cities dictate the animations provided for the sky--including daylight, stars, clouds, rain, snow, lightning, and condition intensity.
+A SwiftUI app for searching and displaying the weather. Weathered is built using MVVM architecture and fetches real-time data from weatherapi.com.
 
+## SwiftData
+SwiftData is used to persist the user's favorite locations. These models are created from - and queried to - HomeView, where a user may add a searched city to favorites, or delete a favorite city with a long press on the corresponding tile in the ScrollView.
 
-   
+## MapKit & CoreLocation
+MapKit is used to provide an immersive visual element as context in HomeView. If the device's location is not shared with Weathered, MapKit's satellite image of Earth will be the background view. If a user enables Location Services, the background view is a local map. In settings, the user may toggle between Satellite and Explore MapStyles.
+
+## WeatherAnimations
+Local conditions for searched cities dictate the animations provided for the sky--including daylight, stars, clouds, rain, snow, lightning, and condition intensity.
 
 ### 📲 Running in the Simulator
 * An API key from weatherapi.com is required to run the project with real data.
