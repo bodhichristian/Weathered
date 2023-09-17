@@ -7,7 +7,7 @@
 ![Static Badge](https://img.shields.io/badge/WeatherAPI-gray)
 ![Static Badge](https://img.shields.io/badge/MVVM-gray)
 
-A SwiftUI app for searching and displaying the weather. Weathered is built using MVVM architecture and fetches real-time data from weatherapi.com.
+A SwiftUI app for searching and displaying the weather. Weathered is built using MVVM architecture and fetches real-time data from ![weatherapi.com](weatherapi.com).
 
 ### SwiftData
 SwiftData is used to persist the user's favorite locations. These models are created from - and queried to - HomeView, where a user may add a searched city to favorites, or delete a favorite city with a long press on the corresponding tile in the ScrollView.
