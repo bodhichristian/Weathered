@@ -86,7 +86,7 @@ struct FavoriteLocationTile: View {
         }
         
         .onTapGesture {
-            withAnimation(.easeInOut(duration: 1.0)){
+            withAnimation(.easeIn(duration: 0.3)){
                 viewModel.weatherData = weatherData
                 viewingDetails = true
             }

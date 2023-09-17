@@ -27,11 +27,8 @@ class LocationViewModel: ObservableObject {
     func updateUserLocation() {
         locationManager.checkIfLocationServicesIsEnabled()
         if let userLocation = locationManager.manager?.location {
-            withAnimation{
                 userLocationKnown = true
                 position = .camera(MapCamera(centerCoordinate: userLocation.coordinate, distance: 18000, heading: heading, pitch: 60))
-            }
         }
-        
     }
 }

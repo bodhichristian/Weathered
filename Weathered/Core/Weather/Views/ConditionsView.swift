@@ -94,9 +94,8 @@ extension ConditionsView {
             VStack {
                 HStack {
                     Button {
-                        withAnimation(.easeInOut(duration: 1.0)){
                             viewingDetails = false
-                        }
+                        
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .resizable()
