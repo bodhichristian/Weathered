@@ -14,6 +14,7 @@ A SwiftUI app for searching and displaying the weather. Weathered is built using
 
 ### 📲 Running in the Simulator
 * An API key from weatherapi.com is required to run the project with real data.
-  * Enter your API Key in Weathered/Services/WeatherService. Instructions are in the file.
+  * Enter your API Key in Weathered/Services/WeatherService. Instructions are in the file. 
+* Provide a location to your simulator from the Menu Bar: Features > Location
 
 ![‎Weathered App Showcase ‎001](https://github.com/bodhichristian/Weathered/assets/110639779/df1743ff-6440-40eb-8ac6-530859df8af8)
