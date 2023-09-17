@@ -1,4 +1,11 @@
 # Weathered
+![Static Badge](https://img.shields.io/badge/Swift-orange)
+![Static Badge](https://img.shields.io/badge/SwiftUI-orange)
+![Static Badge](https://img.shields.io/badge/SwiftData-orange)
+![Static Badge](https://img.shields.io/badge/MapKit-green)
+![Static Badge](https://img.shields.io/badge/CoreLocation-blue)
+![Static Badge](https://img.shields.io/badge/WeatherAPI-gray)
+![Static Badge](https://img.shields.io/badge/MVVM-gray)
 
 A SwiftUI app for searching and displaying the weather. Weathered is organized using MVVM architecture and ultilizes a WeatherService class for retrieving a JSON response from weatherapi.com. Users may save FavoriteLocations, with persistence from SwiftData.
 
