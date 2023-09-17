@@ -41,7 +41,7 @@ struct HomeView: View {
                 Map(position: $locationVM.position)
                     .mapStyle(locationVM.mapStyle)
                     .ignoresSafeArea()
-                
+                    
                 
                 // Background Gradient
                 LinearGradient(colors: [.midnightEnd, .midnightStart], startPoint: .top, endPoint: .bottom)
