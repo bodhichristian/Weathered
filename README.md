@@ -7,7 +7,7 @@
 ![Static Badge](https://img.shields.io/badge/WeatherAPI-gray)
 ![Static Badge](https://img.shields.io/badge/MVVM-gray)
 
-![‎Weathered App Showcase ‎001](https://github.com/bodhichristian/Weathered/assets/110639779/df1743ff-6440-40eb-8ac6-530859df8af8)
+![trim 001](https://github.com/bodhichristian/Weathered/assets/110639779/eba86ea5-6d05-4e8a-9341-4280026ff6b8)
 
 A SwiftUI app for searching and displaying the weather. Weathered is built using MVVM architecture and fetches real-time data from weatherapi.com.
 
