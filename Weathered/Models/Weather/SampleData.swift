@@ -94,7 +94,7 @@ struct SampleData {
                         moonrise: "11:00 PM",
                         moonset: "10:24 AM",
                         moonPhase: "Waning Gibbous",
-                        moonIllumination: "60",
+                        moonIllumination: 60,
                         isMoonUp: 1,
                         isSunUp: 1
                     ),

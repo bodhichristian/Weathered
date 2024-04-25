@@ -97,7 +97,8 @@ struct Forecastday: Codable {
 
 // MARK: Astro
 struct Astro: Codable {
-    let sunrise, sunset, moonrise, moonset, moonPhase, moonIllumination: String
+    let sunrise, sunset, moonrise, moonset, moonPhase: String
+    let moonIllumination: Int
     let isMoonUp, isSunUp: Int
 
     enum CodingKeys: String, CodingKey {
